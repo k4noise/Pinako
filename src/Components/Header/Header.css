@@ -1,0 +1,52 @@
+.Header {
+  height: 480px;
+  position: relative;
+  border-bottom: 1px solid #000;
+}
+
+.Wave1 {
+  position: absolute;
+  bottom: 0;
+}
+
+.Wave2 {
+  position: absolute;
+  top: 0;
+  left: 47%;
+}
+
+.Header h1 {
+  position: absolute;
+  top: 130px;
+  left: 20vw;
+  font-size: 64px;
+  font-weight: normal;
+}
+
+.Header h1::before {
+  content: '';
+  display: block;
+  width: 35px;
+  height: 4px;
+  position: absolute;
+  left: 127px;
+  top: 12px;
+  background-color: #be70d9;
+}
+
+.Header h2 {
+  width: 50vw;
+  padding-left: 5px;
+  position: absolute;
+  top: 225px;
+  left: 20vw;
+  font-size: 36px;
+  font-weight: normal;
+}
+
+.Header .LogoWrapper {
+  position: absolute;
+  right: 100px;
+  top: 50%;
+  bottom: 50%;
+}

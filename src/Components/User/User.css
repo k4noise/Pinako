@@ -1,0 +1,8 @@
+.User {
+  display: flex;
+  align-items: center;
+}
+
+.UserName {
+  padding-left: 10px;
+}

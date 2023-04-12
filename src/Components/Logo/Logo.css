@@ -1,0 +1,10 @@
+.LogoWrapper {
+  display: flex;
+  align-items: center;
+  font-family: BookmanOld, sans-serif;
+}
+
+.LogoText {
+  padding-left: 25px;
+  font-size: 24px;
+}
