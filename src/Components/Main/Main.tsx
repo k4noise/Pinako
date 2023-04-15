@@ -14,7 +14,7 @@ const Main = (): JSX.Element => {
         <Card />
       </div>
       <button className="Register">
-        Зарегестрируйтесь, чтобы увидеть больше
+        Зарегистрируйтесь, чтобы увидеть больше
       </button>
     </>
   );
