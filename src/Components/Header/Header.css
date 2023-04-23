@@ -1,7 +1,7 @@
 .Header {
   height: 480px;
   position: relative;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid black;
 }
 
 .Wave1 {
@@ -15,7 +15,7 @@
   left: 47%;
 }
 
-.Header h1 {
+.HeaderTitle {
   position: absolute;
   top: 130px;
   left: 20vw;
@@ -23,7 +23,7 @@
   font-weight: normal;
 }
 
-.Header h1::before {
+.HeaderTitle::before {
   content: '';
   display: block;
   width: 35px;
@@ -31,10 +31,10 @@
   position: absolute;
   left: 127px;
   top: 12px;
-  background-color: #be70d9;
+  background-color: var(--accent-color);
 }
 
-.Header h2 {
+.HeaderTagline {
   width: 50vw;
   padding-left: 5px;
   position: absolute;

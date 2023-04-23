@@ -27,6 +27,11 @@ const Nav = (): JSX.Element => {
         <a>Зарегестрироваться</a>
         <a>Войти</a>
       </div>
+      <button onClick={ShowMobileMenu} className="UtilityMobileNavigaion">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
   );
 };
@@ -51,6 +56,22 @@ const Search = (): JSX.Element => {
       </button>
     </form>
   );
+};
+
+const ShowMobileMenu: void = () => {
+  const navigation: JSX.Element = document.querySelector(
+    '.UtilityNavigationWrapper'
+  );
+  const footer: JSX.Element = document.querySelector('.Footer');
+  const userNav: JSX.Element = document.querySelector('.UserNavigation');
+  const body: JSX.Element = document.querySelector('body');
+  body.style.overflow = body.style.overflow == 'hidden' ? 'visible' : 'hidden';
+  navigation.style.display =
+    navigation.style.display === 'flex' ? 'none' : 'flex';
+  footer.style.visibility =
+    footer.style.visibility === 'visible' ? 'hidden' : 'visible';
+  userNav.style.visibility =
+    userNav.style.visibility === 'visible' ? 'hidden' : 'visible';
 };
 
 export default Nav;

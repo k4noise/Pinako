@@ -8,8 +8,8 @@ import wave1 from '../../../assets/Vector 2.svg';
 const Header = (): JSX.Element => {
   return (
     <header className="Header">
-      <h1>Пинако</h1>
-      <h2>Черпай вдохновение и делись опытом</h2>
+      <h1 className="HeaderTitle">Пинако</h1>
+      <h2 className="HeaderTagline">Черпай вдохновение и делись опытом</h2>
       <img src={wave1} className="Wave1" />
       <img src={wave2} className="Wave2" />
       <Logo image={LogoImg} size={300} />

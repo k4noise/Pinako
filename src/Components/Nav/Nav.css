@@ -8,11 +8,11 @@
 
 .UtilityNavigation {
   height: 100px;
-  padding: 0 min(100px, 7vw);
+  padding: 0 var(--default-margin);
   display: grid;
   grid-template-columns: 225px auto 230px 40px;
   align-items: center;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid black;
 }
 
 .UtilityNavigation .User:hover ~ .UserNavigation,
@@ -21,8 +21,8 @@
 }
 
 .Link {
-  color: #757171;
-  font-size: 20px;
+  color: var(--accent-color3);
+  font-size: var(--default-font-nav-size);
   border-bottom: 4px solid transparent;
   border-top: 4px solid transparent;
   transition: 0.5s;
@@ -31,11 +31,11 @@
 .Link:hover,
 .CurrentLink {
   padding: 2px 0;
-  border-bottom: 4px solid #be70d9;
+  border-bottom: 4px solid var(--accent-color);
 }
 
 .Link:visited {
-  color: #757171;
+  color: var(--accent-color3);
 }
 
 .SearchForm {
@@ -46,11 +46,12 @@
 }
 
 .SearchInput {
-  width: 180px;
+  width: 135px;
   height: 40px;
   padding-left: 20px;
-  font-size: 20px;
-  background-color: #a2bea8;
+  padding-right: 45px;
+  font-size: var(--default-font-nav-size);
+  background-color: var(--accent-color2);
   color: white;
   border: none;
   border-radius: 75px;
@@ -62,7 +63,6 @@
 }
 
 .SearchInput::placeholder {
-  padding-right: 44px;
   color: white;
   text-align: right;
 }
@@ -80,7 +80,7 @@
   background-color: white;
   position: absolute;
   top: 80px;
-  right: min(100px, 7vw);
+  right: var(--default-margin);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,4 +100,8 @@
   height: 1px;
   background-color: black;
   margin-top: 5px;
+}
+
+.UtilityMobileNavigaion {
+  display: none;
 }

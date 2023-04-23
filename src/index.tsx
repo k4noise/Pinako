@@ -5,10 +5,9 @@ import Main from './Components/Main/Main';
 import Nav from './Components/Nav/Nav';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
+import './media.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementsByTagName('body')[0] as Element
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as Element);
 
 root.render(
   <React.StrictMode>

@@ -8,10 +8,20 @@
   src: url(../assets/BookmanOld.ttf);
 }
 
+:root {
+  --accent-color: #be70d9;
+  --accent-color2: #a2bea8;
+  --accent-color3: #757171;
+  --default-font-nav-size: 20px;
+  --default-font-size: 16px;
+  --default-margin: min(100px, 7vw);
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: CenturyGothic, serif;
+  font-size: var(--default-font-size);
 }
 
 a {

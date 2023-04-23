@@ -1,0 +1,206 @@
+@media (min-width: 375px) and (max-width: 992px) {
+  :root {
+    --default-font-nav-size: 11px;
+    --default-font-size: 12px;
+  }
+
+  .UtilityNavigation {
+    height: 45px;
+    grid-template-columns: 100px 22px;
+    justify-content: space-between;
+  }
+
+  .LogoText {
+    padding-left: 10px;
+    font-size: 14px;
+  }
+
+  .UtilityNavigationWrapper {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 50px;
+    position: absolute;
+    left: 0;
+    top: 46px;
+    flex-direction: column;
+    grid-gap: 15px;
+    background-color: white;
+    z-index: 10;
+  }
+
+  .CurrentLink {
+    border-width: 1px;
+  }
+
+  .UtilityMobileNavigaion {
+    display: block;
+    width: 22px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+  }
+
+  .UtilityMobileNavigaion span {
+    display: block;
+    width: 22px;
+    height: 1.1px;
+    margin-bottom: 6px;
+    background-color: black;
+  }
+
+  .UtilityMobileNavigaion span:last-child {
+    margin-bottom: 0;
+  }
+
+  .UserNavigation {
+    height: 50px;
+    top: 46px;
+    left: 50%;
+    position: absolute;
+    z-index: 12;
+    transform: translateX(-50%);
+    font-size: var(--default-font-nav-size);
+    text-align: center;
+    transition: none;
+    box-shadow: none;
+  }
+
+  .UserNavigation a:first-child {
+    display: none;
+  }
+
+  .UserNavigation a {
+    width: 60px;
+    height: 23px;
+    border: 1px solid gray;
+    border-radius: 60px;
+    line-height: 23px;
+  }
+
+  .UserNavigation a:first-child:after {
+    content: none;
+  }
+
+  .SearchForm {
+    width: calc(100% - 45px);
+    height: 24px;
+    padding: 0 20px;
+    position: absolute;
+    top: 160px;
+    left: 0;
+  }
+
+  .SearchInput {
+    width: 100%;
+    height: 24px;
+    padding-right: 30px;
+    padding-left: 15px;
+    border: 1px solid var(--accent-color3);
+    background-color: white;
+    color: black;
+  }
+
+  .SearchInput::placeholder {
+    color: black;
+  }
+
+  .SearchButton {
+    margin-left: -30px;
+    filter: invert(1);
+  }
+
+  .SearchButton img {
+    width: 10px;
+  }
+
+  .UtilityNavigation .User {
+    position: absolute;
+    visibility: hidden;
+  }
+
+  .Header {
+    height: 100px;
+  }
+
+  .HeaderTitle {
+    top: 25px;
+    font-size: 16px;
+  }
+
+  .HeaderTitle::before {
+    width: 8px;
+    height: 1px;
+    left: 33px;
+    top: 3px;
+  }
+
+  .HeaderTagline {
+    width: 70vw;
+    top: 45px;
+    padding-left: 1px;
+    font-size: 11px;
+  }
+
+  .Header .LogoWrapper {
+    right: 0;
+  }
+
+  .LogoImage {
+    width: 35px;
+  }
+
+  .Header .LogoImage {
+    width: 72px;
+  }
+
+  .Wave1,
+  .Wave2 {
+    width: 20%;
+  }
+
+  .MainWrapper {
+    margin-top: 30px;
+    grid-template-columns: auto;
+  }
+
+  .Card {
+    width: 100%;
+  }
+
+  .User img {
+    width: 23px;
+  }
+
+  .UserName {
+    padding-left: 7px;
+  }
+
+  .Controls object {
+    height: 12px;
+  }
+
+  .Footer {
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    visibility: hidden;
+    font-size: var(--default-font-nav-size);
+    z-index: 11;
+  }
+
+  .GithubLink {
+    margin-left: 10px;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1280px) {
+  :root {
+    --default-font-nav-size: 16px;
+  }
+
+  .Card {
+    width: 450px;
+  }
+}

@@ -1,5 +1,5 @@
 .Card {
-  width: 27.6vw;
+  width: 550px;
 }
 
 .UserImage {
@@ -26,9 +26,9 @@
 .Register {
   display: block;
   margin: 5px auto 25px;
-  background-color: #a2bea8;
+  background-color: var(--accent-color2);
   color: white;
-  font-size: 20px;
+  font-size: var(--default-font-nav-size);
   padding: 11px 21px;
   border: none;
   border-radius: 75px;
