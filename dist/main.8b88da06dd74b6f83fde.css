@@ -66,11 +66,16 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 }
 
 .Controls {
   display: flex;
   align-items: center;
+}
+
+.Controls svg {
+  cursor: pointer;
 }
 
 .Controls object {
@@ -492,4 +497,4 @@ button {
 }
 
 
-/*# sourceMappingURL=main.2f3696fcde6914fa0180.css.map*/
+/*# sourceMappingURL=main.8b88da06dd74b6f83fde.css.map*/
