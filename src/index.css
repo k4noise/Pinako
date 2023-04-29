@@ -15,6 +15,7 @@
   --default-font-nav-size: 20px;
   --default-font-size: 16px;
   --default-margin: min(100px, 7vw);
+  --default-nav-height: 100px;
 }
 
 body {
@@ -42,4 +43,12 @@ textarea,
 select,
 button {
   font-family: inherit;
+}
+
+.App {
+  min-height: calc(100vh - var(--default-nav-height) - 1px - 100px);
+}
+
+.AppWrapper {
+  padding: 0 var(--default-margin);
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import UserAvatar from '../../../assets/user.svg';
 import './User.css';
 
@@ -9,10 +10,10 @@ interface UserProps {
 
 const User = (props: UserProps): JSX.Element => {
   return (
-    <a className="User" href={props.url}>
+    <Link className="User" to={props.url}>
       <img src={UserAvatar} />
       {props.name && <span className="UserName">{props.name}</span>}
-    </a>
+    </Link>
   );
 };
 

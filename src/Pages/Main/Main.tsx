@@ -1,13 +1,16 @@
 import React from 'react';
 import './Main.css';
-import Card from '../Card/Card';
+import Card from '../../Components/Card/Card';
+import Header from '../../Components/Header/Header';
+import { Link } from 'react-router-dom';
 
 const Main = (): JSX.Element => {
   return (
     <>
+      <Header />
       <div className="MainWrapper">{CardsGenerator()}</div>
       <button className="Register">
-        Зарегистрируйтесь, чтобы увидеть больше
+        <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
       </button>
     </>
   );
@@ -23,7 +26,7 @@ const CardsGenerator = (): JSX.Element[] => {
       : Math.floor((cleanWidth - (20 * cleanWidth) / 550) / 550) * 3;
   const cards: JSX.Element[] = [];
   for (let i = 0; i < cardCount; i++) {
-    cards[i] = <Card />;
+    cards[i] = <Card key={i} />;
   }
   return cards;
 };

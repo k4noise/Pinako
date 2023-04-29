@@ -7,7 +7,7 @@
 }
 
 .UtilityNavigation {
-  height: 100px;
+  height: var(--default-nav-height);
   padding: 0 var(--default-margin);
   display: grid;
   grid-template-columns: 225px auto 230px 40px;
