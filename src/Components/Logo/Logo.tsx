@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Logo.css';
 
 interface LogoProps {
@@ -9,10 +10,10 @@ interface LogoProps {
 
 const Logo = (props: LogoProps): JSX.Element => {
   return (
-    <div className="LogoWrapper">
+    <Link to="/" className="LogoWrapper">
       <img src={props.image} width={`${props.size}px`} className="LogoImage" />
       {props?.text && <span className="LogoText">{props.text}</span>}
-    </div>
+    </Link>
   );
 };
 

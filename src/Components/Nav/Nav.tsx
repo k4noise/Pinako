@@ -24,11 +24,11 @@ const Nav = (): JSX.Element => {
         </div>
         <Search />
         <User />
-        <div className="UserNavigation">
+        <div className="UserNavigation" onClick={ToggleMobileMenu}>
           <Link to="/register">Зарегестрироваться</Link>
           <Link to="/login">Войти</Link>
         </div>
-        <button onClick={ShowMobileMenu} className="UtilityMobileNavigaion">
+        <button onClick={ToggleMobileMenu} className="UtilityMobileNavigaion">
           <span></span>
           <span></span>
           <span></span>
@@ -45,6 +45,7 @@ const Links = (props: LinkProps): JSX.Element => {
       className={({ isActive }) => {
         return isActive ? 'Link CurrentLink' : 'Link';
       }}
+      onClick={ToggleMobileMenu}
     >
       {props.name}
     </NavLink>
@@ -53,7 +54,9 @@ const Links = (props: LinkProps): JSX.Element => {
 
 const Search = (): JSX.Element => {
   const location = useLocation();
-  return (
+  const isVisible: boolean =
+    location.pathname !== '/login' && location.pathname !== '/register';
+  return isVisible ? (
     <form
       method="get"
       action="/search"
@@ -73,10 +76,20 @@ const Search = (): JSX.Element => {
         <img src={SearchButtonImage} />
       </button>
     </form>
+  ) : (
+    <form className="SearchForm"></form>
   );
 };
 
-const ShowMobileMenu = () => {
+const ToggleMobileMenu = () => {
+  const mobileMenuButton: HTMLElement = document.querySelector(
+    '.UtilityMobileNavigaion'
+  ) as HTMLElement;
+  if (
+    window.getComputedStyle(mobileMenuButton).getPropertyValue('display') ===
+    'none'
+  )
+    return;
   const navigation: HTMLElement = document.querySelector(
     '.UtilityNavigationWrapper'
   ) as HTMLElement;

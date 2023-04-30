@@ -3,6 +3,8 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Main from './Pages/Main/Main';
 import Nav from './Components/Nav/Nav';
 import Footer from './Components/Footer/Footer';
+import RegisterForm from './Pages/Register/Register';
+import LoginForm from './Pages/Login/Login';
 
 const App = (): JSX.Element => {
   const router = createBrowserRouter([
@@ -23,19 +25,11 @@ const App = (): JSX.Element => {
         },
         {
           path: '/login',
-          element: (
-            <div className="AppWrapper">
-              <span>Форма входа</span>
-            </div>
-          ),
+          element: <LoginForm />,
         },
         {
           path: '/register',
-          element: (
-            <div className="AppWrapper">
-              <span>Форма для регистрации</span>
-            </div>
-          ),
+          element: <RegisterForm />,
         },
         {
           path: '/profile',

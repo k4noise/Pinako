@@ -52,3 +52,7 @@ button {
 .AppWrapper {
   padding: 0 var(--default-margin);
 }
+
+form a {
+  text-decoration: underline;
+}
