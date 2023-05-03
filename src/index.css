@@ -50,7 +50,12 @@ button {
 }
 
 .AppWrapper {
-  padding: 0 var(--default-margin);
+  padding: 25px var(--default-margin) 25px;
+}
+
+.AppWrapperLarge {
+  width: 935px;
+  margin: auto;
 }
 
 form a {

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Main.css';
 import Card from '../../Components/Card/Card';
+import Search from '../../Components/Search/Search';
 import Header from '../../Components/Header/Header';
 import { Link } from 'react-router-dom';
 
@@ -8,10 +9,13 @@ const Main = (): JSX.Element => {
   return (
     <>
       <Header />
-      <div className="MainWrapper">{CardsGenerator()}</div>
-      <button className="Register">
-        <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
-      </button>
+      <div className="AppWrapper">
+        {/* <Search locatedInNav={false} placeholder="Поиск" /> */}
+        <div className="MainWrapper">{CardsGenerator()}</div>
+        <button className="Register">
+          <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
+        </button>
+      </div>
     </>
   );
 };

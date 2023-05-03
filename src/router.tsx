@@ -1,13 +1,15 @@
 import React from 'react';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { createHashRouter, Outlet, RouterProvider } from 'react-router-dom';
+
 import Main from './Pages/Main/Main';
 import Nav from './Components/Nav/Nav';
 import Footer from './Components/Footer/Footer';
 import RegisterForm from './Pages/Register/Register';
 import LoginForm from './Pages/Login/Login';
+import Users from './Pages/Users/Users';
 
 const App = (): JSX.Element => {
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     {
       element: (
         <>
@@ -41,11 +43,7 @@ const App = (): JSX.Element => {
         },
         {
           path: '/users',
-          element: (
-            <div className="AppWrapper">
-              <span>Пользователи</span>
-            </div>
-          ),
+          element: <Users />,
         },
         {
           path: 'user/:userId',
@@ -64,7 +62,7 @@ const App = (): JSX.Element => {
           ),
         },
         {
-          path: '/search',
+          path: '/search:searchParams',
           element: (
             <div className="AppWrapper">
               <span>Поиск</span>

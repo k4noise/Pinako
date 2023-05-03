@@ -50,7 +50,12 @@ button {
 }
 
 .AppWrapper {
-  padding: 0 var(--default-margin);
+  padding: 25px var(--default-margin) 25px;
+}
+
+.AppWrapperLarge {
+  width: 935px;
+  margin: auto;
 }
 
 form a {
@@ -58,7 +63,7 @@ form a {
 }
 
 .MainWrapper {
-  padding: 25px var(--default-margin);
+  padding-bottom: 25px;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(325px, 550px));
@@ -70,7 +75,6 @@ form a {
 }
 
 .UserImage {
-  width: 100%;
   padding-bottom: 10px;
   font-size: 14px;
 }
@@ -222,15 +226,22 @@ form a {
 .Link:visited {
   color: var(--accent-color3);
 }
-
-.SearchForm {
-  width: 200px;
-  display: flex;
-  align-items: center;
+.SearchFormNav {
+  margin-right: 30px;
   justify-content: flex-end;
 }
 
-.SearchInput {
+.SearchForm {
+  margin: auto;
+}
+
+.SearchForm,
+.SearchFormNav {
+  display: flex;
+  align-items: center;
+}
+
+.SearchFormNav .SearchInput {
   width: 135px;
   height: 40px;
   padding-left: 20px;
@@ -240,6 +251,25 @@ form a {
   color: white;
   border: none;
   border-radius: 75px;
+}
+
+.SearchForm .SearchInput::placeholder {
+  color: black;
+  text-align: left;
+}
+
+.SearchForm .SearchInput {
+  width: 885px;
+  height: 45px;
+  font-size: 20px;
+  border: 1px solid black;
+  padding-right: 45px;
+  border-radius: 75px;
+  padding: 0 25px;
+}
+
+.SearchForm .SearchButton {
+  filter: invert();
 }
 
 .SearchInput:focus-visible,
@@ -448,6 +478,18 @@ input[type='checkbox']:checked::before {
   top: 50px;
 }
 
+.Users {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+.Users .UserName {
+  padding-left: 20px;
+}
+
 @media (min-width: 375px) and (max-width: 992px) {
   :root {
     --default-font-nav-size: 11px;
@@ -456,7 +498,11 @@ input[type='checkbox']:checked::before {
   }
 
   .App {
-    margin-top: 50px;
+    /* margin-top: 50px; */
+  }
+
+  .AppWrapperLarge {
+    width: 335px;
   }
 
   .UtilityNavigation {
@@ -548,13 +594,12 @@ input[type='checkbox']:checked::before {
     content: none;
   }
 
+  .SearchFormNav {
+    display: none;
+  }
+
   .SearchForm {
-    width: calc(100% - 45px);
     height: 24px;
-    padding: 0 20px;
-    position: absolute;
-    top: 160px;
-    left: 0;
   }
 
   .SearchFormNoHeader {
@@ -584,6 +629,13 @@ input[type='checkbox']:checked::before {
     width: 10px;
   }
 
+  .SearchForm .SearchInput {
+    font-size: 12px;
+    height: 24px;
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
   .UtilityNavigation .User {
     position: absolute;
     visibility: hidden;
@@ -591,7 +643,7 @@ input[type='checkbox']:checked::before {
 
   .Header {
     height: 100px;
-    margin-top: -50px;
+    margin-top: 0;
   }
 
   .HeaderTitle {
@@ -636,6 +688,10 @@ input[type='checkbox']:checked::before {
   }
 
   .Card {
+    width: 350px;
+  }
+
+  .UserImage {
     width: 100%;
   }
 
@@ -760,6 +816,16 @@ input[type='checkbox']:checked::before {
     top: 30px;
     font-size: 9px;
   }
+
+  .Users {
+    font-size: 12px;
+    margin-top: 15px;
+    gap: 10px;
+  }
+
+  .Users .UserName {
+    padding-left: 12px;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1280px) {
@@ -773,4 +839,4 @@ input[type='checkbox']:checked::before {
 }
 
 
-/*# sourceMappingURL=main.67a074ce88014848f5cd.css.map*/
+/*# sourceMappingURL=main.97755ed78eb9bb91ab1e.css.map*/

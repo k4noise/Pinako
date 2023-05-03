@@ -37,15 +37,22 @@
 .Link:visited {
   color: var(--accent-color3);
 }
-
-.SearchForm {
-  width: 200px;
-  display: flex;
-  align-items: center;
+.SearchFormNav {
+  margin-right: 30px;
   justify-content: flex-end;
 }
 
-.SearchInput {
+.SearchForm {
+  margin: auto;
+}
+
+.SearchForm,
+.SearchFormNav {
+  display: flex;
+  align-items: center;
+}
+
+.SearchFormNav .SearchInput {
   width: 135px;
   height: 40px;
   padding-left: 20px;
@@ -55,6 +62,25 @@
   color: white;
   border: none;
   border-radius: 75px;
+}
+
+.SearchForm .SearchInput::placeholder {
+  color: black;
+  text-align: left;
+}
+
+.SearchForm .SearchInput {
+  width: 885px;
+  height: 45px;
+  font-size: 20px;
+  border: 1px solid black;
+  padding-right: 45px;
+  border-radius: 75px;
+  padding: 0 25px;
+}
+
+.SearchForm .SearchButton {
+  filter: invert();
 }
 
 .SearchInput:focus-visible,

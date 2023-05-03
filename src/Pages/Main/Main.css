@@ -1,5 +1,5 @@
 .MainWrapper {
-  padding: 25px var(--default-margin);
+  padding-bottom: 25px;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, minmax(325px, 550px));

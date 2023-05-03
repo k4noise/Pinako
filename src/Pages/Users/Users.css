@@ -1,0 +1,11 @@
+.Users {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 40px;
+  font-size: 20px;
+}
+
+.Users .UserName {
+  padding-left: 20px;
+}
