@@ -16,6 +16,7 @@
   --default-font-size: 16px;
   --default-margin: min(100px, 7vw);
   --default-nav-height: 100px;
+  --default-form-font-size: 24px;
 }
 
 body {
@@ -123,6 +124,73 @@ form a {
   padding-left: 10px;
 }
 
+.SearchFormNav {
+  margin-right: 30px;
+  justify-content: flex-end;
+}
+
+.SearchForm {
+  margin: auto;
+}
+
+.SearchForm,
+.SearchFormNav {
+  display: flex;
+  align-items: center;
+}
+
+.SearchFormNav .SearchInput {
+  width: 135px;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 45px;
+  font-size: var(--default-font-nav-size);
+  background-color: var(--accent-color2);
+  color: white;
+  border: none;
+  border-radius: 75px;
+}
+
+.SearchForm .SearchInput::placeholder {
+  color: black;
+  text-align: left;
+}
+
+.SearchForm .SearchInput {
+  width: 885px;
+  height: 45px;
+  font-size: 20px;
+  border: 1px solid black;
+  padding-right: 45px;
+  border-radius: 75px;
+  padding: 0 25px;
+}
+
+.SearchForm .SearchButton {
+  filter: invert();
+}
+
+.SearchInput:focus-visible,
+.SearchButton:focus-visible {
+  outline: none;
+}
+
+.SearchInput::placeholder {
+  color: white;
+  text-align: right;
+}
+
+.SearchButton {
+  margin-left: -45px;
+  padding: 8px;
+  background: transparent;
+  border: none;
+}
+
+.SearchOnlyMobile {
+  display: none;
+}
+
 .LogoWrapper {
   display: flex;
   align-items: center;
@@ -226,68 +294,6 @@ form a {
 .Link:visited {
   color: var(--accent-color3);
 }
-.SearchFormNav {
-  margin-right: 30px;
-  justify-content: flex-end;
-}
-
-.SearchForm {
-  margin: auto;
-}
-
-.SearchForm,
-.SearchFormNav {
-  display: flex;
-  align-items: center;
-}
-
-.SearchFormNav .SearchInput {
-  width: 135px;
-  height: 40px;
-  padding-left: 20px;
-  padding-right: 45px;
-  font-size: var(--default-font-nav-size);
-  background-color: var(--accent-color2);
-  color: white;
-  border: none;
-  border-radius: 75px;
-}
-
-.SearchForm .SearchInput::placeholder {
-  color: black;
-  text-align: left;
-}
-
-.SearchForm .SearchInput {
-  width: 885px;
-  height: 45px;
-  font-size: 20px;
-  border: 1px solid black;
-  padding-right: 45px;
-  border-radius: 75px;
-  padding: 0 25px;
-}
-
-.SearchForm .SearchButton {
-  filter: invert();
-}
-
-.SearchInput:focus-visible,
-.SearchButton:focus-visible {
-  outline: none;
-}
-
-.SearchInput::placeholder {
-  color: white;
-  text-align: right;
-}
-
-.SearchButton {
-  margin-left: -45px;
-  padding: 8px;
-  background: transparent;
-  border: none;
-}
 
 .UserNavigation {
   width: 270px;
@@ -347,7 +353,7 @@ form a {
   border: 1px solid black;
   border-radius: 70px;
   box-shadow: 0px 4px 5px 0px #00000080;
-
+  font-size: var(--default-form-font-size);
 }
 
 .RegisterForm .FormTitle::before {
@@ -497,8 +503,8 @@ input[type='checkbox']:checked::before {
     --default-nav-height: 45px;
   }
 
-  .App {
-    /* margin-top: 50px; */
+  .AppWrapper {
+    padding: 15px var(--default-margin);
   }
 
   .AppWrapperLarge {
@@ -630,10 +636,15 @@ input[type='checkbox']:checked::before {
   }
 
   .SearchForm .SearchInput {
+    width: calc(100vw - 20vw);
     font-size: 12px;
     height: 24px;
     padding-left: 11px;
     padding-right: 11px;
+  }
+
+  .SearchOnlyMobile {
+    display: block;
   }
 
   .UtilityNavigation .User {
@@ -828,15 +839,98 @@ input[type='checkbox']:checked::before {
   }
 }
 
-@media (min-width: 993px) and (max-width: 1280px) {
+@media (min-width: 993px) and (max-width: 1366px) {
   :root {
     --default-font-nav-size: 16px;
+    --default-form-font-size: 20px;
   }
 
   .Card {
     width: 450px;
   }
+
+  .FormTitle {
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+  .FormTitle::before,
+  .FormTitle::after {
+    width: 50px;
+  }
+
+  .RegisterForm .FormTitle::before {
+    top: 17px;
+    left: calc(50% - 127px - 5px);
+  }
+
+  .RegisterForm .FormTitle::after {
+    top: -17px;
+    left: calc(50% + 77px + 5px);
+  }
+
+  .FormInput {
+    width: 430px;
+    height: 30px;
+    font-size: var(--default-font-nav-size);
+    margin-bottom: 10px;
+  }
+
+  .RegisterForm {
+    width: 550px;
+    height: 350px;
+    position: relative;
+    top: max(calc(50vh - 300px), 20px);
+    left: calc(50% - 550px / 2);
+  }
+
+  .FormCheckboxInput {
+    font-size: var(--default-font-nav-size);
+    margin: 0 auto 5px;
+  }
+
+  .FormButton {
+    font-size: var(--default-font-nav-size);
+    padding: 0 10px;
+    width: auto;
+    height: 40px;
+  }
+
+  .ToLogin {
+    top: 50px;
+  }
+
+  input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+  }
+
+  input[type='checkbox']:checked::before {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-bottom: 13px;
+  }
+
+  .LoginForm {
+    width: 550px;
+    height: 235px;
+    position: relative;
+    top: max(calc(50vh - 235px), 20px);
+    left: calc(50% - 550px / 2);
+  }
+
+  .LoginForm .FormTitle::before {
+    top: 18px;
+    left: calc(50% - 78px - 5px);
+  }
+
+  .LoginForm .FormTitle::after {
+    top: -17px;
+    left: calc(50% + 30px + 5px);
+  }
 }
 
 
-/*# sourceMappingURL=main.97755ed78eb9bb91ab1e.css.map*/
+/*# sourceMappingURL=main.70d662ef996727928c5c.css.map*/

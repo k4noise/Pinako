@@ -10,7 +10,7 @@ const Main = (): JSX.Element => {
     <>
       <Header />
       <div className="AppWrapper">
-        {/* <Search locatedInNav={false} placeholder="Поиск" /> */}
+        <Search locatedInNav={false} placeholder="Поиск" onlyMobile={true} />
         <div className="MainWrapper">{CardsGenerator()}</div>
         <button className="Register">
           <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>

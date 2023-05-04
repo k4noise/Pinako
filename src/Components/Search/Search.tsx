@@ -1,21 +1,21 @@
 import React from 'react';
-// import { useLocation } from 'react-router-dom';
 import SearchButtonImage from '../../../assets/magnifier.svg';
+import './Search.css';
 
 interface SearchProps {
   locatedInNav: boolean;
   placeholder: string;
+  onlyMobile?: boolean;
 }
 
 const Search = (props: SearchProps): JSX.Element => {
-  // const location = useLocation();
   return (
     <form
       method="get"
-      action="/search"
-      className={
-        props.locatedInNav ? 'SearchFormNav' : 'SearchForm'
-      }
+      action="/search/"
+      className={`${props.locatedInNav ? 'SearchFormNav' : 'SearchForm'} ${
+        props?.onlyMobile && 'SearchOnlyMobile'
+      }`}
     >
       <input
         type="text"

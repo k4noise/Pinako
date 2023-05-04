@@ -7,6 +7,7 @@ import Footer from './Components/Footer/Footer';
 import RegisterForm from './Pages/Register/Register';
 import LoginForm from './Pages/Login/Login';
 import Users from './Pages/Users/Users';
+import Search from './Components/Search/Search';
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -62,7 +63,7 @@ const App = (): JSX.Element => {
           ),
         },
         {
-          path: '/search:searchParams',
+          path: '/search/:searchParams',
           element: (
             <div className="AppWrapper">
               <span>Поиск</span>

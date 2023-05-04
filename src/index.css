@@ -16,6 +16,7 @@
   --default-font-size: 16px;
   --default-margin: min(100px, 7vw);
   --default-nav-height: 100px;
+  --default-form-font-size: 24px;
 }
 
 body {
