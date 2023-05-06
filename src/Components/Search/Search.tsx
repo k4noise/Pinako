@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import SearchButtonImage from '../../../assets/magnifier.svg';
 import './Search.css';
 
@@ -9,13 +10,17 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <form
-      method="get"
-      action="/search/"
       className={`${props.locatedInNav ? 'SearchFormNav' : 'SearchForm'} ${
         props?.onlyMobile && 'SearchOnlyMobile'
       }`}
+      onSubmit={(event) => {
+        event.preventDefault();
+        const form = event.target as HTMLFormElement;
+        navigate(`/search/${form.query.value}`);
+      }}
     >
       <input
         type="text"
