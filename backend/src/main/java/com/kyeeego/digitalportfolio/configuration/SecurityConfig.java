@@ -2,6 +2,7 @@ package com.kyeeego.digitalportfolio.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,7 +30,10 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeHttpRequests()
-                .requestMatchers("/accounts/auth/refresh", "/accounts/auth/login", "/accounts/create").permitAll()
+                .requestMatchers("/accounts/create").permitAll()
+                .requestMatchers("/accounts/auth/refresh", "/accounts/auth/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/artworks").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authProvider);
