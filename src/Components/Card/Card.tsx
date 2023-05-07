@@ -3,18 +3,32 @@ import './Card.css';
 import User from '../User/User';
 import RectImg from '../../../assets/rect.png';
 import EyeImg from '../../../assets/eye.svg';
+import UserAvatar from '../../../assets/user.svg';
 
 interface StaticticsProps {
   likes: number;
   watches: number;
 }
 
-const Card = (): JSX.Element => {
+interface CardProps {
+  showStats?: boolean;
+  hashTag?: string;
+}
+
+const Card = (props: CardProps): JSX.Element => {
   return (
     <div className="Card">
       <img src={RectImg} className="UserImage" />
       <div className="CardControls">
-        <User name="Имя пользователя" url="./user/23452" />
+        {props.hashTag ? (
+          <span className="CardHashTag">#{props.hashTag}</span>
+        ) : (
+          <User
+            name="Имя пользователя"
+            avatar={UserAvatar}
+            url="/profile/23452"
+          />
+        )}
         <Statictics likes={120} watches={120} />
       </div>
     </div>

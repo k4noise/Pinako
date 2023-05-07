@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from '../../Components/Search/Search';
 import User from '../../Components/User/User';
+import UserAvatar from '../../../assets/user.svg';
 import './Users.css';
 
 const Users = (): JSX.Element => {
@@ -8,15 +9,15 @@ const Users = (): JSX.Element => {
     <div className="AppWrapper AppWrapperLarge">
       <Search locatedInNav={false} placeholder="Поиск пользователей" />
       <div className="Users">
-        <User name="Имя пользователя" url="/user/234" />
-        <User name="Имя пользователя" url="/user/274" />
-        <User name="Имя пользователя" url="/user/244" />
-        <User name="Имя пользователя" url="/user/54" />
-        <User name="Имя пользователя" url="/user/21" />
-        <User name="Имя пользователя" url="/user/23" />
-        <User name="Имя пользователя" url="/user/25" />
-        <User name="Имя пользователя" url="/user/20" />
-        <User name="Имя пользователя" url="/user/63" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/234" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/274" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/244" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/54" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/21" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/23" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/25" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/20" />
+        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/63" />
       </div>
     </div>
   );

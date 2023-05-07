@@ -5,6 +5,13 @@
     --default-nav-height: 45px;
   }
 
+  a,
+  button,
+  input,
+  svg {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .AppWrapper {
     padding: 15px var(--default-margin);
   }
@@ -338,6 +345,79 @@
 
   .Users .UserName {
     padding-left: 12px;
+  }
+
+  .UserHeader {
+    height: 170px;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .UserHeader .User {
+    align-items: center;
+    gap: 5px;
+  }
+
+  .UserHeader .UserAvatar {
+    width: 70px;
+  }
+
+  .UserHeader .UserName {
+    font-size: 10px;
+    width: 90px;
+  }
+
+  .AboutUserText {
+    width: 200px;
+    min-height: 40px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+
+  .AboutUserControls button {
+    width: 102px;
+    height: 20px;
+    font-size: 7px;
+  }
+
+  .Wave3 {
+    width: 107px;
+    transform: scaleX(-1);
+    top: -23px;
+    right: 5%;
+  }
+
+  .Wave4 {
+    display: none;
+  }
+
+  .Wave5 {
+    display: block;
+    position: absolute;
+    width: 92px;
+    right: 375px;
+    left: 0;
+    top: 181px;
+  }
+
+  .UserHeader ~ .MainWrapper {
+    grid-template-columns: repeat(auto-fit, 160px);
+    grid-gap: 15px;
+    margin-top: 15px;
+  }
+
+  .UserHeader ~ .MainWrapper .Card {
+    width: 160px;
+  }
+
+  .UserHeader ~ .MainWrapper .UserImage {
+    padding: 0;
+  }
+
+  .UserHeader ~ .MainWrapper .CardControls {
+    display: none;
   }
 }
 

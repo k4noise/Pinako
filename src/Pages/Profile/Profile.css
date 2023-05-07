@@ -1,0 +1,68 @@
+.UserHeader {
+  height: 368px;
+  margin-bottom: 25px;
+  padding: 0 var(--default-margin);
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.UserHeader .User {
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+.UserHeader .UserAvatar {
+  width: 190px;
+}
+
+.UserHeader .UserName {
+  font-size: 20px;
+}
+
+.AboutUserText {
+  width: 530px;
+  min-height: 160px;
+  max-height: 100%;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.AboutUserControls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.AboutUser button {
+  width: 270px;
+  height: 55px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+.Wave3 {
+  height: 160px;
+  position: absolute;
+  top: 61px;
+  right: 20%;
+  z-index: -1;
+}
+
+.Wave4 {
+  height: 213px;
+  position: absolute;
+  right: 0;
+  bottom: 493px;
+  z-index: -1;
+}
+
+.Wave5 {
+  display: none;
+}

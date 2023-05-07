@@ -7,7 +7,7 @@ import Footer from './Components/Footer/Footer';
 import RegisterForm from './Pages/Register/Register';
 import LoginForm from './Pages/Login/Login';
 import Users from './Pages/Users/Users';
-import Search from './Components/Search/Search';
+import Profile from './Pages/Profile/Profile';
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -36,18 +36,14 @@ const App = (): JSX.Element => {
         },
         {
           path: '/profile',
-          element: (
-            <div className="AppWrapper">
-              <span>Профиль</span>
-            </div>
-          ),
+          element: <Profile />,
         },
         {
           path: '/users',
           element: <Users />,
         },
         {
-          path: 'user/:userId',
+          path: 'profile/:userId',
           element: (
             <div className="AppWrapper">
               <span>Профиль пользователя</span>

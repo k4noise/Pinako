@@ -115,6 +115,10 @@ form a {
   color: inherit;
 }
 
+.CardHashTag {
+  padding-left: 7px;
+}
+
 .User {
   display: flex;
   align-items: center;
@@ -496,11 +500,87 @@ input[type='checkbox']:checked::before {
   padding-left: 20px;
 }
 
+.UserHeader {
+  height: 368px;
+  margin-bottom: 25px;
+  padding: 0 var(--default-margin);
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+}
+
+.UserHeader .User {
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+.UserHeader .UserAvatar {
+  width: 190px;
+}
+
+.UserHeader .UserName {
+  font-size: 20px;
+}
+
+.AboutUserText {
+  width: 530px;
+  min-height: 160px;
+  max-height: 100%;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.AboutUserControls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.AboutUser button {
+  width: 270px;
+  height: 55px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 15px;
+}
+
+.Wave3 {
+  height: 160px;
+  position: absolute;
+  top: 61px;
+  right: 20%;
+  z-index: -1;
+}
+
+.Wave4 {
+  height: 213px;
+  position: absolute;
+  right: 0;
+  bottom: 493px;
+  z-index: -1;
+}
+
+.Wave5 {
+  display: none;
+}
+
 @media (min-width: 375px) and (max-width: 992px) {
   :root {
     --default-font-nav-size: 11px;
     --default-font-size: 12px;
     --default-nav-height: 45px;
+  }
+
+  a,
+  button,
+  input,
+  svg {
+    -webkit-tap-highlight-color: transparent;
   }
 
   .AppWrapper {
@@ -837,6 +917,79 @@ input[type='checkbox']:checked::before {
   .Users .UserName {
     padding-left: 12px;
   }
+
+  .UserHeader {
+    height: 170px;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .UserHeader .User {
+    align-items: center;
+    gap: 5px;
+  }
+
+  .UserHeader .UserAvatar {
+    width: 70px;
+  }
+
+  .UserHeader .UserName {
+    font-size: 10px;
+    width: 90px;
+  }
+
+  .AboutUserText {
+    width: 200px;
+    min-height: 40px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+
+  .AboutUserControls button {
+    width: 102px;
+    height: 20px;
+    font-size: 7px;
+  }
+
+  .Wave3 {
+    width: 107px;
+    transform: scaleX(-1);
+    top: -23px;
+    right: 5%;
+  }
+
+  .Wave4 {
+    display: none;
+  }
+
+  .Wave5 {
+    display: block;
+    position: absolute;
+    width: 92px;
+    right: 375px;
+    left: 0;
+    top: 181px;
+  }
+
+  .UserHeader ~ .MainWrapper {
+    grid-template-columns: repeat(auto-fit, 160px);
+    grid-gap: 15px;
+    margin-top: 15px;
+  }
+
+  .UserHeader ~ .MainWrapper .Card {
+    width: 160px;
+  }
+
+  .UserHeader ~ .MainWrapper .UserImage {
+    padding: 0;
+  }
+
+  .UserHeader ~ .MainWrapper .CardControls {
+    display: none;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1366px) {
@@ -933,4 +1086,4 @@ input[type='checkbox']:checked::before {
 }
 
 
-/*# sourceMappingURL=main.70d662ef996727928c5c.css.map*/
+/*# sourceMappingURL=main.36a4fd99bbdee62e55e2.css.map*/
