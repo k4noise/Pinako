@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kyeeego.digitalportfolio.application.port.FileStorageService;
+import com.kyeeego.digitalportfolio.domain.dto.FileUploadResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +21,8 @@ public class FileUploadController {
     private final FileStorageService fileStorageService;
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("file") MultipartFile file, Principal principal) {
-        return fileStorageService.save(file, principal);
+    public FileUploadResponse upload(@RequestParam("file") MultipartFile file, Principal principal) {
+        var filename = fileStorageService.save(file, principal);
+        return new FileUploadResponse(filename);
     }
 }

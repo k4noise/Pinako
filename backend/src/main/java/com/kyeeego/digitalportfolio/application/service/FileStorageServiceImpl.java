@@ -8,7 +8,6 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kyeeego.digitalportfolio.application.port.FileStorageService;
 import com.kyeeego.digitalportfolio.exceptions.InternalServerErrorException;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Service
-@Slf4j
 public class FileStorageServiceImpl implements FileStorageService {
 
     private final Path storageLocation;
