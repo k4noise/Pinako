@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import User from '../../Components/User/User';
 import UserImage from '../../../assets/user.svg';
@@ -15,7 +16,9 @@ const Profile = (): JSX.Element => {
         <div className="AboutUser">
           <div className="AboutUserText">О пользователе</div>
           <div className="AboutUserControls">
-            <button>Редактировать профиль</button>
+            <Link to="/profile/edit">
+              <button>Редактировать профиль</button>
+            </Link>
             <button>Добавить работу</button>
           </div>
         </div>

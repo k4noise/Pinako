@@ -29,10 +29,6 @@
   user-select: none;
 }
 
-.RegisterForm .FormButton {
-  width: 230px;
-}
-
 input[type='checkbox'] {
   appearance: none;
   width: 40px;

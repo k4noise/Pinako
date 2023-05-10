@@ -63,6 +63,10 @@ form a {
   text-decoration: underline;
 }
 
+.Hidden {
+  visibility: hidden;
+}
+
 .MainWrapper {
   padding-bottom: 25px;
   display: grid;
@@ -377,10 +381,6 @@ form a {
   user-select: none;
 }
 
-.RegisterForm .FormButton {
-  width: 230px;
-}
-
 input[type='checkbox'] {
   appearance: none;
   width: 40px;
@@ -469,9 +469,8 @@ input[type='checkbox']:checked::before {
 }
 
 .FormButton {
-  width: 150px;
-  height: 50px;
   margin: 10px auto 0;
+  padding: 10px 40px;
   font-size: 24px;
   border-color: transparent;
   border-radius: 75px;
@@ -561,7 +560,7 @@ input[type='checkbox']:checked::before {
   height: 213px;
   position: absolute;
   right: 0;
-  bottom: 493px;
+  top: 256px;
   z-index: -1;
 }
 
@@ -569,11 +568,77 @@ input[type='checkbox']:checked::before {
   display: none;
 }
 
+.EditForm {
+  width: 622px;
+  height: 776px;
+  padding: 0 64px;
+  position: fixed;
+  top: calc(50% - 776px / 2 + 50px);
+  left: calc(50% - 750px / 2);
+  border: 1px solid black;
+  border-radius: 70px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 5px 0px #00000080;
+  font-size: var(--default-form-font-size);
+}
+
+.EditForm .FormTitle::before {
+  top: 22px;
+  left: calc(50% - 265px - 5px);
+}
+
+.EditForm .FormTitle::after {
+  top: -22px;
+  left: calc(50% + 205px - 5px);
+}
+
+#UploadAvatar {
+  display: none;
+}
+
+.ChangeAvatar {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.ChangeAvatar label {
+  cursor: pointer;
+}
+
+.ChangeAvatar .User img {
+  width: 120px;
+}
+
+.UserData {
+  display: grid;
+  grid-template-columns: 220px auto;
+  grid-gap: 30px;
+  margin-bottom: 20px;
+}
+
+.FormInput2 {
+  border: none;
+  border-bottom: 1px solid black;
+  height: 25px;
+  font-size: var(--default-form-font-size);
+}
+
+.FormInput2:focus-visible {
+  outline: none;
+}
+
 @media (min-width: 375px) and (max-width: 992px) {
   :root {
     --default-font-nav-size: 11px;
     --default-font-size: 12px;
     --default-nav-height: 45px;
+    --default-form-font-size: 12px;
   }
 
   a,
@@ -851,9 +916,8 @@ input[type='checkbox']:checked::before {
   }
 
   .FormButton {
+    padding: 5px 20px;
     font-size: 12px;
-    width: 75px;
-    height: 25px;
     margin-top: 5px;
   }
 
@@ -897,10 +961,6 @@ input[type='checkbox']:checked::before {
     padding-left: 10px;
     padding-top: 0px;
     padding-bottom: 13px;
-  }
-
-  .RegisterForm .FormButton {
-    width: 115px;
   }
 
   .ToLogin {
@@ -970,7 +1030,7 @@ input[type='checkbox']:checked::before {
     width: 92px;
     right: 375px;
     left: 0;
-    top: 181px;
+    top: 180px;
   }
 
   .UserHeader ~ .MainWrapper {
@@ -990,12 +1050,56 @@ input[type='checkbox']:checked::before {
   .UserHeader ~ .MainWrapper .CardControls {
     display: none;
   }
+
+  .EditForm {
+    width: 285px;
+    height: 385px;
+    padding: 0 25px;
+    border-radius: 32px;
+    top: calc(50% - 385px / 2);
+    left: calc(50% - 337px / 2);
+  }
+
+  .EditForm .FormTitle::before {
+    top: 13px;
+    left: calc(50% - 142px - 5px);
+  }
+
+  .EditForm .FormTitle::after {
+    top: -11px;
+    left: calc(50% + 113px - 5px);
+  }
+
+  .ChangeAvatar {
+    font-size: 9px;
+    gap: 3px;
+    margin-bottom: 15px;
+  }
+
+  .ChangeAvatar .User img {
+    width: 54px;
+  }
+
+  .UserData {
+    grid-template-columns: 110px auto;
+    grid-gap: 13px;
+    margin-bottom: 5px;
+  }
+
+  .FormInput2 {
+    height: 14px;
+    border-bottom: 0.5px solid #000;
+  }
+
+  .EditForm .FormButton {
+    margin-top: 10px;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1366px) {
   :root {
     --default-font-nav-size: 16px;
-    --default-form-font-size: 20px;
+    --default-form-font-size: 16px;
   }
 
   .Card {
@@ -1007,6 +1111,7 @@ input[type='checkbox']:checked::before {
     margin-top: 25px;
     margin-bottom: 15px;
   }
+
   .FormTitle::before,
   .FormTitle::after {
     width: 50px;
@@ -1026,7 +1131,7 @@ input[type='checkbox']:checked::before {
     width: 430px;
     height: 30px;
     font-size: var(--default-font-nav-size);
-    margin-bottom: 10px;
+    margin-bottom: 13px;
   }
 
   .RegisterForm {
@@ -1044,9 +1149,7 @@ input[type='checkbox']:checked::before {
 
   .FormButton {
     font-size: var(--default-font-nav-size);
-    padding: 0 10px;
-    width: auto;
-    height: 40px;
+    padding: 5px 20px;
   }
 
   .ToLogin {
@@ -1083,7 +1186,34 @@ input[type='checkbox']:checked::before {
     top: -17px;
     left: calc(50% + 30px + 5px);
   }
+
+  .EditForm {
+    width: 500px;
+    height: 600px;
+    left: calc(50% - 630px / 2);
+    top: calc(50% - 600px / 2 + 50px);
+  }
+
+  .EditForm .FormTitle::before {
+    top: 18px;
+    left: calc(50% - 202px - 5px);
+  }
+
+  .EditForm .FormTitle::after {
+    top: -17px;
+    left: calc(50% + 163px - 5px);
+  }
+
+  .ChangeAvatar {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .UserData {
+    grid-template-columns: 150px auto;
+    grid-gap: 15px;
+  }
 }
 
 
-/*# sourceMappingURL=main.36a4fd99bbdee62e55e2.css.map*/
+/*# sourceMappingURL=main.43c173dc4e845a4b5e03.css.map*/

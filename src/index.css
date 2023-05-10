@@ -62,3 +62,7 @@ button {
 form a {
   text-decoration: underline;
 }
+
+.Hidden {
+  visibility: hidden;
+}

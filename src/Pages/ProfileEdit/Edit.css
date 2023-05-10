@@ -1,0 +1,64 @@
+.EditForm {
+  width: 622px;
+  height: 776px;
+  padding: 0 64px;
+  position: fixed;
+  top: calc(50% - 776px / 2 + 50px);
+  left: calc(50% - 750px / 2);
+  border: 1px solid black;
+  border-radius: 70px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 5px 0px #00000080;
+  font-size: var(--default-form-font-size);
+}
+
+.EditForm .FormTitle::before {
+  top: 22px;
+  left: calc(50% - 265px - 5px);
+}
+
+.EditForm .FormTitle::after {
+  top: -22px;
+  left: calc(50% + 205px - 5px);
+}
+
+#UploadAvatar {
+  display: none;
+}
+
+.ChangeAvatar {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.ChangeAvatar label {
+  cursor: pointer;
+}
+
+.ChangeAvatar .User img {
+  width: 120px;
+}
+
+.UserData {
+  display: grid;
+  grid-template-columns: 220px auto;
+  grid-gap: 30px;
+  margin-bottom: 20px;
+}
+
+.FormInput2 {
+  border: none;
+  border-bottom: 1px solid black;
+  height: 25px;
+  font-size: var(--default-form-font-size);
+}
+
+.FormInput2:focus-visible {
+  outline: none;
+}

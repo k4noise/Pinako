@@ -10,7 +10,7 @@ interface UserProps {
 
 const User = (props: UserProps): JSX.Element => {
   return (
-    <Link className="User" to={props.url}>
+    <Link className="User" to={props?.url ? props.url : '/profile'}>
       <img src={props.avatar} className="UserAvatar" />
       {props.name && <span className="UserName">{props.name}</span>}
     </Link>

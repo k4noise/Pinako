@@ -1,9 +1,11 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './Footer.css';
 
 const Footer = (): JSX.Element => {
+  const location = useLocation();
   return (
-    <footer className="Footer">
+    <footer className={`Footer ${location.pathname !== '/' && 'Hidden'}`}>
       <span>© Sunrise, 2023</span>
       <a
         href="https://github.com/Yrwlcm/Digital-portfolio"

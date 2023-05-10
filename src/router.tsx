@@ -8,6 +8,7 @@ import RegisterForm from './Pages/Register/Register';
 import LoginForm from './Pages/Login/Login';
 import Users from './Pages/Users/Users';
 import Profile from './Pages/Profile/Profile';
+import Edit from './Pages/ProfileEdit/Edit';
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -37,6 +38,10 @@ const App = (): JSX.Element => {
         {
           path: '/profile',
           element: <Profile />,
+        },
+        {
+          path: '/profile/edit',
+          element: <Edit />,
         },
         {
           path: '/users',

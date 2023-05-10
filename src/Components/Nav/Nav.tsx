@@ -4,6 +4,7 @@ import Logo from '../Logo/Logo';
 import User from '../User/User';
 import Search from '../Search/Search';
 import './Nav.css';
+import UserAvatar from '../../../assets/user.svg';
 import LogoImage from '../../../assets/logo.svg';
 
 interface LinkProps {
@@ -22,7 +23,7 @@ const Nav = (): JSX.Element => {
         <Links url="/about" name="О нас" />
       </div>
       <Search locatedInNav={true} placeholder="Поиск" />
-      <User />
+      <User avatar={UserAvatar} />
       <div className="UserNavigation" onClick={ToggleMobileMenu}>
         <Link to="/register">Зарегестрироваться</Link>
         <Link to="/login">Войти</Link>
