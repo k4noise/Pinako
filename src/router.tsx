@@ -1,5 +1,6 @@
 import React from 'react';
 import { createHashRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { NotificationContainer } from 'react-notifications';
 
 import Main from './Pages/Main/Main';
 import Nav from './Components/Nav/Nav';
@@ -20,6 +21,7 @@ const App = (): JSX.Element => {
             <Outlet />
           </div>
           <Footer />
+          <NotificationContainer />
         </>
       ),
       children: [

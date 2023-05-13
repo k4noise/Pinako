@@ -1,4 +1,5 @@
 import React from 'react';
+import { NotificationManager } from 'react-notifications';
 import { Link } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import User from '../../Components/User/User';
@@ -19,7 +20,17 @@ const Profile = (): JSX.Element => {
             <Link to="/profile/edit">
               <button>Редактировать профиль</button>
             </Link>
-            <button>Добавить работу</button>
+            <button
+              onClick={() =>
+                NotificationManager.error(
+                  'Данная функция в разработке',
+                  'Ошибка',
+                  3000
+                )
+              }
+            >
+              Добавить работу
+            </button>
           </div>
         </div>
         <img src={Wave3pic} className="Wave3" />

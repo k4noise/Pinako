@@ -67,6 +67,105 @@ form a {
   visibility: hidden;
 }
 
+.notification-container {
+  position: fixed;
+  top: 100px;
+  right: 0;
+  z-index: 999999;
+  width: 320px;
+  padding: 0 15px;
+  max-height: calc(100% - 30px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.notification,
+.notification-container {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.notification {
+  padding: 15px 15px 15px 58px;
+  border-radius: 2px;
+  color: #fff;
+  background-color: #ccc;
+  -webkit-box-shadow: 0 0 12px #999;
+  box-shadow: 0 0 12px #999;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 1.2em;
+  position: relative;
+  opacity: 0.9;
+  margin-top: 15px;
+}
+.notification .title {
+  font-size: 1em;
+  line-height: 1.2em;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+.notification:focus,
+.notification:hover {
+  opacity: 1;
+}
+.notification-enter {
+  visibility: hidden;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+}
+.notification-enter.notification-enter-active {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.notification-enter.notification-enter-active,
+.notification-exit {
+  visibility: visible;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.notification-exit.notification-exit-active {
+  visibility: hidden;
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.notification:before {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  margin-top: -14px;
+  display: block;
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 28px;
+}
+.notification-info {
+  background-color: var(--accent-color3);
+}
+.notification-info:before {
+  content: '!';
+}
+.notification-success {
+  background-color: var(--accent-color2);
+}
+.notification-success:before {
+  content: '\2714';
+}
+.notification-warning {
+  background-color: #dab37e;
+}
+.notification-warning:before {
+  content: '\26A0';
+}
+.notification-error {
+  background-color: var(--accent-color);
+}
+.notification-error:before {
+  content: '\2716';
+}
+
 .MainWrapper {
   padding-bottom: 25px;
   display: grid;
@@ -413,7 +512,7 @@ input[type='checkbox']:checked::before {
   width: 100%;
   text-align: center;
   font-size: 16px;
-  top: 75px;
+  top: 65px;
 }
 
 .LoginForm {
@@ -484,7 +583,7 @@ input[type='checkbox']:checked::before {
   width: 100%;
   text-align: center;
   font-size: 16px;
-  top: 50px;
+  top: 55px;
 }
 
 .Users {
@@ -1030,7 +1129,7 @@ input[type='checkbox']:checked::before {
     width: 92px;
     right: 375px;
     left: 0;
-    top: 180px;
+    top: 181px;
   }
 
   .UserHeader ~ .MainWrapper {
@@ -1093,6 +1192,10 @@ input[type='checkbox']:checked::before {
 
   .EditForm .FormButton {
     margin-top: 10px;
+  }
+
+  .notification-container {
+    top: 45px;
   }
 }
 
@@ -1216,4 +1319,4 @@ input[type='checkbox']:checked::before {
 }
 
 
-/*# sourceMappingURL=main.43c173dc4e845a4b5e03.css.map*/
+/*# sourceMappingURL=main.105480e674551025a9fa.css.map*/

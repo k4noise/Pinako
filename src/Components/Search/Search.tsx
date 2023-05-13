@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NotificationManager } from 'react-notifications';
 import SearchButtonImage from '../../../assets/magnifier.svg';
 import './Search.css';
 
@@ -10,7 +10,6 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps): JSX.Element => {
-  const navigate = useNavigate();
   return (
     <form
       className={`${props.locatedInNav ? 'SearchFormNav' : 'SearchForm'} ${
@@ -18,8 +17,11 @@ const Search = (props: SearchProps): JSX.Element => {
       }`}
       onSubmit={(event) => {
         event.preventDefault();
-        const form = event.target as HTMLFormElement;
-        navigate(`/search/${form.query.value}`);
+        NotificationManager.error(
+          'Данная функция в разработке',
+          'Ошибка',
+          3000
+        );
       }}
     >
       <input
@@ -27,6 +29,7 @@ const Search = (props: SearchProps): JSX.Element => {
         placeholder={props.placeholder}
         className="SearchInput"
         name="query"
+        spellCheck={false}
       />
       <button type="submit" className="SearchButton">
         <img src={SearchButtonImage} />

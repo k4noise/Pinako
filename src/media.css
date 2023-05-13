@@ -395,7 +395,7 @@
     width: 92px;
     right: 375px;
     left: 0;
-    top: 180px;
+    top: 181px;
   }
 
   .UserHeader ~ .MainWrapper {
@@ -458,6 +458,10 @@
 
   .EditForm .FormButton {
     margin-top: 10px;
+  }
+
+  .notification-container {
+    top: 45px;
   }
 }
 
