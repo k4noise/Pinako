@@ -39,7 +39,7 @@ const App = (): JSX.Element => {
         },
         {
           path: '/profile',
-          element: <Profile />,
+          element: <Profile isMine={true} />,
         },
         {
           path: '/profile/edit',
@@ -51,11 +51,7 @@ const App = (): JSX.Element => {
         },
         {
           path: 'profile/:userId',
-          element: (
-            <div className="AppWrapper">
-              <span>Профиль пользователя</span>
-            </div>
-          ),
+          element: <Profile isMine={false} />,
         },
         {
           path: '/about',

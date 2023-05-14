@@ -1106,6 +1106,10 @@ input[type='checkbox']:checked::before {
     font-size: 9px;
   }
 
+  .AboutUserTextAlone {
+    min-height: 65px;
+  }
+
   .AboutUserControls button {
     width: 102px;
     height: 20px;
@@ -1319,4 +1323,4 @@ input[type='checkbox']:checked::before {
 }
 
 
-/*# sourceMappingURL=main.105480e674551025a9fa.css.map*/
+/*# sourceMappingURL=main.f2c5719ee050875f6a77.css.map*/

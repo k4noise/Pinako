@@ -372,6 +372,10 @@
     font-size: 9px;
   }
 
+  .AboutUserTextAlone {
+    min-height: 65px;
+  }
+
   .AboutUserControls button {
     width: 102px;
     height: 20px;

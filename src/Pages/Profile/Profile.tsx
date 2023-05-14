@@ -9,29 +9,39 @@ import Wave4pic from '../../../assets/wave4.svg';
 import Wave5pic from '../../../assets/wave5.svg';
 import './Profile.css';
 
-const Profile = (): JSX.Element => {
+interface ProfileProps {
+  isMine?: boolean;
+}
+
+const Profile = (props: ProfileProps): JSX.Element => {
   return (
     <>
       <div className="UserHeader">
         <User name="Имя пользователя" avatar={UserImage} />
         <div className="AboutUser">
-          <div className="AboutUserText">О пользователе</div>
-          <div className="AboutUserControls">
-            <Link to="/profile/edit">
-              <button>Редактировать профиль</button>
-            </Link>
-            <button
-              onClick={() =>
-                NotificationManager.error(
-                  'Данная функция в разработке',
-                  'Ошибка',
-                  3000
-                )
-              }
-            >
-              Добавить работу
-            </button>
+          <div
+            className={`AboutUserText ${!props.isMine && 'AboutUserTextAlone'}`}
+          >
+            О пользователе
           </div>
+          {props?.isMine && (
+            <div className="AboutUserControls">
+              <Link to="/profile/edit">
+                <button>Редактировать профиль</button>
+              </Link>
+              <button
+                onClick={() =>
+                  NotificationManager.error(
+                    'Данная функция в разработке',
+                    'Ошибка',
+                    3000
+                  )
+                }
+              >
+                Добавить работу
+              </button>
+            </div>
+          )}
         </div>
         <img src={Wave3pic} className="Wave3" />
         <img src={Wave4pic} className="Wave4" />
