@@ -13,7 +13,7 @@ const Search = (props: SearchProps): JSX.Element => {
   return (
     <form
       className={`${props.locatedInNav ? 'SearchFormNav' : 'SearchForm'} ${
-        props?.onlyMobile && 'SearchOnlyMobile'
+        props?.onlyMobile ? 'SearchOnlyMobile' : ''
       }`}
       onSubmit={(event) => {
         event.preventDefault();

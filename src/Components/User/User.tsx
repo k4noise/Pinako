@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './User.css';
 
@@ -9,6 +9,9 @@ interface UserProps {
 }
 
 const User = (props: UserProps): JSX.Element => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <Link className="User" to={props?.url ? props.url : '/profile'}>
       <img src={props.avatar} className="UserAvatar" />

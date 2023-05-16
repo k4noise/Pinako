@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import User from '../User/User';
@@ -13,6 +13,26 @@ interface LinkProps {
 }
 
 const Nav = (): JSX.Element => {
+  useEffect(() => {
+    const handleResize = () => {
+      const navigation: HTMLElement = document.querySelector(
+        '.UtilityNavigationWrapper'
+      ) as HTMLElement;
+      if (
+        window.innerWidth > 993 &&
+        window.getComputedStyle(navigation).getPropertyValue('display') ===
+          'none'
+      )
+        navigation.style.display = 'flex';
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <nav className="UtilityNavigation">
       <Logo image={LogoImage} text="Пинако" size={50} />
@@ -60,6 +80,7 @@ const ToggleMobileMenu = () => {
     'none'
   )
     return;
+
   const navigation: HTMLElement = document.querySelector(
     '.UtilityNavigationWrapper'
   ) as HTMLElement;
