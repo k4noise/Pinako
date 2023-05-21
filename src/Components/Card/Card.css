@@ -2,11 +2,6 @@
   width: 550px;
 }
 
-.UserImage {
-  padding-bottom: 10px;
-  font-size: 14px;
-}
-
 .CardControls {
   display: flex;
   justify-content: space-between;
@@ -44,4 +39,32 @@
 
 .CardHashTag {
   padding-left: 7px;
+}
+
+.CardTags {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px 15px;
+}
+
+.CardTag {
+  color: white;
+  background-color: var(--accent-color2);
+  padding: 5px 20px;
+  border-radius: 75px;
+  white-space: nowrap;
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+.CardName {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.CardDescription {
+  font-size: 20px;
+  margin-bottom: 30px;
+  margin-top: 0;
 }

@@ -1,0 +1,55 @@
+.ModalOverlay {
+  position: fixed;
+  top: 101px;
+  left: 0;
+  height: calc(100vh - 101px);
+  width: calc(100vw - 30vw);
+  background-color: white;
+  padding: 45px 15vw;
+  overflow-y: auto;
+}
+
+.ModalClose {
+  position: absolute;
+  right: 75px;
+  top: 10px;
+  font-size: 28px;
+  background: none;
+  border: none;
+}
+
+.ModalBody {
+  min-height: calc(100vh - 101px);
+}
+
+.Modal .Card {
+  display: grid;
+  grid-template-columns: calc(50vw - 50px) 20vw;
+  gap: 50px;
+}
+
+.Modal .Controls {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30px auto 20px 30px;
+}
+
+.Modal .Controls .LikesCount {
+  order: 4;
+}
+
+.Modal .Controls svg {
+  order: 3;
+}
+
+.Modal .Controls .ViewsCount {
+  order: 2;
+}
+
+.Modal .Controls object {
+  order: 1;
+}
+
+.Modal .UserName {
+  font-size: 20px;
+}

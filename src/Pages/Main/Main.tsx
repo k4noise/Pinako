@@ -3,7 +3,9 @@ import './Main.css';
 import Card from '../../Components/Card/Card';
 import Search from '../../Components/Search/Search';
 import Header from '../../Components/Header/Header';
+import Artworks from '../../Components/Artworks/Artworks';
 import { Link } from 'react-router-dom';
+import RectImg from '../../../assets/rect.png';
 
 const Main = (): JSX.Element => {
   const [windowSize, setWindowSize] = useState({
@@ -30,7 +32,9 @@ const Main = (): JSX.Element => {
       <Header />
       <div className="AppWrapper">
         <Search locatedInNav={false} placeholder="Поиск" onlyMobile={true} />
-        <div className="MainWrapper">{CardsGenerator(windowSize.width)}</div>
+        <Artworks additionalClassName="MainWrapper">
+          {CardsGenerator(windowSize.width)}
+        </Artworks>
         <button className="Register">
           <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
         </button>
@@ -48,7 +52,7 @@ const CardsGenerator = (width: number): JSX.Element[] => {
       : Math.floor((cleanWidth - (20 * cleanWidth) / 550) / 550) * 3;
   const cards: JSX.Element[] = [];
   for (let i = 0; i < cardCount; i++) {
-    cards[i] = <Card key={i} />;
+    cards[i] = <Card key={i} image={RectImg} />;
   }
   return cards;
 };

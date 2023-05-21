@@ -178,11 +178,6 @@ form a {
   width: 550px;
 }
 
-.UserImage {
-  padding-bottom: 10px;
-  font-size: 14px;
-}
-
 .CardControls {
   display: flex;
   justify-content: space-between;
@@ -222,6 +217,34 @@ form a {
   padding-left: 7px;
 }
 
+.CardTags {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px 15px;
+}
+
+.CardTag {
+  color: white;
+  background-color: var(--accent-color2);
+  padding: 5px 20px;
+  border-radius: 75px;
+  white-space: nowrap;
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.25);
+}
+
+.CardName {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.CardDescription {
+  font-size: 20px;
+  margin-bottom: 30px;
+  margin-top: 0;
+}
+
 .User {
   display: flex;
   align-items: center;
@@ -229,6 +252,14 @@ form a {
 
 .UserName {
   padding-left: 10px;
+}
+
+.UserImage {
+  object-fit: cover;
+  aspect-ratio: 1.2;
+  width: 100%;
+  padding-bottom: 10px;
+  border-radius: 25px;
 }
 
 .SearchFormNav {
@@ -360,6 +391,62 @@ form a {
   right: 100px;
   top: 50%;
   bottom: 50%;
+}
+
+.ModalOverlay {
+  position: fixed;
+  top: 101px;
+  left: 0;
+  height: calc(100vh - 101px);
+  width: calc(100vw - 30vw);
+  background-color: white;
+  padding: 45px 15vw;
+  overflow-y: auto;
+}
+
+.ModalClose {
+  position: absolute;
+  right: 75px;
+  top: 10px;
+  font-size: 28px;
+  background: none;
+  border: none;
+}
+
+.ModalBody {
+  min-height: calc(100vh - 101px);
+}
+
+.Modal .Card {
+  display: grid;
+  grid-template-columns: calc(50vw - 50px) 20vw;
+  gap: 50px;
+}
+
+.Modal .Controls {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30px auto 20px 30px;
+}
+
+.Modal .Controls .LikesCount {
+  order: 4;
+}
+
+.Modal .Controls svg {
+  order: 3;
+}
+
+.Modal .Controls .ViewsCount {
+  order: 2;
+}
+
+.Modal .Controls object {
+  order: 1;
+}
+
+.Modal .UserName {
+  font-size: 20px;
 }
 
 .UtilityNavigationWrapper {
@@ -948,6 +1035,7 @@ input[type='checkbox']:checked::before {
 
   .UserImage {
     width: 100%;
+    border-radius: 15px;
   }
 
   .User img {
@@ -956,6 +1044,10 @@ input[type='checkbox']:checked::before {
 
   .UserName {
     padding-left: 7px;
+  }
+
+  .Controls {
+    width: 80px;
   }
 
   .Controls object {
@@ -1201,6 +1293,81 @@ input[type='checkbox']:checked::before {
   .notification-container {
     top: 45px;
   }
+
+  .ModalOverlay {
+    top: 46px;
+    min-height: calc(100vh - 46px);
+    width: 100vw;
+    padding: 45px 0 0;
+  }
+
+  .Modal .Card {
+    grid-template-columns: auto;
+    width: 100%;
+    gap: 0;
+    padding-bottom: 30px;
+  }
+
+  .Modal .UserImage {
+    width: 100%;
+    aspect-ratio: 0.8;
+    border-radius: 0;
+    border-top: 1px solid black;
+  }
+
+  .Modal .CardControls {
+    padding: 0 10px;
+  }
+
+  .CardInformation {
+    padding: 0 15px;
+  }
+
+  .ModalClose {
+    right: 10px;
+    top: 4px;
+    font-size: 22px;
+  }
+
+  .Modal .CardInformation .User {
+    position: absolute;
+    top: 11px;
+  }
+
+  .Modal .Controls {
+    grid-template-columns: 20px auto 17px 20px;
+  }
+
+  .Modal .Controls span {
+    font-size: 10px;
+  }
+
+  .Modal .Controls object {
+    height: 8.5px;
+  }
+
+  .Modal .Controls svg {
+    height: 12px;
+  }
+
+  .Modal .UserName {
+    font-size: 12px;
+  }
+
+  .CardName {
+    font-size: 12px;
+    margin: 5px 0;
+  }
+
+  .CardDescription {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .CardTags {
+    font-size: 10px;
+    gap: 6px;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1366px) {
@@ -1323,4 +1490,4 @@ input[type='checkbox']:checked::before {
 }
 
 
-/*# sourceMappingURL=main.f2c5719ee050875f6a77.css.map*/
+/*# sourceMappingURL=main.7c06e914b3eaad12a75f.css.map*/

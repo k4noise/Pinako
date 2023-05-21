@@ -10,6 +10,7 @@ import LoginForm from './Pages/Login/Login';
 import Users from './Pages/Users/Users';
 import Profile from './Pages/Profile/Profile';
 import Edit from './Pages/ProfileEdit/Edit';
+import About from './Pages/About/About';
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -55,11 +56,7 @@ const App = (): JSX.Element => {
         },
         {
           path: '/about',
-          element: (
-            <div className="AppWrapper">
-              <span>О нас</span>
-            </div>
-          ),
+          element: <About />,
         },
         {
           path: '/search/:searchParams',

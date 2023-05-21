@@ -214,6 +214,7 @@
 
   .UserImage {
     width: 100%;
+    border-radius: 15px;
   }
 
   .User img {
@@ -222,6 +223,10 @@
 
   .UserName {
     padding-left: 7px;
+  }
+
+  .Controls {
+    width: 80px;
   }
 
   .Controls object {
@@ -466,6 +471,81 @@
 
   .notification-container {
     top: 45px;
+  }
+
+  .ModalOverlay {
+    top: 46px;
+    min-height: calc(100vh - 46px);
+    width: 100vw;
+    padding: 45px 0 0;
+  }
+
+  .Modal .Card {
+    grid-template-columns: auto;
+    width: 100%;
+    gap: 0;
+    padding-bottom: 30px;
+  }
+
+  .Modal .UserImage {
+    width: 100%;
+    aspect-ratio: 0.8;
+    border-radius: 0;
+    border-top: 1px solid black;
+  }
+
+  .Modal .CardControls {
+    padding: 0 10px;
+  }
+
+  .CardInformation {
+    padding: 0 15px;
+  }
+
+  .ModalClose {
+    right: 10px;
+    top: 4px;
+    font-size: 22px;
+  }
+
+  .Modal .CardInformation .User {
+    position: absolute;
+    top: 11px;
+  }
+
+  .Modal .Controls {
+    grid-template-columns: 20px auto 17px 20px;
+  }
+
+  .Modal .Controls span {
+    font-size: 10px;
+  }
+
+  .Modal .Controls object {
+    height: 8.5px;
+  }
+
+  .Modal .Controls svg {
+    height: 12px;
+  }
+
+  .Modal .UserName {
+    font-size: 12px;
+  }
+
+  .CardName {
+    font-size: 12px;
+    margin: 5px 0;
+  }
+
+  .CardDescription {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .CardTags {
+    font-size: 10px;
+    gap: 6px;
   }
 }
 

@@ -3,6 +3,7 @@ import { NotificationManager } from 'react-notifications';
 import { Link } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import User from '../../Components/User/User';
+import Artworks from '../../Components/Artworks/Artworks';
 import UserImage from '../../../assets/user.svg';
 import Wave3pic from '../../../assets/wave3.svg';
 import Wave4pic from '../../../assets/wave4.svg';
@@ -47,14 +48,14 @@ const Profile = (props: ProfileProps): JSX.Element => {
         <img src={Wave4pic} className="Wave4" />
         <img src={Wave5pic} className="Wave5" />
       </div>
-      <div className="MainWrapper">
+      <Artworks additionalClassName="MainWrapper">
         <Card hashTag={'хэштег'} />
         <Card hashTag={'хэштег'} />
         <Card hashTag={'хэштег'} />
         <Card hashTag={'хэштег'} />
         <Card hashTag={'хэштег'} />
         <Card hashTag={'хэштег'} />
-      </div>
+      </Artworks>
     </>
   );
 };
