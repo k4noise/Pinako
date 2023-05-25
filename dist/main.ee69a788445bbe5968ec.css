@@ -63,8 +63,8 @@ form a {
   text-decoration: underline;
 }
 
-.Hidden {
-  visibility: hidden;
+.Footer.HiddenFooter {
+  display: none;
 }
 
 .notification-container {
@@ -819,6 +819,69 @@ input[type='checkbox']:checked::before {
   outline: none;
 }
 
+.About {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10vh;
+  padding: 100px calc(20vw - min(100px, 7vw)) 0;
+}
+
+.AboutSection {
+  padding: 20px 40px;
+  border: 1px solid black;
+  width: 530px;
+  border-radius: 70px;
+}
+
+.AboutSection:nth-child(even) {
+  align-self: flex-end;
+}
+
+.AboutSection:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.Wave6,
+.Wave7,
+.Wave8 {
+  position: absolute;
+  z-index: -10;
+}
+
+.Wave6 {
+  top: 101px;
+  left: 13vw;
+}
+
+.Wave7 {
+  top: 377px;
+  right: 9vw;
+}
+
+.Wave8 {
+  left: 4vw;
+  bottom: 0;
+}
+
+.AboutHeader {
+  font-size: 40px;
+  font-weight: normal;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.About p,
+ul {
+  margin: 0;
+  font-size: 20px;
+}
+
+.About ul {
+  padding-left: 20px;
+}
+
 @media (min-width: 375px) and (max-width: 992px) {
   :root {
     --default-font-nav-size: 11px;
@@ -835,7 +898,7 @@ input[type='checkbox']:checked::before {
   }
 
   .AppWrapper {
-    padding: 15px var(--default-margin);
+    padding: 15px var(--default-margin) 0;
   }
 
   .AppWrapperLarge {
@@ -1368,6 +1431,51 @@ input[type='checkbox']:checked::before {
     font-size: 10px;
     gap: 6px;
   }
+
+  .About {
+    gap: 22vh;
+    padding: 40px 0 0;
+  }
+
+  .AboutSection {
+    width: 260px;
+    padding: 10px 20px;
+    border-radius: 33px;
+  }
+
+  .AboutSection:nth-child(even) {
+    align-self: flex-start;
+  }
+
+  .AboutSection:nth-child(odd) {
+    align-self: flex-end;
+  }
+
+  .AboutHeader {
+    font-size: 16px;
+  }
+
+  .About p,
+  ul {
+    font-size: 10px;
+  }
+
+  .Wave6 {
+    width: 50vw;
+    top: 46px;
+    left: 5vw;
+  }
+
+  .Wave7 {
+    width: 30vw;
+    top: 34vh;
+    right: 2vw;
+  }
+
+  .Wave8 {
+    width: 45vw;
+    left: 5vw;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1366px) {
@@ -1490,4 +1598,4 @@ input[type='checkbox']:checked::before {
 }
 
 
-/*# sourceMappingURL=main.7c06e914b3eaad12a75f.css.map*/
+/*# sourceMappingURL=main.ee69a788445bbe5968ec.css.map*/

@@ -63,8 +63,8 @@ form a {
   text-decoration: underline;
 }
 
-.Hidden {
-  visibility: hidden;
+.Footer.HiddenFooter {
+  display: none;
 }
 
 .notification-container {

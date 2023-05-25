@@ -5,7 +5,7 @@ import './Footer.css';
 const Footer = (): JSX.Element => {
   const location = useLocation();
   return (
-    <footer className={`Footer ${location.pathname !== '/' && 'Hidden'}`}>
+    <footer className={`Footer ${location.pathname !== '/' && 'HiddenFooter'}`}>
       <span>© Sunrise, 2023</span>
       <a
         href="https://github.com/Yrwlcm/Digital-portfolio"

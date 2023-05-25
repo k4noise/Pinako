@@ -1,0 +1,62 @@
+.About {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10vh;
+  padding: 100px calc(20vw - min(100px, 7vw)) 0;
+}
+
+.AboutSection {
+  padding: 20px 40px;
+  border: 1px solid black;
+  width: 530px;
+  border-radius: 70px;
+}
+
+.AboutSection:nth-child(even) {
+  align-self: flex-end;
+}
+
+.AboutSection:nth-child(odd) {
+  align-self: flex-start;
+}
+
+.Wave6,
+.Wave7,
+.Wave8 {
+  position: absolute;
+  z-index: -10;
+}
+
+.Wave6 {
+  top: 101px;
+  left: 13vw;
+}
+
+.Wave7 {
+  top: 377px;
+  right: 9vw;
+}
+
+.Wave8 {
+  left: 4vw;
+  bottom: 0;
+}
+
+.AboutHeader {
+  font-size: 40px;
+  font-weight: normal;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.About p,
+ul {
+  margin: 0;
+  font-size: 20px;
+}
+
+.About ul {
+  padding-left: 20px;
+}

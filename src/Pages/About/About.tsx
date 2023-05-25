@@ -2,31 +2,32 @@ import React from 'react';
 import Wave6 from '../../../assets/wave6.svg';
 import Wave7 from '../../../assets/wave7.svg';
 import Wave8 from '../../../assets/wave8.svg';
+import './About.css';
 
 const About = (): JSX.Element => {
   return (
     <div className="AppWrapper">
       <div className="About">
         <div className="AboutSection">
-          <img src={Wave6} />
-          <h3>Что за сервис?</h3>
+          <img src={Wave6} className="Wave6" />
+          <h3 className="AboutHeader">Что за сервис?</h3>
           <p>Пинако - онлайн портфолио для художников.</p>
         </div>
         <div className="AboutSection">
-          <img src={Wave7} />
-          <h3>Почему такое название?</h3>
+          <img src={Wave7} className="Wave7" />
+          <h3 className="AboutHeader">Наша команда</h3>
           <p>
-            Пинако сокращенно от пинакотека - у древних греков помещение для
-            хранения живописных изображений.
+            Мы - первокурсники ИРИТ-РТФ заинтересованные в создании самого
+            удобного сервиса по созданию и хранению портфолио для дизайнеров.
           </p>
         </div>
         <div className="AboutSection">
-          <img src={Wave8} />
-          <h3>Наши преимущества</h3>
+          <img src={Wave8} className="Wave8" />
+          <h3 className="AboutHeader">Наши преимущества</h3>
           <ul>
-            <li>быстрый поиск по тегам</li>
-            <li></li>
-            <li></li>
+            <li>Удобная система тегов</li>
+            <li>Ориентированно на дизайнеров</li>
+            <li>Удобный поиск</li>
           </ul>
         </div>
       </div>

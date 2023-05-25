@@ -94,6 +94,7 @@ const ToggleMobileMenu = () => {
     navigation.style.display === 'flex' ? 'none' : 'flex';
   footer.style.visibility =
     footer.style.visibility === 'visible' ? 'hidden' : 'visible';
+  footer.style.display = footer.style.display === 'flex' ? 'none' : 'flex';
   userNav.style.visibility =
     userNav.style.visibility === 'visible' ? 'hidden' : 'visible';
 };
