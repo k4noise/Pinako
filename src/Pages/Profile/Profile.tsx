@@ -8,6 +8,7 @@ import UserImage from '../../../assets/user.svg';
 import Wave3pic from '../../../assets/wave3.svg';
 import Wave4pic from '../../../assets/wave4.svg';
 import Wave5pic from '../../../assets/wave5.svg';
+import CardImage from '../../../assets/photo.svg';
 import './Profile.css';
 
 interface ProfileProps {
@@ -49,12 +50,12 @@ const Profile = (props: ProfileProps): JSX.Element => {
         <img src={Wave5pic} className="Wave5" />
       </div>
       <Artworks additionalClassName="MainWrapper">
-        <Card hashTag={'хэштег'} />
-        <Card hashTag={'хэштег'} />
-        <Card hashTag={'хэштег'} />
-        <Card hashTag={'хэштег'} />
-        <Card hashTag={'хэштег'} />
-        <Card hashTag={'хэштег'} />
+        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
       </Artworks>
     </>
   );

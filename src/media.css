@@ -408,21 +408,12 @@
   }
 
   .UserHeader ~ .MainWrapper {
-    grid-template-columns: repeat(auto-fit, 160px);
     grid-gap: 15px;
     margin-top: 15px;
   }
 
-  .UserHeader ~ .MainWrapper .Card {
-    width: 160px;
-  }
-
   .UserHeader ~ .MainWrapper .UserImage {
     padding: 0;
-  }
-
-  .UserHeader ~ .MainWrapper .CardControls {
-    display: none;
   }
 
   .EditForm {
@@ -572,7 +563,7 @@
   }
 
   .About p,
-  ul {
+  .About ul {
     font-size: 10px;
   }
 

@@ -25,7 +25,7 @@ const Card = (props: CardProps): JSX.Element => {
           {props.hashTag && (
             <span className="CardHashTag">#{props.hashTag}</span>
           )}
-          {!props.modalView && (
+          {!props.modalView && !props?.hashTag && (
             <User
               name="Имя пользователя"
               avatar={UserAvatar}

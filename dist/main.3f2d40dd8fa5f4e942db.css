@@ -258,8 +258,9 @@ form a {
   object-fit: cover;
   aspect-ratio: 1.2;
   width: 100%;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
   border-radius: 25px;
+  border: 1px solid gray;
 }
 
 .SearchFormNav {
@@ -1292,21 +1293,12 @@ ul {
   }
 
   .UserHeader ~ .MainWrapper {
-    grid-template-columns: repeat(auto-fit, 160px);
     grid-gap: 15px;
     margin-top: 15px;
   }
 
-  .UserHeader ~ .MainWrapper .Card {
-    width: 160px;
-  }
-
   .UserHeader ~ .MainWrapper .UserImage {
     padding: 0;
-  }
-
-  .UserHeader ~ .MainWrapper .CardControls {
-    display: none;
   }
 
   .EditForm {
@@ -1456,7 +1448,7 @@ ul {
   }
 
   .About p,
-  ul {
+  .About ul {
     font-size: 10px;
   }
 
@@ -1598,4 +1590,4 @@ ul {
 }
 
 
-/*# sourceMappingURL=main.ee69a788445bbe5968ec.css.map*/
+/*# sourceMappingURL=main.3f2d40dd8fa5f4e942db.css.map*/
