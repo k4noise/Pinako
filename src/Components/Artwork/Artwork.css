@@ -1,4 +1,4 @@
-.ModalOverlay {
+.Artwork {
   position: fixed;
   top: 101px;
   left: 0;
@@ -9,7 +9,7 @@
   overflow-y: auto;
 }
 
-.ModalClose {
+.ArtworkClose {
   position: absolute;
   right: 75px;
   top: 10px;
@@ -18,38 +18,34 @@
   border: none;
 }
 
-.ModalBody {
-  min-height: calc(100vh - 101px);
-}
-
-.Modal .Card {
+.Artwork .Card {
   display: grid;
   grid-template-columns: calc(50vw - 50px) 20vw;
   gap: 50px;
 }
 
-.Modal .Controls {
+.Artwork .Controls {
   width: 100%;
   display: grid;
   grid-template-columns: 30px auto 20px 30px;
 }
 
-.Modal .Controls .LikesCount {
+.Artwork .Controls .LikesCount {
   order: 4;
 }
 
-.Modal .Controls svg {
+.Artwork .Controls svg {
   order: 3;
 }
 
-.Modal .Controls .ViewsCount {
+.Artwork .Controls .ViewsCount {
   order: 2;
 }
 
-.Modal .Controls object {
+.Artwork .Controls object {
   order: 1;
 }
 
-.Modal .UserName {
+.Artwork .UserName {
   font-size: 20px;
 }

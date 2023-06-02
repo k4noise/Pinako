@@ -10,6 +10,7 @@ import LoginForm from './Pages/Login/Login';
 import Users from './Pages/Users/Users';
 import Profile from './Pages/Profile/Profile';
 import Edit from './Pages/ProfileEdit/Edit';
+import Artwork from './Components/Artwork/Artwork';
 import About from './Pages/About/About';
 
 const App = (): JSX.Element => {
@@ -53,6 +54,10 @@ const App = (): JSX.Element => {
         {
           path: 'profile/:userId',
           element: <Profile isMine={false} />,
+        },
+        {
+          path: 'profile/:userId/artwork/:artworkId',
+          element: <Artwork />,
         },
         {
           path: '/about',

@@ -12,7 +12,7 @@ interface StaticticsProps {
 interface CardProps {
   showStats?: boolean;
   hashTag?: string;
-  modalView: boolean;
+  artworkView: boolean;
   image: string;
 }
 
@@ -20,12 +20,12 @@ const Card = (props: CardProps): JSX.Element => {
   return (
     <div className="Card">
       <span className="ClickableCard">
-        <img src={props.image} className="UserImage" />
+        <img src={props.image} className="UserImage" loading="lazy" />
         <div className="CardControls">
           {props.hashTag && (
             <span className="CardHashTag">#{props.hashTag}</span>
           )}
-          {!props.modalView && !props?.hashTag && (
+          {!props.artworkView && !props?.hashTag && (
             <User
               name="Имя пользователя"
               avatar={UserAvatar}
@@ -35,7 +35,7 @@ const Card = (props: CardProps): JSX.Element => {
           <Statictics likes={120} watches={120} />
         </div>
       </span>
-      {props.modalView && (
+      {props.artworkView && (
         <div className="CardInformation">
           <User
             name="Имя пользователя"

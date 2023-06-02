@@ -1,5 +1,5 @@
-import React, { ReactNode, useState } from 'react';
-import Modal from './Modal';
+import React, { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ArtworksProps {
   children: ReactNode;
@@ -7,22 +7,7 @@ interface ArtworksProps {
 }
 
 const Artworks = (props: ArtworksProps): JSX.Element => {
-  const [showModal, setShowModal] = useState(false);
-  const [scrollYPos, setScrollYPos] = useState(window.scrollY);
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-    setScrollYPos(window.scrollY);
-    window.scrollTo(0, 0);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    window.scrollTo(0, scrollYPos);
-    document.body.style.overflow = '';
-  };
-
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -33,12 +18,11 @@ const Artworks = (props: ArtworksProps): JSX.Element => {
           const targetElement = event.target as HTMLElement;
           if (!targetElement.parentNode.classList.contains('ClickableCard'))
             return;
-          handleOpenModal();
+          navigate('/profile/324/artwork/1234');
         }}
       >
         {props.children}
       </div>
-      <Modal show={showModal} onClose={handleCloseModal} />
     </>
   );
 };

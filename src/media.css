@@ -464,28 +464,27 @@
     top: 45px;
   }
 
-  .ModalOverlay {
+  .Artwork {
     top: 46px;
-    min-height: calc(100vh - 46px);
     width: 100vw;
     padding: 45px 0 0;
   }
 
-  .Modal .Card {
+  .Artwork .Card {
     grid-template-columns: auto;
     width: 100%;
     gap: 0;
     padding-bottom: 30px;
   }
 
-  .Modal .UserImage {
-    width: 100%;
+  .Artwork .UserImage {
+    width: 99.5%;
     aspect-ratio: 0.8;
     border-radius: 0;
     border-top: 1px solid black;
   }
 
-  .Modal .CardControls {
+  .Artwork .CardControls {
     padding: 0 10px;
   }
 
@@ -493,34 +492,34 @@
     padding: 0 15px;
   }
 
-  .ModalClose {
+  .ArtworkClose {
     right: 10px;
     top: 4px;
     font-size: 22px;
   }
 
-  .Modal .CardInformation .User {
+  .Artwork .CardInformation .User {
     position: absolute;
     top: 11px;
   }
 
-  .Modal .Controls {
+  .Artwork .Controls {
     grid-template-columns: 20px auto 17px 20px;
   }
 
-  .Modal .Controls span {
+  .Artwork .Controls span {
     font-size: 10px;
   }
 
-  .Modal .Controls object {
+  .Artwork .Controls object {
     height: 8.5px;
   }
 
-  .Modal .Controls svg {
+  .Artwork .Controls svg {
     height: 12px;
   }
 
-  .Modal .UserName {
+  .Artwork .UserName {
     font-size: 12px;
   }
 

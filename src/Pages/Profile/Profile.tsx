@@ -50,12 +50,12 @@ const Profile = (props: ProfileProps): JSX.Element => {
         <img src={Wave5pic} className="Wave5" />
       </div>
       <Artworks additionalClassName="MainWrapper">
-        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
-        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
-        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
-        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
-        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
-        <Card hashTag={'хэштег'} image={CardImage} modalView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
+        <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
       </Artworks>
     </>
   );
