@@ -3,6 +3,7 @@
 }
 
 .CardControls {
+  height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,11 +11,12 @@
 }
 
 .Controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 30px 25px 30px;
   align-items: center;
 }
 
-.Controls svg {
+.LikesIcon {
   cursor: pointer;
 }
 

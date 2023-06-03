@@ -90,6 +90,7 @@ const Statictics = (props: StaticticsProps): JSX.Element => {
         height="16"
         viewBox="0 0 18 16"
         fill="none"
+        className="LikesIcon"
         onClick={handleClick}
       >
         <path
@@ -98,7 +99,21 @@ const Statictics = (props: StaticticsProps): JSX.Element => {
         />
       </svg>
       <span className="LikesCount">{likesCount}</span>
-      <object data={EyeImg} />
+      <svg
+        width="24"
+        height="14"
+        viewBox="0 0 24 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="ViewsIcon"
+      >
+        <path
+          d="M12 13.5C7.26206 13.5 3.07025 10.932 0.587558 7C3.07025 3.06797 7.26206 0.5 12 0.5C16.7379 0.5 20.9298 3.06797 23.4124 7C20.9298 10.932 16.7379 13.5 12 13.5Z"
+          fill="white"
+          stroke="black"
+        />
+        <circle cx="12" cy="7" r="4.5" fill="white" stroke="black" />
+      </svg>
       <span className="ViewsCount">{props.watches}</span>
     </div>
   );

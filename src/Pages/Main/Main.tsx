@@ -49,7 +49,7 @@ const CardsGenerator = (width: number): JSX.Element[] => {
   const cardCount: number =
     cleanWidth < 650
       ? 3
-      : Math.floor((cleanWidth - (20 * cleanWidth) / 550) / 550) * 3;
+      : Math.floor((cleanWidth - (20 * cleanWidth) / 500) / 500) * 3;
   const cards: JSX.Element[] = [];
   for (let i = 0; i < cardCount; i++) {
     cards[i] = <Card key={i} image={RectImg} />;

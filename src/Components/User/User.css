@@ -5,12 +5,16 @@
 
 .UserName {
   padding-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .UserImage {
   object-fit: cover;
   aspect-ratio: 1.2;
   width: 100%;
+  max-width: 88vh;
+  max-height: 73vh;
   margin-bottom: 10px;
   border-radius: 25px;
   border: 1px solid gray;

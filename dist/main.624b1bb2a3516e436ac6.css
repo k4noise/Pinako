@@ -170,6 +170,7 @@ form a {
   padding-bottom: 25px;
   display: grid;
   justify-content: center;
+  justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(325px, 550px));
   grid-gap: 20px;
 }
@@ -179,6 +180,7 @@ form a {
 }
 
 .CardControls {
+  height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -186,11 +188,12 @@ form a {
 }
 
 .Controls {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 30px 25px 30px;
   align-items: center;
 }
 
-.Controls svg {
+.LikesIcon {
   cursor: pointer;
 }
 
@@ -252,12 +255,16 @@ form a {
 
 .UserName {
   padding-left: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .UserImage {
   object-fit: cover;
   aspect-ratio: 1.2;
   width: 100%;
+  max-width: 88vh;
+  max-height: 73vh;
   margin-bottom: 10px;
   border-radius: 25px;
   border: 1px solid gray;
@@ -392,62 +399,6 @@ form a {
   right: 100px;
   top: 50%;
   bottom: 50%;
-}
-
-.ModalOverlay {
-  position: fixed;
-  top: 101px;
-  left: 0;
-  height: calc(100vh - 101px);
-  width: calc(100vw - 30vw);
-  background-color: white;
-  padding: 45px 15vw;
-  overflow-y: auto;
-}
-
-.ModalClose {
-  position: absolute;
-  right: 75px;
-  top: 10px;
-  font-size: 28px;
-  background: none;
-  border: none;
-}
-
-.ModalBody {
-  min-height: calc(100vh - 101px);
-}
-
-.Modal .Card {
-  display: grid;
-  grid-template-columns: calc(50vw - 50px) 20vw;
-  gap: 50px;
-}
-
-.Modal .Controls {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 30px auto 20px 30px;
-}
-
-.Modal .Controls .LikesCount {
-  order: 4;
-}
-
-.Modal .Controls svg {
-  order: 3;
-}
-
-.Modal .Controls .ViewsCount {
-  order: 2;
-}
-
-.Modal .Controls object {
-  order: 1;
-}
-
-.Modal .UserName {
-  font-size: 20px;
 }
 
 .UtilityNavigationWrapper {
@@ -820,6 +771,57 @@ input[type='checkbox']:checked::before {
   outline: none;
 }
 
+.Artwork {
+  background-color: white;
+  padding: 45px 15vw;
+  overflow-y: auto;
+}
+
+.ArtworkClose {
+  position: absolute;
+  right: 75px;
+  top: 111px;
+  font-size: 28px;
+  background: none;
+  border: none;
+}
+
+.Artwork .Card {
+  display: grid;
+  grid-template-columns: 88vh calc(100vw - 88vh - 35vw);
+  gap: 50px;
+}
+
+.Artwork .Controls {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 25px auto 20px 30px;
+}
+
+.Artwork .Controls .LikesCount {
+  order: 4;
+}
+
+.Artwork .LikesIcon {
+  order: 3;
+}
+
+.Artwork .Controls .ViewsCount {
+  order: 2;
+}
+
+.Artwork .ViewsIcon {
+  order: 1;
+}
+
+.Artwork .UserName {
+  font-size: 20px;
+}
+
+.CardInformation {
+  width: 100%;
+}
+
 .About {
   display: flex;
   flex-direction: column;
@@ -1097,6 +1099,18 @@ ul {
     width: 350px;
   }
 
+  .Controls {
+    grid-template-columns: 15px 22px 22px 20px;
+  }
+
+  .CardControls {
+    height: 23px;
+  }
+
+  .Controls svg {
+    height: 12px;
+  }
+
   .UserImage {
     width: 100%;
     border-radius: 15px;
@@ -1349,63 +1363,56 @@ ul {
     top: 45px;
   }
 
-  .ModalOverlay {
+  .Artwork {
     top: 46px;
-    min-height: calc(100vh - 46px);
     width: 100vw;
     padding: 45px 0 0;
   }
 
-  .Modal .Card {
+  .Artwork .Card {
     grid-template-columns: auto;
     width: 100%;
     gap: 0;
     padding-bottom: 30px;
   }
 
-  .Modal .UserImage {
-    width: 100%;
+  .Artwork .UserImage {
+    width: 99.5%;
+    max-height: 100vh;
     aspect-ratio: 0.8;
     border-radius: 0;
     border-top: 1px solid black;
   }
 
-  .Modal .CardControls {
+  .Artwork .CardControls {
     padding: 0 10px;
   }
 
   .CardInformation {
+    width: calc(100% - 30px);
     padding: 0 15px;
   }
 
-  .ModalClose {
+  .ArtworkClose {
     right: 10px;
-    top: 4px;
+    top: 50px;
     font-size: 22px;
   }
 
-  .Modal .CardInformation .User {
+  .Artwork .CardInformation .User {
     position: absolute;
-    top: 11px;
+    top: 56px;
   }
 
-  .Modal .Controls {
-    grid-template-columns: 20px auto 17px 20px;
+  .Artwork .Controls {
+    grid-template-columns: 24px auto 17px 20px;
   }
 
-  .Modal .Controls span {
+  .Artwork .Controls span {
     font-size: 10px;
   }
 
-  .Modal .Controls object {
-    height: 8.5px;
-  }
-
-  .Modal .Controls svg {
-    height: 12px;
-  }
-
-  .Modal .UserName {
+  .Artwork .UserName {
     font-size: 12px;
   }
 
@@ -1474,6 +1481,10 @@ ul {
   :root {
     --default-font-nav-size: 16px;
     --default-form-font-size: 16px;
+  }
+
+  .MainWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(325px, 450px));
   }
 
   .Card {
@@ -1587,7 +1598,29 @@ ul {
     grid-template-columns: 150px auto;
     grid-gap: 15px;
   }
+
+  .Artwork {
+    padding: 45px 10vw;
+  }
+
+  .Artwork .Card {
+    grid-template-columns: calc(50vw - 50px) calc(100vw - 88vh - 15vw);
+  }
+
+  .Artwork .UserName {
+    font-size: 16px;
+  }
+
+  .Artwork .CardName {
+    font-size: 20px;
+    margin: 15px 0;
+  }
+
+  .Artwork .CardDescription {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
 }
 
 
-/*# sourceMappingURL=main.3f2d40dd8fa5f4e942db.css.map*/
+/*# sourceMappingURL=main.624b1bb2a3516e436ac6.css.map*/

@@ -1,9 +1,4 @@
 .Artwork {
-  position: fixed;
-  top: 101px;
-  left: 0;
-  height: calc(100vh - 101px);
-  width: calc(100vw - 30vw);
   background-color: white;
   padding: 45px 15vw;
   overflow-y: auto;
@@ -12,7 +7,7 @@
 .ArtworkClose {
   position: absolute;
   right: 75px;
-  top: 10px;
+  top: 111px;
   font-size: 28px;
   background: none;
   border: none;
@@ -20,21 +15,21 @@
 
 .Artwork .Card {
   display: grid;
-  grid-template-columns: calc(50vw - 50px) 20vw;
+  grid-template-columns: 88vh calc(100vw - 88vh - 35vw);
   gap: 50px;
 }
 
 .Artwork .Controls {
   width: 100%;
   display: grid;
-  grid-template-columns: 30px auto 20px 30px;
+  grid-template-columns: 25px auto 20px 30px;
 }
 
 .Artwork .Controls .LikesCount {
   order: 4;
 }
 
-.Artwork .Controls svg {
+.Artwork .LikesIcon {
   order: 3;
 }
 
@@ -42,10 +37,14 @@
   order: 2;
 }
 
-.Artwork .Controls object {
+.Artwork .ViewsIcon {
   order: 1;
 }
 
 .Artwork .UserName {
   font-size: 20px;
+}
+
+.CardInformation {
+  width: 100%;
 }
