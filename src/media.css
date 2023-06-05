@@ -588,6 +588,48 @@
     width: 45vw;
     left: 5vw;
   }
+
+  .AddArtworkForm {
+    width: 335px;
+    top: calc(50% - 280px / 2);
+    left: calc(50% - 335px / 2);
+    border-radius: 37px;
+    padding-bottom: 25px;
+  }
+
+  .AddArtworkForm .FormTitle::before {
+    top: 14px;
+    left: calc(50% - 125px - 5px);
+  }
+
+  .AddArtworkForm .FormTitle::after {
+    top: -10px;
+    left: calc(50% + 86px + 5px);
+  }
+
+  .AddArtworkForm label {
+    width: 290px;
+  }
+
+  .AddArtworkForm .FormInput {
+    width: 270px;
+    border-radius: 13px;
+  }
+
+  .AddArtworkForm .FormLargeInput {
+    height: 55px;
+    padding: 5px 10px;
+  }
+
+  .AddArtworkForm .FormCroppedInput {
+    width: 240px;
+  }
+
+  .HasAddButton::after {
+    margin-top: -36px;
+    margin-left: 273px;
+    font-size: 17px;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1366px) {
@@ -732,5 +774,29 @@
   .Artwork .CardDescription {
     font-size: 16px;
     margin-bottom: 20px;
+  }
+
+  .AddArtworkForm {
+    top: calc(50% - 440px / 2);
+  }
+
+  .AddArtworkForm .FormTitle::before {
+    top: 19px;
+    left: calc(50% - 179px - 5px);
+  }
+
+  .AddArtworkForm .FormTitle::after {
+    left: calc(50% + 127px + 5px);
+    top: -16px;
+  }
+
+  .AddArtworkForm .FormLargeInput {
+    border-radius: 15px;
+    height: 100px;
+  }
+
+  .HasAddButton::after {
+    font-size: 22px;
+    margin-top: -45px;
   }
 }

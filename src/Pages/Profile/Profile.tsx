@@ -31,17 +31,9 @@ const Profile = (props: ProfileProps): JSX.Element => {
               <Link to="/profile/edit">
                 <button>Редактировать профиль</button>
               </Link>
-              <button
-                onClick={() =>
-                  NotificationManager.error(
-                    'Данная функция в разработке',
-                    'Ошибка',
-                    3000
-                  )
-                }
-              >
-                Добавить работу
-              </button>
+              <Link to="/profile/upload">
+                <button>Добавить работу</button>
+              </Link>
             </div>
           )}
         </div>

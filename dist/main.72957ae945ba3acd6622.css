@@ -885,6 +885,72 @@ ul {
   padding-left: 20px;
 }
 
+.AddArtworkForm {
+  width: 760px;
+  position: fixed;
+  top: calc(50% - 553px / 2);
+  left: calc(50% - 760px / 2);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 70px;
+  box-shadow: 0px 4px 5px 0px #00000080;
+  font-size: var(--default-form-font-size);
+  padding-bottom: 45px;
+}
+
+.AddArtworkForm .FormInput {
+  width: 610px;
+}
+
+.AddArtworkForm .FormTitle::before {
+  top: 23px;
+  left: calc(50% - 233px - 5px);
+}
+
+.AddArtworkForm .FormTitle::after {
+  left: calc(50% + 163px + 5px);
+  top: -20px;
+}
+
+.FormLargeInput {
+  padding: 10px 20px;
+  height: 125px;
+  resize: none;
+}
+
+.AddArtworkForm .FormCroppedInput {
+  width: 560px;
+}
+
+.HasAddButton::after {
+  content: '✕';
+  display: block;
+  position: absolute;
+  transform: rotate(45deg);
+  cursor: pointer;
+  margin-top: -67px;
+  margin-left: 620px;
+  font-size: 27px;
+}
+
+.AddArtworkForm input[type='file'] {
+  display: none;
+}
+
+.AddArtworkForm label {
+  width: 650px;
+  margin: auto;
+}
+
+.FormButtonAdd {
+  height: 45px;
+  margin-left: 15px;
+  border: none;
+  background: none;
+  font-size: 30px;
+}
+
 @media (min-width: 375px) and (max-width: 992px) {
   :root {
     --default-font-nav-size: 11px;
@@ -1475,6 +1541,48 @@ ul {
     width: 45vw;
     left: 5vw;
   }
+
+  .AddArtworkForm {
+    width: 335px;
+    top: calc(50% - 280px / 2);
+    left: calc(50% - 335px / 2);
+    border-radius: 37px;
+    padding-bottom: 25px;
+  }
+
+  .AddArtworkForm .FormTitle::before {
+    top: 14px;
+    left: calc(50% - 125px - 5px);
+  }
+
+  .AddArtworkForm .FormTitle::after {
+    top: -10px;
+    left: calc(50% + 86px + 5px);
+  }
+
+  .AddArtworkForm label {
+    width: 290px;
+  }
+
+  .AddArtworkForm .FormInput {
+    width: 270px;
+    border-radius: 13px;
+  }
+
+  .AddArtworkForm .FormLargeInput {
+    height: 55px;
+    padding: 5px 10px;
+  }
+
+  .AddArtworkForm .FormCroppedInput {
+    width: 240px;
+  }
+
+  .HasAddButton::after {
+    margin-top: -36px;
+    margin-left: 273px;
+    font-size: 17px;
+  }
 }
 
 @media (min-width: 993px) and (max-width: 1366px) {
@@ -1620,7 +1728,31 @@ ul {
     font-size: 16px;
     margin-bottom: 20px;
   }
+
+  .AddArtworkForm {
+    top: calc(50% - 440px / 2);
+  }
+
+  .AddArtworkForm .FormTitle::before {
+    top: 19px;
+    left: calc(50% - 179px - 5px);
+  }
+
+  .AddArtworkForm .FormTitle::after {
+    left: calc(50% + 127px + 5px);
+    top: -16px;
+  }
+
+  .AddArtworkForm .FormLargeInput {
+    border-radius: 15px;
+    height: 100px;
+  }
+
+  .HasAddButton::after {
+    font-size: 22px;
+    margin-top: -45px;
+  }
 }
 
 
-/*# sourceMappingURL=main.624b1bb2a3516e436ac6.css.map*/
+/*# sourceMappingURL=main.72957ae945ba3acd6622.css.map*/

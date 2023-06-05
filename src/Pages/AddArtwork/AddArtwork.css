@@ -1,0 +1,65 @@
+.AddArtworkForm {
+  width: 760px;
+  position: fixed;
+  top: calc(50% - 553px / 2);
+  left: calc(50% - 760px / 2);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 70px;
+  box-shadow: 0px 4px 5px 0px #00000080;
+  font-size: var(--default-form-font-size);
+  padding-bottom: 45px;
+}
+
+.AddArtworkForm .FormInput {
+  width: 610px;
+}
+
+.AddArtworkForm .FormTitle::before {
+  top: 23px;
+  left: calc(50% - 233px - 5px);
+}
+
+.AddArtworkForm .FormTitle::after {
+  left: calc(50% + 163px + 5px);
+  top: -20px;
+}
+
+.FormLargeInput {
+  padding: 10px 20px;
+  height: 125px;
+  resize: none;
+}
+
+.AddArtworkForm .FormCroppedInput {
+  width: 560px;
+}
+
+.HasAddButton::after {
+  content: '✕';
+  display: block;
+  position: absolute;
+  transform: rotate(45deg);
+  cursor: pointer;
+  margin-top: -67px;
+  margin-left: 620px;
+  font-size: 27px;
+}
+
+.AddArtworkForm input[type='file'] {
+  display: none;
+}
+
+.AddArtworkForm label {
+  width: 650px;
+  margin: auto;
+}
+
+.FormButtonAdd {
+  height: 45px;
+  margin-left: 15px;
+  border: none;
+  background: none;
+  font-size: 30px;
+}

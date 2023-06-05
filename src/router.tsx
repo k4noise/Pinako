@@ -12,6 +12,7 @@ import Profile from './Pages/Profile/Profile';
 import Edit from './Pages/ProfileEdit/Edit';
 import Artwork from './Components/Artwork/Artwork';
 import About from './Pages/About/About';
+import AddArtwork from './Pages/AddArtwork/AddArtwork';
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -46,6 +47,10 @@ const App = (): JSX.Element => {
         {
           path: '/profile/edit',
           element: <Edit />,
+        },
+        {
+          path: '/profile/upload',
+          element: <AddArtwork />,
         },
         {
           path: '/users',
