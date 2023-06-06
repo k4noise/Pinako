@@ -632,6 +632,16 @@
   }
 }
 
+@media (min-width: 550px) and (max-width: 993px) {
+  .AboutSection:nth-child(even) {
+    align-self: flex-end;
+  }
+
+  .AboutSection:nth-child(odd) {
+    align-self: flex-start;
+  }
+}
+
 @media (min-width: 993px) and (max-width: 1366px) {
   :root {
     --default-font-nav-size: 16px;
@@ -798,5 +808,10 @@
   .HasAddButton::after {
     font-size: 22px;
     margin-top: -45px;
+  }
+
+  .About {
+    padding: 50px calc(20vw - min(100px, 7vw));
+    height: calc(100vh - 100px * 2 - 50px - 1px);
   }
 }

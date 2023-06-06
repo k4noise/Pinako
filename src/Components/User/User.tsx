@@ -13,10 +13,19 @@ const User = (props: UserProps): JSX.Element => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <Link className="User" to={props?.url ? props.url : '/profile'}>
-      <img src={props.avatar} className="UserAvatar" />
-      {props.name && <span className="UserName">{props.name}</span>}
-    </Link>
+    <>
+      {props?.url ? (
+        <Link className="User" to={props.url}>
+          <img src={props.avatar} className="UserAvatar" />
+          {props.name && <span className="UserName">{props.name}</span>}
+        </Link>
+      ) : (
+        <span className="User">
+          <img src={props.avatar} className="UserAvatar" />
+          {props.name && <span className="UserName">{props.name}</span>}
+        </span>
+      )}
+    </>
   );
 };
 

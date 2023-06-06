@@ -270,6 +270,12 @@ form a {
   border: 1px solid gray;
 }
 
+.UserAvatar {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .SearchFormNav {
   margin-right: 30px;
   justify-content: flex-end;
@@ -824,11 +830,10 @@ input[type='checkbox']:checked::before {
 
 .About {
   display: flex;
+  height: calc(100vh - 100px * 3 - 50px - 1px);
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10vh;
-  padding: 100px calc(20vw - min(100px, 7vw)) 0;
+  justify-content: space-between;
+  padding: 100px calc(20vw - min(100px, 7vw));
 }
 
 .AboutSection {
@@ -1585,6 +1590,16 @@ ul {
   }
 }
 
+@media (min-width: 550px) and (max-width: 993px) {
+  .AboutSection:nth-child(even) {
+    align-self: flex-end;
+  }
+
+  .AboutSection:nth-child(odd) {
+    align-self: flex-start;
+  }
+}
+
 @media (min-width: 993px) and (max-width: 1366px) {
   :root {
     --default-font-nav-size: 16px;
@@ -1752,7 +1767,12 @@ ul {
     font-size: 22px;
     margin-top: -45px;
   }
+
+  .About {
+    padding: 50px calc(20vw - min(100px, 7vw));
+    height: calc(100vh - 100px * 2 - 50px - 1px);
+  }
 }
 
 
-/*# sourceMappingURL=main.72957ae945ba3acd6622.css.map*/
+/*# sourceMappingURL=main.3fbd926bf373c8d80c3c.css.map*/

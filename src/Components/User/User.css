@@ -17,5 +17,11 @@
   max-height: 73vh;
   margin-bottom: 10px;
   border-radius: 25px;
-  border: 1px solid gray;
+  border: 1px solid #d9d9d9;
+}
+
+.UserAvatar {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
 }

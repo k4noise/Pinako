@@ -69,7 +69,24 @@ const Edit = (): JSX.Element => {
         <span className="ChangeAvatar">
           <User avatar={UserImage} />
           <label htmlFor="UploadAvatar">Изменить фото</label>
-          <input type="file" accept="image/*" id="UploadAvatar" name="avatar" />
+          <input
+            type="file"
+            accept="image/*"
+            id="UploadAvatar"
+            name=""
+            onChange={(event) => {
+              const image = document.querySelector(
+                '.EditForm .UserAvatar'
+              ) as HTMLImageElement;
+              const reader = new FileReader();
+              reader.onload = function (event) {
+                image.src = event.target.result;
+              };
+
+              if (event?.target?.files[0])
+                reader.readAsDataURL(event.target.files[0]);
+            }}
+          />
         </span>
         <div className="UserData">
           <label htmlFor="username">Имя пользователя</label>

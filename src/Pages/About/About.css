@@ -1,10 +1,9 @@
 .About {
   display: flex;
+  height: calc(100vh - 100px * 3 - 50px - 1px);
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10vh;
-  padding: 100px calc(20vw - min(100px, 7vw)) 0;
+  justify-content: space-between;
+  padding: 100px calc(20vw - min(100px, 7vw));
 }
 
 .AboutSection {
