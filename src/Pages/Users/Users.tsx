@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollRestoration } from 'react-router-dom';
 import Search from '../../Components/Search/Search';
 import User from '../../Components/User/User';
 import UserAvatar from '../../../assets/user.svg';
@@ -19,6 +20,7 @@ const Users = (): JSX.Element => {
         <User name="Имя пользователя" avatar={UserAvatar} url="/profile/20" />
         <User name="Имя пользователя" avatar={UserAvatar} url="/profile/63" />
       </div>
+      <ScrollRestoration />
     </div>
   );
 };

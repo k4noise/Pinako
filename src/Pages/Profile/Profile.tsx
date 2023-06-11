@@ -1,6 +1,5 @@
 import React from 'react';
-import { NotificationManager } from 'react-notifications';
-import { Link } from 'react-router-dom';
+import { Link, ScrollRestoration } from 'react-router-dom';
 import Card from '../../Components/Card/Card';
 import User from '../../Components/User/User';
 import Artworks from '../../Components/Artworks/Artworks';
@@ -49,6 +48,7 @@ const Profile = (props: ProfileProps): JSX.Element => {
         <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
         <Card hashTag={'хэштег'} image={CardImage} artworkView={false} />
       </Artworks>
+      <ScrollRestoration />
     </>
   );
 };

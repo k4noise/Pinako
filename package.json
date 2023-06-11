@@ -9,6 +9,7 @@
     "surge-deploy": "npm run build && cd dist && surge --domain pinako.surge.sh"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-notifications": "^1.7.4",
@@ -27,7 +28,7 @@
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
-    "babel-loader": "^9.1.2",
+    "babel-loader": "^8.3.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "eslint": "^8.36.0",
@@ -45,6 +46,7 @@
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "jest-transform-stub": "^2.0.0",
+    "js-cookie": "^3.0.5",
     "mini-css-extract-plugin": "^2.7.4",
     "prettier": "^2.8.4",
     "style-loader": "^3.3.2",

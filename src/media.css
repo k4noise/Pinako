@@ -310,9 +310,8 @@
 
   .RegisterForm {
     width: 335px;
-    height: 300px;
     left: calc(50% - 335px / 2);
-    top: calc(50% - 300px / 2 - 50px);
+    top: calc(50% - 260px / 2 - 50px);
     border-radius: 37px;
   }
 
@@ -630,6 +629,23 @@
     margin-left: 273px;
     font-size: 17px;
   }
+
+  .SearchTags {
+    margin-top: 20px;
+  }
+
+  .Error {
+    margin-top: -46px;
+  }
+
+  .ErrorNumber {
+    font-size: 100px;
+  }
+
+  .ErrorDescription {
+    font-size: 20px;
+    margin-top: 10px;
+  }
 }
 
 @media (min-width: 550px) and (max-width: 993px) {
@@ -686,9 +702,8 @@
 
   .RegisterForm {
     width: 550px;
-    height: 350px;
     position: relative;
-    top: max(calc(50vh - 300px), 20px);
+    top: max(calc(50vh - 315px), 20px);
     left: calc(50% - 550px / 2);
   }
 

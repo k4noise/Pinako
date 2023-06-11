@@ -9,6 +9,7 @@
 }
 
 :root {
+  overflow-y: scroll;
   --accent-color: #be70d9;
   --accent-color2: #a2bea8;
   --accent-color3: #757171;
@@ -64,6 +65,34 @@ form a {
 }
 
 .Footer.HiddenFooter {
+  display: none;
+}
+
+.Password {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 60px;
+  margin-top: 17px;
+  padding: 0;
+}
+
+.Password::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  bottom: 0;
+  transform-origin: left top;
+  transform: rotate(-45deg);
+  top: 18px;
+  right: -3px;
+}
+
+.Show::after {
   display: none;
 }
 

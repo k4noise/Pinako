@@ -1,0 +1,25 @@
+.Error {
+  margin-top: -101px;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ErrorNumber {
+  color: var(--accent-color);
+  font-size: 150px;
+  margin: 0;
+}
+
+.ErrorDescription {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.LinkToHome {
+  text-decoration: underline;
+  color: var(--accent-color3) !important;
+  margin-bottom: 70px;
+}

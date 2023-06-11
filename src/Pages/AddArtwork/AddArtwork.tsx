@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollRestoration } from 'react-router-dom';
 import './AddArtwork.css';
 
 const AddArtwork = (): JSX.Element => {
@@ -36,16 +37,6 @@ const AddArtwork = (): JSX.Element => {
           }}
           readOnly
         />
-        {/* <button
-          type="button"
-          className="FormButtonAdd"
-          onClick={(event) => {
-            const fileInput = document.body.querySelector('#UploadArtwork');
-            fileInput.click();
-          }}
-        >
-          +
-        </button> */}
         <input
           type="file"
           accept="image/*"
@@ -60,6 +51,7 @@ const AddArtwork = (): JSX.Element => {
       <button type="submit" className="FormButton">
         Опубликовать
       </button>
+      <ScrollRestoration />
     </form>
   );
 };

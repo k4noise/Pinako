@@ -189,7 +189,7 @@ form a {
 
 .Controls {
   display: grid;
-  grid-template-columns: 20px 30px 25px 30px;
+  grid-template-columns: 20px 35px 25px 30px;
   align-items: center;
 }
 
@@ -267,7 +267,7 @@ form a {
   max-height: 73vh;
   margin-bottom: 10px;
   border-radius: 25px;
-  border: 1px solid gray;
+  border: 1px solid #d9d9d9;
 }
 
 .UserAvatar {
@@ -1775,4 +1775,4 @@ ul {
 }
 
 
-/*# sourceMappingURL=main.3fbd926bf373c8d80c3c.css.map*/
+/*# sourceMappingURL=main.68af4ff9b0afebf0e0e6.css.map*/

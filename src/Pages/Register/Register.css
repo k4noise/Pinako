@@ -1,8 +1,7 @@
 .RegisterForm {
   width: 630px;
-  height: 553px;
   position: fixed;
-  top: calc(50% - 553px / 2);
+  top: calc(50% - 470px / 2);
   left: calc(50% - 630px / 2);
   display: flex;
   flex-direction: column;
@@ -18,6 +17,10 @@
 
 .RegisterForm .FormTitle::after {
   left: calc(50% + 98px + 5px);
+}
+
+.RegisterForm label {
+  margin: auto;
 }
 
 .FormCheckboxInput {

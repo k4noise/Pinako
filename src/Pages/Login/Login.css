@@ -50,6 +50,10 @@
   appearance: none;
 }
 
+.LoginForm label {
+  margin: auto;
+}
+
 .FormButton {
   margin: 10px auto 0;
   padding: 10px 40px;

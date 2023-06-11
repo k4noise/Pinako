@@ -9,9 +9,6 @@ interface UserProps {
 }
 
 const User = (props: UserProps): JSX.Element => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <>
       {props?.url ? (

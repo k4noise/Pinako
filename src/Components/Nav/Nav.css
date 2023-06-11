@@ -55,6 +55,7 @@
   z-index: 5;
   transition: 0.2s;
   visibility: hidden;
+  text-align: center;
 }
 
 .UserNavigation a:first-child:after {

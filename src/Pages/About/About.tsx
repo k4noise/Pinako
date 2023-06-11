@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScrollRestoration } from 'react-router-dom';
 import Wave6 from '../../../assets/wave6.svg';
 import Wave7 from '../../../assets/wave7.svg';
 import Wave8 from '../../../assets/wave8.svg';
@@ -31,6 +32,7 @@ const About = (): JSX.Element => {
           </ul>
         </div>
       </div>
+      <ScrollRestoration />
     </div>
   );
 };

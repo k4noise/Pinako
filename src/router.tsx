@@ -1,5 +1,6 @@
-import React from 'react';
-import { createHashRouter, Outlet, RouterProvider } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { createHashRouter, Outlet, redirect, RouterProvider } from 'react-router-dom';
+import Cookies from "js-cookie"
 import { NotificationContainer } from 'react-notifications';
 
 import Main from './Pages/Main/Main';
@@ -13,8 +14,19 @@ import Edit from './Pages/ProfileEdit/Edit';
 import Artwork from './Components/Artwork/Artwork';
 import About from './Pages/About/About';
 import AddArtwork from './Pages/AddArtwork/AddArtwork';
+import Error from './Pages/Error/Error';
+import Refresh from './Actions/Refresh';
 
 const App = (): JSX.Element => {
+  useEffect(() => {
+    const updateTime = 60 * 60 * 1000; //час
+    if (localStorage.hasOwnProperty('refreshToken')) {
+      if (!Cookies.get("accessToken"))
+        Refresh();
+    }
+    setInterval(Refresh, updateTime);
+  });
+
   const router = createHashRouter([
     {
       element: (
@@ -33,23 +45,42 @@ const App = (): JSX.Element => {
           element: <Main />,
         },
         {
+          path: 'page/:pageId',
+          element: <Main />
+        },
+        {
           path: '/login',
-          element: <LoginForm />,
+          element: <LoginForm />
         },
         {
           path: '/register',
-          element: <RegisterForm />,
+          element: <RegisterForm />
         },
         {
           path: '/profile',
-          element: <Profile isMine={true} />,
+          loader: () => {
+            if (!Cookies.get("accessToken"))
+              return redirect('/401')
+            return null;
+          },
+          element: <Profile isMine={true} />
         },
         {
           path: '/profile/edit',
+          loader: () => {
+            if (!Cookies.get("accessToken"))
+              return redirect('/401')
+            return null;
+          },
           element: <Edit />,
         },
         {
           path: '/profile/upload',
+          loader: () => {
+            if (!Cookies.get("accessToken"))
+              return redirect('/401')
+            return null;
+          },
           element: <AddArtwork />,
         },
         {
@@ -76,6 +107,22 @@ const App = (): JSX.Element => {
             </div>
           ),
         },
+        {
+          path: '404',
+          element: <Error number={404} description='Страница не найдена'/>
+        },
+        {
+          path: '401',
+          element: <Error number={401} description='Войдите для просмотра страницы'/>
+        },
+        {
+          path: '403',
+          element: <Error number={403} description='Вы уже вошли'/>
+        },
+        {
+          path: '*',
+          loader: () => redirect('404'),
+        }
       ],
     },
   ]);

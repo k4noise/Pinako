@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { ScrollRestoration, useParams } from 'react-router-dom';
+import Cookies from "js-cookie"
 import './Main.css';
 import Card from '../../Components/Card/Card';
 import Search from '../../Components/Search/Search';
@@ -13,7 +15,36 @@ const Main = (): JSX.Element => {
     height: window.innerHeight,
   });
 
-  useEffect(() => {
+  const params = useParams();
+  const startPageNumber: number = params?.pageId ? Number(params.pageId) : 0;
+  const cardsInPage: number = CardsInPage(windowSize.width);
+  const [cards, addCards] = useState(CardsGenerator(cardsInPage));
+
+  if (Cookies.get("accessToken")) {
+    useEffect(() => {
+      const handleScroll = () => {
+        const height = document.body.offsetHeight;
+        const screenHeight = window.innerHeight;
+        const scrolled = window.scrollY;
+        const threshold = height - screenHeight / 8;
+        const position = scrolled + screenHeight;
+
+        if (position >= threshold) {
+          addCards([...cards, ...CardsGenerator(cardsInPage)]);
+          const currentPageNumber: number = startPageNumber + cards.length / cardsInPage
+          window.history.pushState(null, '', `/#/page/${currentPageNumber}`)
+        }
+      }
+
+      window.addEventListener('scroll', handleScroll);
+
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    });
+  }
+
+  useLayoutEffect(() => {
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
@@ -27,32 +58,40 @@ const Main = (): JSX.Element => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return (
     <>
       <Header />
       <div className="AppWrapper">
         <Search locatedInNav={false} placeholder="Поиск" onlyMobile={true} />
         <Artworks additionalClassName="MainWrapper">
-          {CardsGenerator(windowSize.width)}
+          {cards}
         </Artworks>
-        <button className="Register">
-          <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
-        </button>
+        {!Cookies.get("accessToken") &&
+          <button className="Register">
+            <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
+          </button>
+        }
       </div>
+      <ScrollRestoration />
     </>
   );
 };
 
-const CardsGenerator = (width: number): JSX.Element[] => {
+const CardsInPage = (width: number): number => {
   const paddings: number = Math.min(200, width * 0.07);
   const cleanWidth: number = Math.floor(width - paddings);
   const cardCount: number =
     cleanWidth < 650
       ? 3
       : Math.floor((cleanWidth - (20 * cleanWidth) / 500) / 500) * 3;
-  const cards: JSX.Element[] = [];
-  for (let i = 0; i < cardCount; i++) {
-    cards[i] = <Card key={i} image={RectImg} />;
+  return cardCount;
+}
+
+const CardsGenerator = (count: number): JSX.Element[] => {
+  let cards: JSX.Element[] = [];
+  for (let i = 0; i < count; i++) {
+    cards[i] = <Card key={Math.random()} image={RectImg} />;
   }
   return cards;
 };

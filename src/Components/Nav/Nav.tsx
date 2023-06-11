@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import Cookies from "js-cookie"
 import Logo from '../Logo/Logo';
 import User from '../User/User';
 import Search from '../Search/Search';
+import Logout from '../../Actions/Logout';
 import './Nav.css';
 import UserAvatar from '../../../assets/user.svg';
 import LogoImage from '../../../assets/logo.svg';
@@ -45,8 +47,20 @@ const Nav = (): JSX.Element => {
       <Search locatedInNav={true} placeholder="Поиск" />
       <User avatar={UserAvatar} />
       <div className="UserNavigation" onClick={ToggleMobileMenu}>
-        <Link to="/register">Зарегестрироваться</Link>
-        <Link to="/login">Войти</Link>
+        {Cookies.get("accessToken") ?
+          <>
+            <Link to="/profile/upload">Добавить работу</Link>
+            <Link to="" onClick={async (event) => {
+              event.preventDefault();
+              Logout();
+            }
+            }>Выйти</Link>
+          </>
+          :<>
+            <Link to="/register">Зарегестрироваться</Link>
+            <Link to="/login">Войти</Link>
+          </>
+      }
       </div>
       <button onClick={ToggleMobileMenu} className="UtilityMobileNavigaion">
         <span></span>

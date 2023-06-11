@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { ScrollRestoration } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 import './Edit.css';
 import User from '../../Components/User/User';
@@ -104,6 +105,7 @@ const Edit = (): JSX.Element => {
         </div>
         <button className="FormButton">Сохранить</button>
       </form>
+      <ScrollRestoration />
     </div>
   );
 };
