@@ -1,7 +1,6 @@
 import Cookies from "js-cookie"
 import { Request } from "../Requests";
 import Logout from "./Logout";
-import { AxiosError } from "axios";
 
 
 async function Refresh() {

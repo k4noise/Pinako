@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import Cookies from "js-cookie"
+import Cookies from 'js-cookie'
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import User from '../User/User';
 import Search from '../Search/Search';
@@ -15,6 +15,8 @@ interface LinkProps {
 }
 
 const Nav = (): JSX.Element => {
+  useLocation();
+
   useEffect(() => {
     const handleResize = () => {
       const navigation: HTMLElement = document.querySelector(

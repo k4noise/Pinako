@@ -9,6 +9,7 @@
 }
 
 :root {
+  overflow-y: scroll;
   --accent-color: #be70d9;
   --accent-color2: #a2bea8;
   --accent-color3: #757171;
@@ -64,6 +65,34 @@ form a {
 }
 
 .Footer.HiddenFooter {
+  display: none;
+}
+
+.Password {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 60px;
+  margin-top: 17px;
+  padding: 0;
+}
+
+.Password::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  bottom: 0;
+  transform-origin: left top;
+  transform: rotate(-45deg);
+  top: 18px;
+  right: -3px;
+}
+
+.Show::after {
   display: none;
 }
 
@@ -175,6 +204,13 @@ form a {
   grid-gap: 20px;
 }
 
+.SearchTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
 .Card {
   width: 550px;
 }
@@ -464,6 +500,7 @@ form a {
   z-index: 5;
   transition: 0.2s;
   visibility: hidden;
+  text-align: center;
 }
 
 .UserNavigation a:first-child:after {
@@ -496,9 +533,8 @@ form a {
 
 .RegisterForm {
   width: 630px;
-  height: 553px;
   position: fixed;
-  top: calc(50% - 553px / 2);
+  top: calc(50% - 470px / 2);
   left: calc(50% - 630px / 2);
   display: flex;
   flex-direction: column;
@@ -514,6 +550,10 @@ form a {
 
 .RegisterForm .FormTitle::after {
   left: calc(50% + 98px + 5px);
+}
+
+.RegisterForm label {
+  margin: auto;
 }
 
 .FormCheckboxInput {
@@ -610,6 +650,10 @@ input[type='checkbox']:checked::before {
   border-radius: 25px;
   border: 1px solid var(--accent-color3);
   appearance: none;
+}
+
+.LoginForm label {
+  margin: auto;
 }
 
 .FormButton {
@@ -956,6 +1000,32 @@ ul {
   font-size: 30px;
 }
 
+.Error {
+  margin-top: -101px;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ErrorNumber {
+  color: var(--accent-color);
+  font-size: 150px;
+  margin: 0;
+}
+
+.ErrorDescription {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.LinkToHome {
+  text-decoration: underline;
+  color: var(--accent-color3) !important;
+  margin-bottom: 70px;
+}
+
 @media (min-width: 375px) and (max-width: 992px) {
   :root {
     --default-font-nav-size: 11px;
@@ -1268,9 +1338,8 @@ ul {
 
   .RegisterForm {
     width: 335px;
-    height: 300px;
     left: calc(50% - 335px / 2);
-    top: calc(50% - 300px / 2 - 50px);
+    top: calc(50% - 260px / 2 - 50px);
     border-radius: 37px;
   }
 
@@ -1588,6 +1657,23 @@ ul {
     margin-left: 273px;
     font-size: 17px;
   }
+
+  .SearchTags {
+    margin-top: 20px;
+  }
+
+  .Error {
+    margin-top: -46px;
+  }
+
+  .ErrorNumber {
+    font-size: 100px;
+  }
+
+  .ErrorDescription {
+    font-size: 20px;
+    margin-top: 10px;
+  }
 }
 
 @media (min-width: 550px) and (max-width: 993px) {
@@ -1644,9 +1730,8 @@ ul {
 
   .RegisterForm {
     width: 550px;
-    height: 350px;
     position: relative;
-    top: max(calc(50vh - 300px), 20px);
+    top: max(calc(50vh - 315px), 20px);
     left: calc(50% - 550px / 2);
   }
 
@@ -1775,4 +1860,4 @@ ul {
 }
 
 
-/*# sourceMappingURL=main.68af4ff9b0afebf0e0e6.css.map*/
+/*# sourceMappingURL=main.f436665f17570c4f8750.css.map*/

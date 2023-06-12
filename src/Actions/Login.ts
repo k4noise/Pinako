@@ -12,7 +12,7 @@ interface LoginProps {
 
 async function LoginUser(props: LoginProps): Promise<boolean> {
   const url: string = '/accounts/auth/login';
-  const updateTime: number = 60 * 60 * 1000; //час
+  const updateTime: number = 59 * 60 * 1000; //59 минут
   try {
     const response = await Request.post(url, props);
     const data = response.data;

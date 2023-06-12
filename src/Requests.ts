@@ -1,13 +1,14 @@
-import axios from "axios";
-import Cookies from "js-cookie"
+import axios, { AxiosInstance } from "axios";
 
-const AuthRequest = axios.create({
+const CreateAuthRequest = (token: string): AxiosInstance => {
+  return axios.create({
   baseURL: "http://localhost:8081",
   headers: {
-    'Authorization': `Bearer ${Cookies.get("accessToken")}`,
+    'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   },
 });
+}
 
 const Request = axios.create({
   baseURL: "http://localhost:8081",
@@ -16,4 +17,4 @@ const Request = axios.create({
   }
 });
 
-export { AuthRequest, Request };
+export { Request, CreateAuthRequest };

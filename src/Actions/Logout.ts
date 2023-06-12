@@ -1,12 +1,12 @@
 import React from "react";
-import { AuthRequest } from "../Requests";
+import { CreateAuthRequest } from "../Requests";
 import Cookies from 'js-cookie';
-import { NotificationManager } from 'react-notifications';
 
 
 async function Logout() {
   try {
-    await AuthRequest.post('/accounts/auth/logout', { fingerprint: localStorage.getItem("fingerprint") });
+    const authRequest = CreateAuthRequest(Cookies.get('accessToken'));
+    await authRequest.post('/accounts/auth/logout', { fingerprint: localStorage.getItem("fingerprint") });
   }
   finally {
     localStorage.clear();

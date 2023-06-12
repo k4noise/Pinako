@@ -22,19 +22,19 @@ const RegisterForm = (): JSX.Element => {
   }
 
   const IsValidForm = (form: HTMLFormElement): boolean => {
-    const username: string = form?.username?.value as string;
+    const login: string = form?.login?.value as string;
     const password: string = form?.password?.value as string;
     const passwordRepeat: string = form?.passwordRepeat?.value as string;
     const approve: boolean = form?.approve?.checked as boolean;
     let isValid: boolean = true;
 
-    if (username.length === 0) {
+    if (login.length === 0) {
       NotificationManager.warning('Не указано имя пользователя');
       isValid = false;
-    } else if (username.length < 5) {
+    } else if (login.length < 5) {
       NotificationManager.warning('Имя пользователя не может быть короче 5 символов');
       isValid = false;
-    } else if (username.length >= 20) {
+    } else if (login.length >= 20) {
       NotificationManager.warning('Имя пользователя не может быть длиннее 20 символов');
       isValid = false;
     }
@@ -69,7 +69,7 @@ const RegisterForm = (): JSX.Element => {
         const form = event.target as HTMLFormElement;
         event.preventDefault();
         if (IsValidForm(form)) {
-          await Register({ login: form.username.value, password: form.password.value });
+          await Register({ login: form.login.value, password: form.password.value });
           navigate("/login");
         }
       }}
@@ -77,9 +77,9 @@ const RegisterForm = (): JSX.Element => {
       <h3 className="FormTitle">Регистрация</h3>
       <input
         type="text"
-        placeholder="Имя пользователя"
+        placeholder="Логин"
         className="FormInput"
-        name="username"
+        name="login"
       />
       <label>
         <input
