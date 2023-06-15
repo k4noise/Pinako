@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie'
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
@@ -15,7 +15,8 @@ interface LinkProps {
 }
 
 const Nav = (): JSX.Element => {
-  useLocation();
+  const location = useLocation();
+  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,6 +38,10 @@ const Nav = (): JSX.Element => {
     };
   }, []);
 
+  useEffect(() => {
+    setIsAuth(Cookies.get("accessToken"))
+  },[location]);
+
   return (
     <nav className="UtilityNavigation">
       <Logo image={LogoImage} text="Пинако" size={50} />
@@ -49,12 +54,13 @@ const Nav = (): JSX.Element => {
       <Search locatedInNav={true} placeholder="Поиск" />
       <User avatar={UserAvatar} />
       <div className="UserNavigation" onClick={ToggleMobileMenu}>
-        {Cookies.get("accessToken") ?
+        {isAuth ?
           <>
             <Link to="/profile/upload">Добавить работу</Link>
             <Link to="" onClick={async (event) => {
               event.preventDefault();
               Logout();
+              setIsAuth(false);
             }
             }>Выйти</Link>
           </>

@@ -41,7 +41,7 @@ const LoginForm = (): JSX.Element => {
   useEffect(() => {
     if (Cookies.get("accessToken"))
       navigate('/403');
-  });
+  }, []);
 
   return (
     <>

@@ -18,15 +18,6 @@ import Error from './Pages/Error/Error';
 import Refresh from './Actions/Refresh';
 
 const App = (): JSX.Element => {
-  useEffect(() => {
-    const updateTime = 59 * 60 * 1000; //59 минут
-    if (localStorage.hasOwnProperty('refreshToken')) {
-      if (!Cookies.get("accessToken"))
-        Refresh();
-    }
-    setInterval(Refresh, updateTime);
-  });
-
   const router = createHashRouter([
     {
       element: (

@@ -9,10 +9,14 @@ async function Logout() {
     await authRequest.post('/accounts/auth/logout', { fingerprint: localStorage.getItem("fingerprint") });
   }
   finally {
-    localStorage.clear();
-    Cookies.remove('accessToken');
-    window.location.reload();
+    ClearStorage();
   }
 }
 
+const ClearStorage = (): void => {
+  localStorage.clear();
+  Cookies.remove('accessToken');
+}
+
 export default Logout;
+export { ClearStorage };

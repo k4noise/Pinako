@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration, useNavigate } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 import './Edit.css';
 import Update from '../../Actions/UpdateProfile';
@@ -8,6 +8,7 @@ import UserImage from '../../../assets/user.svg';
 
 const Edit = (): JSX.Element => {
   const ref = useRef(null);
+  const navigate = useNavigate();
   const [isDirty, setIsDirty] = useState(false);
   const [avatar, setAvatar] = useState();
 
@@ -80,11 +81,15 @@ const Edit = (): JSX.Element => {
         onSubmit={async (event) => {
           event.preventDefault();
           if (IsValidForm()) {
-            Update({
+            const isSuccess: boolean = await Update({
               login: ref.current.login.value,
               displayName: ref.current.username.value,
               about: ref.current.aboutUser.value
             })
+            if (isSuccess) {
+                  NotificationManager.info('Войдите заново с новыми данными');
+            navigate('/login');
+            }
           }
         }}
       >

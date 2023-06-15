@@ -20,6 +20,21 @@ const Main = (): JSX.Element => {
   const cardsInPage: number = CardsInPage(windowSize.width);
   const [cards, addCards] = useState(CardsGenerator(cardsInPage));
 
+    useLayoutEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+    }, []);
+
   if (Cookies.get("accessToken")) {
     useEffect(() => {
       const handleScroll = () => {
@@ -43,21 +58,6 @@ const Main = (): JSX.Element => {
       };
     });
   }
-
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
 
   return (
     <>
