@@ -15,6 +15,7 @@ import com.kyeeego.digitalportfolio.domain.dto.ArtworkUpdateDto;
 import com.kyeeego.digitalportfolio.domain.dto.ArtworkUploadDto;
 import com.kyeeego.digitalportfolio.domain.models.Artwork;
 import com.kyeeego.digitalportfolio.domain.models.helpers.Tag;
+import com.kyeeego.digitalportfolio.exceptions.NotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -72,6 +73,16 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Override
     public void delete(long id) {
         artworkRepository.deleteById(id);
+    }
+
+    @Override
+    public Artwork findById(long id) {
+        return artworkRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    @Override
+    public List<Artwork> findByAuthor(long authorId) {
+        return artworkRepository.findByUserId(authorId);
     }
 
 }

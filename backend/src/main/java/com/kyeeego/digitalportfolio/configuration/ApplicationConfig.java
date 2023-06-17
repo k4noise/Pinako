@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.kyeeego.digitalportfolio.utils.NullAwareBeanUtilsBean;
+
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -36,5 +38,10 @@ public class ApplicationConfig {
     @Bean
     public PasswordEncoder bcryptPasswordEncoder() {
         return new BCryptPasswordEncoder(12);
+    }
+
+    @Bean
+    public NullAwareBeanUtilsBean beanUtilsBean() {
+        return new NullAwareBeanUtilsBean();
     }
 }

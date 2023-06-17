@@ -37,8 +37,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("/accounts/create").permitAll()
                 .requestMatchers("/accounts/auth/refresh", "/accounts/auth/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/accounts/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/artworks").permitAll()
+                .requestMatchers(HttpMethod.GET, "/artworks/**").permitAll()
                 .anyRequest().authenticated();
 
         http.authenticationProvider(authProvider);

@@ -1,6 +1,9 @@
 package com.kyeeego.digitalportfolio.application.service;
 
 import java.security.Principal;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,6 +17,7 @@ import com.kyeeego.digitalportfolio.application.port.AccountService;
 import com.kyeeego.digitalportfolio.application.port.SessionService;
 import com.kyeeego.digitalportfolio.application.repository.UserRepository;
 import com.kyeeego.digitalportfolio.domain.dto.AuthDto;
+import com.kyeeego.digitalportfolio.domain.dto.LoginResponse;
 import com.kyeeego.digitalportfolio.domain.dto.TokenPair;
 import com.kyeeego.digitalportfolio.domain.dto.UserCreateDto;
 import com.kyeeego.digitalportfolio.domain.dto.UserUpdateDto;
@@ -36,6 +40,7 @@ public class AccountServiceImpl implements AccountService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
     private final UserDetailsService userDetailsService;
+    private final NullAwareBeanUtilsBean beanUtilsBean;
 
     @Override
     public void create(UserCreateDto body) {
@@ -59,7 +64,6 @@ public class AccountServiceImpl implements AccountService {
                 .findByLogin(principal.getName())
                 .orElseThrow(NotFoundException::new);
 
-        var beanUtilsBean = new NullAwareBeanUtilsBean();
         try {
             beanUtilsBean.copyProperties(user, body);
         } catch (Exception e) {
@@ -75,7 +79,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public TokenPair auth(AuthDto body) {
+    public LoginResponse auth(AuthDto body) {
         try {
             authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(body.getLogin(), body.getPassword()));
@@ -86,7 +90,13 @@ public class AccountServiceImpl implements AccountService {
         var userDetails = userDetailsService
                 .loadUserByUsername(body.getLogin());
 
-        return sessionService.create(userDetails, body.getFingerprint());
+        var tokenPair = sessionService.create(userDetails, body.getFingerprint());
+        var user = userRepository.findByLogin(body.getLogin()).orElseThrow(NotFoundException::new);
+
+        return new LoginResponse(
+                user.getId(),
+                user.getPfpUrl(),
+                tokenPair);
     }
 
     @Override
@@ -97,5 +107,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void logout(String fingerprint) {
         sessionService.logout(fingerprint);
+    }
+
+    @Override
+    public Set<User> findByNameContains(String namePart) {
+        return Stream.concat(
+                userRepository.findByDisplayNameContains(namePart).stream(),
+                userRepository.findByLoginContains(namePart).stream()).collect(Collectors.toSet());
     }
 }

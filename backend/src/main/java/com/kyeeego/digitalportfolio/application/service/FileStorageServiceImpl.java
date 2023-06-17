@@ -28,6 +28,8 @@ public class FileStorageServiceImpl implements FileStorageService {
 
         try {
             Files.createDirectories(storageLocation);
+            Files.copy(this.getClass().getClassLoader().getResourceAsStream("defaultpfp.jpg"),
+                    storageLocation.resolve("defaultpfp.jpg"));
         } catch (Exception ex) {
             throw new RuntimeException(
                     "Could not create the directory where the uploaded files will be stored.", ex);

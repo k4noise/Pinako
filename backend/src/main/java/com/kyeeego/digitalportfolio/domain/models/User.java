@@ -26,7 +26,7 @@ public class User {
 
     private String password;
 
-    // private String pfpUrl;
+    private String pfpUrl = "defaultpfp.jpg";
     // private String bannerUrl;
 
     public User(UserCreateDto dto) {

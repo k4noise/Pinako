@@ -12,6 +12,10 @@ public interface ArtworkService {
 
     void update(ArtworkUpdateDto body, Principal principal);
 
+    Artwork findById(long id);
+
+    List<Artwork> findByAuthor(long authorId);
+
     List<Artwork> findByTags(List<String> tags);
 
     List<Artwork> findByTitleContains(String titleParts);

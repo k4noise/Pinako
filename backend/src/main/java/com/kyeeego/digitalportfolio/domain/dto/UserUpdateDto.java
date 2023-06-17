@@ -13,4 +13,6 @@ public class UserUpdateDto {
 
     @Size(max = 300)
     private String about;
+
+    private String pfpUrl;
 }

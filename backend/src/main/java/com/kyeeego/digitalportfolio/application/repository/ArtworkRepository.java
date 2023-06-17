@@ -10,4 +10,6 @@ import com.kyeeego.digitalportfolio.domain.models.Artwork;
 @Transactional
 public interface ArtworkRepository extends JpaRepository<Artwork, Long> {
     List<Artwork> findByTitleContainsIgnoreCase(String titlePart);
+
+    List<Artwork> findByUserId(long userId);
 }
