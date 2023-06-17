@@ -17,7 +17,6 @@ async function Refresh() {
     localStorage.setItem("refreshToken", data.refreshToken);
     Cookies.set("accessToken", data.accessToken, { expires: 1 / 24 });
   } catch (error) {
-    console.log(error)
     if (error.response.status == 410)
       Logout();
   }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Card.css';
 import User from '../User/User';
 import EyeImg from '../../../assets/eye.svg';
@@ -12,14 +13,17 @@ interface StaticticsProps {
 interface CardProps {
   showStats?: boolean;
   hashTag?: string;
+  userId: number;
+  id: number;
   artworkView: boolean;
   image: string;
 }
 
 const Card = (props: CardProps): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <div className="Card">
-      <span className="ClickableCard">
+      <span className="ClickableCard" onClick={(event) => navigate(`/profile/${props.userId}/artwork/${props.id}`)}>
         <img src={props.image} className="UserImage" loading="lazy" />
         <div className="CardControls">
           {props.hashTag && (
@@ -29,7 +33,7 @@ const Card = (props: CardProps): JSX.Element => {
             <User
               name="Имя пользователя"
               avatar={UserAvatar}
-              url="/profile/23452"
+              url={`/profile/${props.userId}`}
             />
           )}
           <Statictics likes={120} watches={120} />
@@ -40,7 +44,7 @@ const Card = (props: CardProps): JSX.Element => {
           <User
             name="Имя пользователя"
             avatar={UserAvatar}
-            url="/profile/23452"
+            url={`/profile/${props.userId}`}
           />
           <h3 className="CardName">Название работы</h3>
           <p className="CardDescription">

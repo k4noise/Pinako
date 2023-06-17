@@ -8,7 +8,7 @@ const Artwork = (): JSX.Element => {
   const navigate = useNavigate();
   return (
     <div className="Artwork">
-      <Card artworkView={true} image={RectImg} />
+      <Card id={13256} userId={23452} artworkView={true} image={RectImg} />
       <button className="ArtworkClose" onClick={(event) => navigate(-1)}>
         ✕
       </button>

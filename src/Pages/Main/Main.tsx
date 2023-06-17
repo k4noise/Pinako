@@ -5,7 +5,6 @@ import './Main.css';
 import Card from '../../Components/Card/Card';
 import Search from '../../Components/Search/Search';
 import Header from '../../Components/Header/Header';
-import Artworks from '../../Components/Artworks/Artworks';
 import { Link } from 'react-router-dom';
 import RectImg from '../../../assets/rect.png';
 
@@ -64,9 +63,9 @@ const Main = (): JSX.Element => {
       <Header />
       <div className="AppWrapper">
         <Search locatedInNav={false} placeholder="Поиск" onlyMobile={true} />
-        <Artworks additionalClassName="MainWrapper">
+        <div className="Artworks MainWrapper">
           {cards}
-        </Artworks>
+        </div>
         {!Cookies.get("accessToken") &&
           <button className="Register">
             <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
@@ -91,7 +90,7 @@ const CardsInPage = (width: number): number => {
 const CardsGenerator = (count: number): JSX.Element[] => {
   let cards: JSX.Element[] = [];
   for (let i = 0; i < count; i++) {
-    cards[i] = <Card key={Math.random()} image={RectImg} />;
+    cards[i] = <Card id={13256} key={Math.random()} userId={23452} image={RectImg} />;
   }
   return cards;
 };

@@ -15,7 +15,8 @@ import Artwork from './Components/Artwork/Artwork';
 import About from './Pages/About/About';
 import AddArtwork from './Pages/AddArtwork/AddArtwork';
 import Error from './Pages/Error/Error';
-import Refresh from './Actions/Refresh';
+import Search from './Pages/Search/Search';
+import SearchServer from './Actions/Search';
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -92,11 +93,12 @@ const App = (): JSX.Element => {
         },
         {
           path: '/search/:searchParams',
-          element: (
-            <div className="AppWrapper">
-              <span>Поиск</span>
-            </div>
-          ),
+          loader: async ({ params }) => {
+            const searchString = params.searchParams;
+            const originQuery = searchString?.replaceAll('*', '#');
+            return await SearchServer(originQuery);
+          },
+          element: <Search/>,
         },
         {
           path: '404',

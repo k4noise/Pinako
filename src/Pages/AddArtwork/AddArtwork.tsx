@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { Form, ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration } from 'react-router-dom';
 import UploadFile from '../../Actions/UploadFile';
 import UploadArtwork from '../../Actions/UploadArtwork';
+import { NotificationManager } from 'react-notifications';
 import './AddArtwork.css';
 
 const AddArtwork = (): JSX.Element => {
@@ -20,28 +21,39 @@ const AddArtwork = (): JSX.Element => {
       isValid = false;
     }
 
-    if (description.length < 300) {
+    if (description.length > 300) {
       NotificationManager.warning('Описание не может быть больше 300 символов');
       isValid = false;
     }
+
+    if (picture === undefined) {
+      NotificationManager.warning('Добавьте изображение работы');
+      isValid = false;
+    }
+
     return isValid;
   };
 
   return (
     <form action="/upload" method="post" className="AddArtworkForm" onSubmit={async (event) => {
       event.preventDefault();
-      const form = event.currentTarget;
-      const formData = new FormData();
-      formData.set('file', picture);
-      const postImageUrl = await UploadFile(formData);
+      const form = event.currentTarget as HTMLFormElement;
+      const validForm = IsValidForm(form)
+      if (validForm) {
+        const formData = new FormData();
+        formData.set('file', picture);
+        const postImageUrl = await UploadFile(formData);
 
-      const body = {
-        title: form.artworkName.value,
-        description: form.description.value,
-        imageUrl: postImageUrl,
-        tags: TagSplitter(form.tags.value)
+        const body = {
+          title: form.artworkName.value,
+          description: form.description.value,
+          imageUrl: postImageUrl,
+          tags: TagSplitter(form.tags.value)
+        }
+          await UploadArtwork(body);
       }
-      await UploadArtwork(body);
+
+
     }}>
       <h3 className="FormTitle">Добавление работы</h3>
       <input
@@ -97,7 +109,7 @@ const AddArtwork = (): JSX.Element => {
 };
 
 const TagSplitter = (tags: string): string[] =>
-  tags.split(' ').filter(tag => tag.startsWith('#')).map(tag => tag.slice(1));
+  tags.split(' ').filter(tag => tag.startsWith('#'));
 
 
 export default AddArtwork;

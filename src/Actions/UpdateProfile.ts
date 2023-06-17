@@ -1,9 +1,6 @@
-import Cookies from "js-cookie"
-import { CreateAuthRequest } from "../Requests";
-import Refresh from "./Refresh";
+import { AuthRequest } from "../Requests";
 import { NotificationManager } from 'react-notifications';
 import { ClearStorage } from "./Logout";
-import { useNavigate } from "react-router-dom";
 
 interface UpdateProps {
   login: string;
@@ -13,9 +10,8 @@ interface UpdateProps {
 
 async function Update(props: UpdateProps): Promise<boolean> {
   const url: string = '/accounts/update';
-    const authRequest = CreateAuthRequest(Cookies.get('accessToken'));
   try {
-    await authRequest.post(url, props);
+    await AuthRequest.post(url, props);
     NotificationManager.success('Профиль обновлен успешно');
     ClearStorage();
     return true;

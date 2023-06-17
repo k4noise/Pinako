@@ -1,5 +1,5 @@
 import Cookies from "js-cookie"
-import { CreateAuthRequest } from "../Requests";
+import { AuthRequest } from "../Requests";
 import { NotificationManager } from 'react-notifications';
 
 interface UploadProps {
@@ -12,8 +12,7 @@ interface UploadProps {
 async function UploadArtwork(props: UploadProps) {
   const url: string = '/artworks/upload';
   try {
-    const authRequest = CreateAuthRequest(Cookies.get('accessToken'));
-    await authRequest.post(url, props);
+    await AuthRequest.post(url, props);
     NotificationManager.success('Работа успешно добавлена');
   }
   catch (error) {

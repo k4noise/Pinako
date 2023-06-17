@@ -1,12 +1,10 @@
 import React from "react";
-import { CreateAuthRequest } from "../Requests";
+import { AuthRequest } from "../Requests";
 import Cookies from 'js-cookie';
-
 
 async function Logout() {
   try {
-    const authRequest = CreateAuthRequest(Cookies.get('accessToken'));
-    await authRequest.post('/accounts/auth/logout', { fingerprint: localStorage.getItem("fingerprint") });
+    await AuthRequest.post('/accounts/auth/logout', { fingerprint: localStorage.getItem("fingerprint") });
   }
   finally {
     ClearStorage();

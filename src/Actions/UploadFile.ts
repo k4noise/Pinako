@@ -1,11 +1,9 @@
-import Cookies from "js-cookie"
-import { CreateAuthRequest } from "../Requests";
+import { AuthRequest } from "../Requests";
 
 const UploadFile = async (props: FormData): Promise<string | null> => {
   const url = '/files/upload';
-  const authRequest = CreateAuthRequest(Cookies.get('accessToken'), 'multipart/form-data');
   try {
-    const response = await authRequest.post(url, props);
+    const response = await AuthRequest.post(url, props);
     return response.data.filename;
   }
   catch (error) {

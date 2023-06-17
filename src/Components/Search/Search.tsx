@@ -2,6 +2,7 @@ import React from 'react';
 import { NotificationManager } from 'react-notifications';
 import SearchButtonImage from '../../../assets/magnifier.svg';
 import './Search.css';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchProps {
   locatedInNav: boolean;
@@ -10,18 +11,18 @@ interface SearchProps {
 }
 
 const Search = (props: SearchProps): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <form
       className={`${props.locatedInNav ? 'SearchFormNav' : 'SearchForm'} ${
         props?.onlyMobile ? 'SearchOnlyMobile' : ''
-      }`}
+      }`
+    }
       onSubmit={(event) => {
         event.preventDefault();
-        NotificationManager.error(
-          'Данная функция в разработке',
-          'Ошибка',
-          3000
-        );
+        const query: string = event.target.query.value;
+        const shieldedQuery: string = query.replaceAll('#', '*');
+        navigate(`/search/${shieldedQuery}`)
       }}
     >
       <input
