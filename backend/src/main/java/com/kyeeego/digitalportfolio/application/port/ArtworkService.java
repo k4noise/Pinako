@@ -8,6 +8,8 @@ import com.kyeeego.digitalportfolio.domain.dto.ArtworkUploadDto;
 import com.kyeeego.digitalportfolio.domain.models.Artwork;
 
 public interface ArtworkService {
+    List<Artwork> getPage(int page, int n);
+
     void upload(ArtworkUploadDto body, Principal principal);
 
     void update(ArtworkUpdateDto body, Principal principal);

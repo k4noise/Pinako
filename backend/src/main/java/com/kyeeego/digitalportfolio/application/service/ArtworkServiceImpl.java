@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.kyeeego.digitalportfolio.application.port.ArtworkService;
@@ -83,6 +85,13 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Override
     public List<Artwork> findByAuthor(long authorId) {
         return artworkRepository.findByUserId(authorId);
+    }
+
+    @Override
+    public List<Artwork> getPage(int page, int n) {
+        return artworkRepository
+                .findAll(PageRequest.of(page, n, Sort.by("createdAt").descending()))
+                .toList();
     }
 
 }

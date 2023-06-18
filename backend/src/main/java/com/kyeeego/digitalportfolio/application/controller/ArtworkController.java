@@ -27,6 +27,11 @@ public class ArtworkController {
 
     private final ArtworkService artworkService;
 
+    @GetMapping("/all")
+    public List<Artwork> getPage(@RequestParam int page, @RequestParam int n) {
+        return artworkService.getPage(page, n);
+    }
+
     @PostMapping("/upload")
     public void upload(@RequestBody @Valid ArtworkUploadDto body, Principal principal) {
         artworkService.upload(body, principal);
