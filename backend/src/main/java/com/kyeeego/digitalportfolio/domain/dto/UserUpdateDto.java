@@ -1,5 +1,6 @@
 package com.kyeeego.digitalportfolio.domain.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -15,4 +16,7 @@ public class UserUpdateDto {
     private String about;
 
     private String pfpUrl;
+
+    @NotBlank
+    private String currentPassword;
 }

@@ -17,6 +17,7 @@ import com.kyeeego.digitalportfolio.application.port.ArtworkService;
 import com.kyeeego.digitalportfolio.domain.dto.AuthDto;
 import com.kyeeego.digitalportfolio.domain.dto.LoginResponse;
 import com.kyeeego.digitalportfolio.domain.dto.LogoutDto;
+import com.kyeeego.digitalportfolio.domain.dto.PasswordUpdateDto;
 import com.kyeeego.digitalportfolio.domain.dto.RefreshTokensDto;
 import com.kyeeego.digitalportfolio.domain.dto.TokenPair;
 import com.kyeeego.digitalportfolio.domain.dto.UserCreateDto;
@@ -46,6 +47,11 @@ public class AccountContoller {
     @PostMapping("/update")
     public void update(@RequestBody @Valid UserUpdateDto userUpdateDto, Principal principal) {
         accountService.update(principal, userUpdateDto);
+    }
+
+    @PostMapping("/update/password")
+    public void updatePassword(@RequestBody @Valid PasswordUpdateDto body, Principal principal) {
+        accountService.updatePassword(principal, body);
     }
 
     @GetMapping

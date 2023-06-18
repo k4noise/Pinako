@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.kyeeego.digitalportfolio.domain.dto.AuthDto;
 import com.kyeeego.digitalportfolio.domain.dto.LoginResponse;
+import com.kyeeego.digitalportfolio.domain.dto.PasswordUpdateDto;
 import com.kyeeego.digitalportfolio.domain.dto.TokenPair;
 import com.kyeeego.digitalportfolio.domain.dto.UserCreateDto;
 import com.kyeeego.digitalportfolio.domain.dto.UserUpdateDto;
@@ -14,6 +15,8 @@ public interface AccountService {
     void create(UserCreateDto body);
 
     void update(Principal principal, UserUpdateDto body);
+
+    void updatePassword(Principal principal, PasswordUpdateDto body);
 
     User findById(long id);
 

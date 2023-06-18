@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ArtworkUploadDto {
 
-    @NotNull
     @NotBlank
     @Size(max = 50)
     private String title;
@@ -23,7 +22,6 @@ public class ArtworkUploadDto {
     @Size(max = 300)
     private String description;
 
-    @NotNull
     @NotBlank
     private String imageUrl;
 

@@ -18,6 +18,7 @@ import com.kyeeego.digitalportfolio.application.port.SessionService;
 import com.kyeeego.digitalportfolio.application.repository.UserRepository;
 import com.kyeeego.digitalportfolio.domain.dto.AuthDto;
 import com.kyeeego.digitalportfolio.domain.dto.LoginResponse;
+import com.kyeeego.digitalportfolio.domain.dto.PasswordUpdateDto;
 import com.kyeeego.digitalportfolio.domain.dto.TokenPair;
 import com.kyeeego.digitalportfolio.domain.dto.UserCreateDto;
 import com.kyeeego.digitalportfolio.domain.dto.UserUpdateDto;
@@ -25,6 +26,7 @@ import com.kyeeego.digitalportfolio.domain.models.User;
 import com.kyeeego.digitalportfolio.exceptions.AlreadyExistsException;
 import com.kyeeego.digitalportfolio.exceptions.InternalServerErrorException;
 import com.kyeeego.digitalportfolio.exceptions.NotFoundException;
+import com.kyeeego.digitalportfolio.exceptions.UnauthorizedException;
 import com.kyeeego.digitalportfolio.utils.NullAwareBeanUtilsBean;
 
 import lombok.RequiredArgsConstructor;
@@ -57,12 +59,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void update(Principal principal, UserUpdateDto body) {
-        if (body.getLogin() != null && userRepository.existsByLogin(body.getLogin()))
-            throw new AlreadyExistsException();
-
         var user = userRepository
                 .findByLogin(principal.getName())
                 .orElseThrow(NotFoundException::new);
+
+        if (!passwordEncoder.matches(body.getCurrentPassword(), user.getPassword()))
+            throw new UnauthorizedException("Couldn't update user profile: Wrong password");
 
         try {
             beanUtilsBean.copyProperties(user, body);
@@ -114,5 +116,18 @@ public class AccountServiceImpl implements AccountService {
         return Stream.concat(
                 userRepository.findByDisplayNameContains(namePart).stream(),
                 userRepository.findByLoginContains(namePart).stream()).collect(Collectors.toSet());
+    }
+
+    @Override
+    public void updatePassword(Principal principal, PasswordUpdateDto body) {
+        var user = userRepository
+                .findByLogin(principal.getName())
+                .orElseThrow(NotFoundException::new);
+
+        if (!passwordEncoder.matches(body.getCurrentPassword(), user.getPassword()))
+            throw new UnauthorizedException("Couldn't update password: Wrong password");
+
+        user.setPassword(passwordEncoder.encode(body.getNewPassword()));
+        userRepository.save(user);
     }
 }
