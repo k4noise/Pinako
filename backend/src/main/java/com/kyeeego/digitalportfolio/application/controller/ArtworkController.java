@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kyeeego.digitalportfolio.application.port.ArtworkService;
+import com.kyeeego.digitalportfolio.domain.dto.ArtworkResponse;
 import com.kyeeego.digitalportfolio.domain.dto.ArtworkUploadDto;
 import com.kyeeego.digitalportfolio.domain.models.Artwork;
 
@@ -28,8 +29,11 @@ public class ArtworkController {
     private final ArtworkService artworkService;
 
     @GetMapping("/all")
-    public List<Artwork> getPage(@RequestParam int page, @RequestParam int n) {
-        return artworkService.getPage(page, n);
+    public List<ArtworkResponse> getPage(@RequestParam int page, @RequestParam int n) {
+        return artworkService.getPage(page, n)
+                .stream()
+                .map(a -> artworkService.getWithTags(a))
+                .toList();
     }
 
     @PostMapping("/upload")
@@ -38,12 +42,12 @@ public class ArtworkController {
     }
 
     @GetMapping("{id}")
-    public Artwork getById(@PathVariable long id) {
-        return artworkService.findById(id);
+    public ArtworkResponse getById(@PathVariable long id) {
+        return artworkService.getWithTags(artworkService.findById(id));
     }
 
     @GetMapping
-    public List<Artwork> findByQuery(@RequestParam String q) {
+    public List<ArtworkResponse> findByQuery(@RequestParam String q) {
         var tokens = List.of(q.split(" "));
 
         var tags = tokens.stream()
@@ -61,6 +65,8 @@ public class ArtworkController {
         if (titleParts != "")
             searchResByTitle = artworkService.findByTitleContains(titleParts);
 
-        return Stream.concat(searchResByTags.stream(), searchResByTitle.stream()).toList();
+        return Stream.concat(searchResByTags.stream(), searchResByTitle.stream())
+                .map(a -> artworkService.getWithTags(a))
+                .toList();
     }
 }

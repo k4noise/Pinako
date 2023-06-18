@@ -13,11 +13,14 @@ import com.kyeeego.digitalportfolio.application.port.ArtworkService;
 import com.kyeeego.digitalportfolio.application.repository.ArtworkRepository;
 import com.kyeeego.digitalportfolio.application.repository.TagRepository;
 import com.kyeeego.digitalportfolio.application.repository.UserRepository;
+import com.kyeeego.digitalportfolio.domain.dto.ArtworkResponse;
 import com.kyeeego.digitalportfolio.domain.dto.ArtworkUpdateDto;
 import com.kyeeego.digitalportfolio.domain.dto.ArtworkUploadDto;
 import com.kyeeego.digitalportfolio.domain.models.Artwork;
 import com.kyeeego.digitalportfolio.domain.models.helpers.Tag;
+import com.kyeeego.digitalportfolio.exceptions.InternalServerErrorException;
 import com.kyeeego.digitalportfolio.exceptions.NotFoundException;
+import com.kyeeego.digitalportfolio.utils.NullAwareBeanUtilsBean;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +31,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     private final ArtworkRepository artworkRepository;
     private final UserRepository userRepository;
     private final TagRepository tagRepository;
+    private final NullAwareBeanUtilsBean beanUtilsBean;
 
     @Override
     public void upload(ArtworkUploadDto body, Principal principal) {
@@ -92,6 +96,22 @@ public class ArtworkServiceImpl implements ArtworkService {
         return artworkRepository
                 .findAll(PageRequest.of(page, n, Sort.by("createdAt").descending()))
                 .toList();
+    }
+
+    @Override
+    public ArtworkResponse getWithTags(Artwork artwork) {
+        var tags = tagRepository.findByArtworkId(artwork.getId())
+                .stream()
+                .map(t -> t.getTag())
+                .toList();
+        var res = new ArtworkResponse(tags);
+        try {
+            beanUtilsBean.copyProperties(res, artwork);
+        } catch (Exception e) {
+            throw new InternalServerErrorException(e.getMessage());
+        }
+
+        return res;
     }
 
 }
