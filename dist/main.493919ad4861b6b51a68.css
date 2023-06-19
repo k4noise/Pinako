@@ -211,6 +211,14 @@ form a {
   gap: 15px;
   margin-bottom: 20px;
 }
+
+.NoArtworks {
+  font-size: 20px;
+}
+
+.NoArtworks a {
+  text-decoration: underline;
+}
 .Card {
   width: 550px;
 }
@@ -272,6 +280,10 @@ form a {
   box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.25);
 }
 
+.CardTag:visited {
+  color: white;
+}
+
 .CardName {
   margin: 20px 0;
   font-size: 24px;
@@ -286,13 +298,20 @@ form a {
 
 .User {
   display: flex;
+  width: 40px;
   align-items: center;
+}
+
+.UserHeader .User {
+  width: 190px;
 }
 
 .UserName {
   padding-left: 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
 }
 
 .UserImage {
@@ -303,10 +322,11 @@ form a {
   max-height: 73vh;
   margin-bottom: 10px;
   border-radius: 25px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid transparent;
 }
 
 .UserAvatar {
+  width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;
@@ -709,6 +729,7 @@ input[type='checkbox']:checked::before {
 
 .UserHeader .UserName {
   font-size: 20px;
+  padding-left: 0;
 }
 
 .AboutUserText {
@@ -781,6 +802,14 @@ input[type='checkbox']:checked::before {
   left: calc(50% + 205px - 5px);
 }
 
+.EditForm input {
+  width: 100%;
+}
+
+.EditForm .Password {
+  margin-top: -25px;
+}
+
 #UploadAvatar {
   display: none;
 }
@@ -797,6 +826,10 @@ input[type='checkbox']:checked::before {
 
 .ChangeAvatar label {
   cursor: pointer;
+}
+
+.ChangeAvatar .User {
+  width: 120px;
 }
 
 .ChangeAvatar .User img {
@@ -1860,4 +1893,4 @@ ul {
 }
 
 
-/*# sourceMappingURL=main.f436665f17570c4f8750.css.map*/
+/*# sourceMappingURL=main.493919ad4861b6b51a68.css.map*/
