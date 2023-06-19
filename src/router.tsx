@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { createHashRouter, Outlet, redirect, RouterProvider } from 'react-router-dom';
 import Cookies from "js-cookie"
 import { NotificationContainer } from 'react-notifications';
+import { Request } from './Requests';
 
 import Main from './Pages/Main/Main';
 import Nav from './Components/Nav/Nav';
@@ -17,6 +18,7 @@ import AddArtwork from './Pages/AddArtwork/AddArtwork';
 import Error from './Pages/Error/Error';
 import Search from './Pages/Search/Search';
 import SearchServer from './Actions/Search';
+
 
 const App = (): JSX.Element => {
   const router = createHashRouter([
@@ -34,10 +36,29 @@ const App = (): JSX.Element => {
       children: [
         {
           path: '/',
+          loader: (async () => {
+            let data = await Request.get(`/artworks/all?page=0&n=6`)
+
+            for (let key in Object.keys(data.data)) {
+              const userData = await Request.get(`/accounts/${data.data[key].userId}`);
+              data.data[key].userName = userData.data.displayName;
+              data.data[key].userAvatar = userData.data.pfpUrl;
+            }
+            return data.data;
+          }),
           element: <Main />,
         },
         {
-          path: 'page/:pageId',
+          path: '/page/:pageId',
+          loader: (async ({ params }) => {
+            let data = await Request.get(`/artworks/all?page=${params.pageId}&n=6`)
+            for (let key in Object.keys(data.data)) {
+              const userData = await Request.get(`/accounts/${data.data[key].userId}`);
+              data.data[key].userName = userData.data.displayName;
+              data.data[key].userAvatar = userData.data.pfpUrl;
+            }
+            return data.data;
+          }),
           element: <Main />
         },
         {
@@ -50,19 +71,27 @@ const App = (): JSX.Element => {
         },
         {
           path: '/profile',
-          loader: () => {
+          loader: async () => {
             if (!Cookies.get("accessToken"))
-              return redirect('/401')
-            return null;
+              return redirect('/401');
+            const id = localStorage.getItem('id')
+            const userData = await Request.get(`/accounts/${id}`);
+            for (let key in Object.keys(userData.data.artworks)) {
+              const artwork = (userData.data.artworks[key]);
+              const a = await Request.get(`/artworks/${artwork.id}`)
+              userData.data.artworks[key].tags = a.data.tags;
+            }
+            return userData;
           },
           element: <Profile isMine={true} />
         },
         {
           path: '/profile/edit',
-          loader: () => {
+          loader: async () => {
             if (!Cookies.get("accessToken"))
               return redirect('/401')
-            return null;
+            const id = localStorage.getItem('id')
+            return await Request.get(`/accounts/${id}`);
           },
           element: <Edit />,
         },
@@ -80,11 +109,41 @@ const App = (): JSX.Element => {
           element: <Users />,
         },
         {
-          path: 'profile/:userId',
+          path: '/users/:userNamePart',
+          loader: (async ({ params }) => {
+            const users = await Request.get(`/accounts?q=${params.userNamePart}`);
+            return users;
+          }),
+          element: <Users />,
+        },
+        {
+          path: '/profile/:userId',
+          loader: (async ({ params }) => {
+            const userData = await Request.get(`/accounts/${params.userId}`);
+            for (let key in Object.keys(userData.data.artworks)) {
+              const artwork = (userData.data.artworks[key]);
+              const a = await Request.get(`/artworks/${artwork.id}`)
+              userData.data.artworks[key].tags = a.data.tags;
+            }
+            return userData;
+          }),
           element: <Profile isMine={false} />,
         },
         {
-          path: 'profile/:userId/artwork/:artworkId',
+          path: '/artwork/:artworkId',
+          loader: async ({ params }) => {
+            try {
+              const data = await Request.get(`/artworks/${params.artworkId}`);
+              const user = await Request.get(`/accounts/${data.data.userId}`)
+              data.data.userName = user.data.displayName;
+              data.data.userPfp = user.data.pfpUrl;
+              return data;
+            }
+            catch (error) {
+              redirect('/404')
+              return null;
+            }
+          },
           element: <Artwork />,
         },
         {
@@ -96,7 +155,14 @@ const App = (): JSX.Element => {
           loader: async ({ params }) => {
             const searchString = params.searchParams;
             const originQuery = searchString?.replaceAll('*', '#');
-            return await SearchServer(originQuery);
+            const data = await SearchServer(originQuery);
+            for (let key in Object.keys(data)) {
+              const artwork = (data[key]);
+              const a = await Request.get(`/accounts/${artwork.userId}`)
+              data[key].userName = a.data.displayName;
+              data[key].avatarUrl = a.data.pfpUrl;
+            }
+            return data;
           },
           element: <Search/>,
         },

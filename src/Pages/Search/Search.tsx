@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLoaderData, useParams } from 'react-router-dom';
-import { Request } from '../../Requests';
+import { GetImage } from '../../Requests';
 import Card from '../../Components/Card/Card';
 
 const Search = (): JSX.Element => {
@@ -37,7 +37,15 @@ const Search = (): JSX.Element => {
 const GetCards = (artworks: object): JSX.Element[] => {
   const cards: JSX.Element[] = [];
   artworks.forEach((value, key) => {
-    cards[key] = (<Card id={value.id} userId={value.userId} image={`http://localhost:8081/uploads/${value.imageUrl}`} />)
+    cards[key] = <Card
+      id={value.id}
+      userId={value.userId}
+      image={GetImage(value.imageUrl)}
+      userName={value.userName}
+      userAvatar={GetImage(value.avatarUrl)}
+      artworkView={false}
+      showStats={true}
+    />
   });
   return cards;
 }

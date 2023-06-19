@@ -23,6 +23,14 @@
   left: calc(50% + 205px - 5px);
 }
 
+.EditForm input {
+  width: 100%;
+}
+
+.EditForm .Password {
+  margin-top: -25px;
+}
+
 #UploadAvatar {
   display: none;
 }
@@ -39,6 +47,10 @@
 
 .ChangeAvatar label {
   cursor: pointer;
+}
+
+.ChangeAvatar .User {
+  width: 120px;
 }
 
 .ChangeAvatar .User img {

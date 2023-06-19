@@ -4,11 +4,16 @@ import Refresh from "./Actions/Refresh";
 
 const GetToken = (): string => Cookies.get("accessToken");
 
+
 const Request = axios.create({
   baseURL: "http://localhost:8081",
 });
 
-const AuthRequest = Request;
+const GetImage = (fileName: string) => `http://localhost:8081/uploads/${fileName}`
+
+const AuthRequest = axios.create({
+  baseURL: "http://localhost:8081",
+});;
 
 AuthRequest.interceptors.request.use(config => {
   const token = GetToken();
@@ -20,29 +25,27 @@ AuthRequest.interceptors.request.use(config => {
 AuthRequest.interceptors.response.use(config => config,
   async (error) => {
   const originalRequest = error.config;
-  if ((error.response.status === 401 || error.response.status === 403) && !originalRequest.data?._retry) {
-    originalRequest.data['_retry'] = true;
+  if ((error.response?.status === 401 || error.response?.status === 403) && !originalRequest?._retry) {
+    originalRequest['_retry'] = true;
     if (localStorage.hasOwnProperty("refreshToken")) {
       await Refresh();
-      return await AuthRequest.post(originalRequest.url, originalRequest.data)
+      return axios(originalRequest);
     }
   }
-  else if (error.response.status === 500 && !originalRequest.data?._retry) {
-    originalRequest.data['_retry'] = true;
-    return await AuthRequest.post(originalRequest.url, originalRequest.data)
+  else if (error.response?.status === 500 && !originalRequest?._retry) {
+    originalRequest['_retry'] = true;
+    return axios(originalRequest);
   }
   return Promise.reject(originalRequest)
 }
 );
 
-
-
 Request.interceptors.response.use(config => config, async (error) => {
   const originalRequest = error.config;
-  if (error.response.status === 500)
-    return await Request.post(originalRequest.url, originalRequest.data)
+  if (error.response?.status === 500)
+    return axios(originalRequest);
   return Promise.reject(originalRequest)
 });
 
 
-export { Request, AuthRequest };
+export { Request, AuthRequest, GetImage };

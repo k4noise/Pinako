@@ -1,12 +1,19 @@
 .User {
   display: flex;
+  width: 40px;
   align-items: center;
+}
+
+.UserHeader .User {
+  width: 190px;
 }
 
 .UserName {
   padding-left: 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
 }
 
 .UserImage {
@@ -17,10 +24,11 @@
   max-height: 73vh;
   margin-bottom: 10px;
   border-radius: 25px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid transparent;
 }
 
 .UserAvatar {
+  width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 50%;

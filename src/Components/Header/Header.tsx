@@ -12,7 +12,7 @@ const Header = (): JSX.Element => {
       <h2 className="HeaderTagline">Черпай вдохновение и делись опытом</h2>
       <img src={wave1} className="Wave1" />
       <img src={wave2} className="Wave2" />
-      <Logo image={LogoImg} size={300} />
+      <Logo image={LogoImg} size={300} noLink={true} />
     </header>
   );
 };

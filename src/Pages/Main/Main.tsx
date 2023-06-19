@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { ScrollRestoration, useParams } from 'react-router-dom';
+import React, { useState, useLayoutEffect } from 'react';
+import { useNavigate, useLoaderData } from 'react-router-dom';
 import Cookies from "js-cookie"
 import './Main.css';
 import Card from '../../Components/Card/Card';
 import Search from '../../Components/Search/Search';
 import Header from '../../Components/Header/Header';
 import { Link } from 'react-router-dom';
-import RectImg from '../../../assets/rect.png';
+import { GetImage } from '../../Requests';
+import { NotificationManager } from 'react-notifications';
 
 const Main = (): JSX.Element => {
   const [windowSize, setWindowSize] = useState({
@@ -14,85 +15,68 @@ const Main = (): JSX.Element => {
     height: window.innerHeight,
   });
 
-  const params = useParams();
-  const startPageNumber: number = params?.pageId ? Number(params.pageId) : 0;
-  const cardsInPage: number = CardsInPage(windowSize.width);
-  const [cards, addCards] = useState(CardsGenerator(cardsInPage));
+  const navigate = useNavigate();
+  const artworks = useLoaderData();
+  const url = window.location.href;
+  const pageNumber = Number(url.match(/\/page\/(\d+)/)?.[1] || '');
+  const cards = GetCards(artworks);
 
-    useLayoutEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+  const handleResize = () => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
 
+  useLayoutEffect(() => {
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-    }, []);
-
-  if (Cookies.get("accessToken")) {
-    useEffect(() => {
-      const handleScroll = () => {
-        const height = document.body.offsetHeight;
-        const screenHeight = window.innerHeight;
-        const scrolled = window.scrollY;
-        const threshold = height - screenHeight / 8;
-        const position = scrolled + screenHeight;
-
-        if (position >= threshold) {
-          addCards([...cards, ...CardsGenerator(cardsInPage)]);
-          const currentPageNumber: number = startPageNumber + cards.length / cardsInPage
-          window.history.pushState(null, '', `/#/page/${currentPageNumber}`)
-        }
-      }
-
-      window.addEventListener('scroll', handleScroll);
-
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    });
-  }
+  }, []);
 
   return (
     <>
       <Header />
       <div className="AppWrapper">
         <Search locatedInNav={false} placeholder="Поиск" onlyMobile={true} />
-        <div className="Artworks MainWrapper">
-          {cards}
-        </div>
-        {!Cookies.get("accessToken") &&
-          <button className="Register">
-            <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
-          </button>
+        {
+          cards.length > 0 ?
+            <div className="Artworks MainWrapper">
+              {cards}
+            </div>
+            : <div className="NoArtworks">
+              {pageNumber > 0 ? 'На этой странице работ нет' :
+                'Работы еще не загружены.' + <Link to='/profile/upload'>Будьте первым!</Link>
+              }
+            </div>
         }
+          <button className="Register">
+        {!Cookies.get("accessToken") && cards.length > 0 ?
+            <Link to="/register">Зарегистрируйтесь, чтобы увидеть больше</Link>
+            : <span onClick={() => {
+              if (artworks.length === 6)
+                navigate(`/page/${pageNumber + 1}`)
+              else {
+                NotificationManager.warning('Вы просмотрели все работы')
+              }
+            }
+            }>Смотреть еще</span>
+        }
+          </button>
       </div>
-      <ScrollRestoration />
     </>
   );
 };
 
-const CardsInPage = (width: number): number => {
-  const paddings: number = Math.min(200, width * 0.07);
-  const cleanWidth: number = Math.floor(width - paddings);
-  const cardCount: number =
-    cleanWidth < 650
-      ? 3
-      : Math.floor((cleanWidth - (20 * cleanWidth) / 500) / 500) * 3;
-  return cardCount;
-}
-
-const CardsGenerator = (count: number): JSX.Element[] => {
+const GetCards = (data: object): JSX.Element[] => {
   let cards: JSX.Element[] = [];
-  for (let i = 0; i < count; i++) {
-    cards[i] = <Card id={13256} key={Math.random()} userId={23452} image={RectImg} />;
-  }
+  data.forEach((card, index) => {
+    cards[index] = <Card id={card.id} key={card.id} userId={card.userId} image={GetImage(card.imageUrl)} userName={card.userName} userAvatar={GetImage(card.userAvatar)} />;
+  });
   return cards;
 };
+
 
 export default Main;

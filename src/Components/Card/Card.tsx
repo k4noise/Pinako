@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Card.css';
 import User from '../User/User';
-import EyeImg from '../../../assets/eye.svg';
-import UserAvatar from '../../../assets/user.svg';
 
 interface StaticticsProps {
   likes: number;
@@ -15,24 +13,29 @@ interface CardProps {
   hashTag?: string;
   userId: number;
   id: number;
-  artworkView: boolean;
   image: string;
+  userName?: string;
+  userAvatar?: string;
+  artworkView: boolean;
+  artworkName?: string;
+  artworkDesc?: string;
+  artworkTags?: string[];
 }
 
 const Card = (props: CardProps): JSX.Element => {
   const navigate = useNavigate();
   return (
     <div className="Card">
-      <span className="ClickableCard" onClick={(event) => navigate(`/profile/${props.userId}/artwork/${props.id}`)}>
-        <img src={props.image} className="UserImage" loading="lazy" />
+      <span>
+        <img src={props.image} className="UserImage" loading="lazy"  onClick={(event) => navigate(`/artwork/${props.id}`)} />
         <div className="CardControls">
           {props.hashTag && (
             <span className="CardHashTag">#{props.hashTag}</span>
           )}
           {!props.artworkView && !props?.hashTag && (
             <User
-              name="Имя пользователя"
-              avatar={UserAvatar}
+              name={props.userName}
+              avatar={props.userAvatar}
               url={`/profile/${props.userId}`}
             />
           )}
@@ -42,31 +45,20 @@ const Card = (props: CardProps): JSX.Element => {
       {props.artworkView && (
         <div className="CardInformation">
           <User
-            name="Имя пользователя"
-            avatar={UserAvatar}
+            name={props.userName}
+            avatar={props.userAvatar}
             url={`/profile/${props.userId}`}
           />
-          <h3 className="CardName">Название работы</h3>
+          <h3 className="CardName">{ props.artworkName }</h3>
           <p className="CardDescription">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            {props.artworkDesc}
           </p>
           <div className="CardTags">
-            <span className="CardTag">картина маслом</span>
-            <span className="CardTag">натюрморт</span>
-            <span className="CardTag">абстракционизм</span>
-            <span className="CardTag">пастель</span>
-            <span className="CardTag">живопись</span>
-            <span className="CardTag">эстетика</span>
-            <span className="CardTag">арт</span>
-            <span className="CardTag">гуашь</span>
-            <span className="CardTag">fashion</span>
-            <span className="CardTag">скетчинг</span>
+            {
+              props.artworkTags.map(tag =>
+                <Link to={`/search/*${tag.slice(1)}`} className="CardTag"> {tag.slice(1) }</Link>
+              )
+            }
           </div>
         </div>
       )}

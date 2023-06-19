@@ -6,6 +6,7 @@ interface UpdateProps {
   login: string;
   displayName: string;
   about: string;
+  currentPassword: string;
 }
 
 async function Update(props: UpdateProps): Promise<boolean> {

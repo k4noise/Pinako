@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie'
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import User from '../User/User';
 import Search from '../Search/Search';
@@ -8,6 +8,7 @@ import Logout from '../../Actions/Logout';
 import './Nav.css';
 import UserAvatar from '../../../assets/user.svg';
 import LogoImage from '../../../assets/logo.svg';
+import { GetImage } from '../../Requests';
 
 interface LinkProps {
   name: string;
@@ -16,7 +17,9 @@ interface LinkProps {
 
 const Nav = (): JSX.Element => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(false);
+  const userAvatar = localStorage.getItem('avatarUrl')
 
   useEffect(() => {
     const handleResize = () => {
@@ -52,7 +55,7 @@ const Nav = (): JSX.Element => {
         <Links url="/about" name="О нас" />
       </div>
       <Search locatedInNav={true} placeholder="Поиск" />
-      <User avatar={UserAvatar} />
+      <User avatar={userAvatar ? GetImage(userAvatar) : UserAvatar} />
       <div className="UserNavigation" onClick={ToggleMobileMenu}>
         {isAuth ?
           <>
@@ -61,6 +64,7 @@ const Nav = (): JSX.Element => {
               event.preventDefault();
               Logout();
               setIsAuth(false);
+              navigate('/');  
             }
             }>Выйти</Link>
           </>

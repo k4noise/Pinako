@@ -8,6 +8,7 @@ interface SearchProps {
   locatedInNav: boolean;
   placeholder: string;
   onlyMobile?: boolean;
+  userSearch?: boolean;
 }
 
 const Search = (props: SearchProps): JSX.Element => {
@@ -22,7 +23,9 @@ const Search = (props: SearchProps): JSX.Element => {
         event.preventDefault();
         const query: string = event.target.query.value;
         const shieldedQuery: string = query.replaceAll('#', '*');
-        navigate(`/search/${shieldedQuery}`)
+        if (props?.userSearch)
+          navigate(`/users/${shieldedQuery}`)
+        else navigate(`/search/${shieldedQuery}`)
       }}
     >
       <input
@@ -38,5 +41,6 @@ const Search = (props: SearchProps): JSX.Element => {
     </form>
   );
 };
+
 
 export default Search;

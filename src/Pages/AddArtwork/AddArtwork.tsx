@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration, useNavigate } from 'react-router-dom';
 import UploadFile from '../../Actions/UploadFile';
 import UploadArtwork from '../../Actions/UploadArtwork';
 import { NotificationManager } from 'react-notifications';
@@ -7,10 +7,12 @@ import './AddArtwork.css';
 
 const AddArtwork = (): JSX.Element => {
   const [picture, setPicture] = useState();
+  const navigate = useNavigate();
 
   const IsValidForm = (form: HTMLFormElement): boolean => {
     const artworkName: string = form?.artworkName?.value as string;
     const description: string = form?.description?.value as string;
+    const tags: string = form?.tags?.value as string;
     let isValid = true;
 
     if (artworkName.length === 0) {
@@ -23,6 +25,11 @@ const AddArtwork = (): JSX.Element => {
 
     if (description.length > 300) {
       NotificationManager.warning('Описание не может быть больше 300 символов');
+      isValid = false;
+    }
+
+    if (tags.length === 0 || tags.split('#').length - 1 === 0) {
+      NotificationManager.warning('Укажите минимум 1 тэг');
       isValid = false;
     }
 
@@ -50,7 +57,9 @@ const AddArtwork = (): JSX.Element => {
           imageUrl: postImageUrl,
           tags: TagSplitter(form.tags.value)
         }
-          await UploadArtwork(body);
+        const isAdded = await UploadArtwork(body);
+        if (isAdded)
+          navigate('/profile')
       }
 
 

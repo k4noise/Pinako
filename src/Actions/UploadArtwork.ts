@@ -9,15 +9,17 @@ interface UploadProps {
   tags: string[];
 }
 
-async function UploadArtwork(props: UploadProps) {
+async function UploadArtwork(props: UploadProps): Promise<boolean> {
   const url: string = '/artworks/upload';
   try {
     await AuthRequest.post(url, props);
     NotificationManager.success('Работа успешно добавлена');
+    return true;
   }
   catch (error) {
     console.log(error)
   }
+  return false;
 }
 
 export default UploadArtwork;

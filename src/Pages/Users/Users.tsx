@@ -1,28 +1,29 @@
 import React from 'react';
-import { ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration, useLoaderData } from 'react-router-dom';
+import { GetImage } from '../../Requests';
 import Search from '../../Components/Search/Search';
 import User from '../../Components/User/User';
-import UserAvatar from '../../../assets/user.svg';
 import './Users.css';
 
 const Users = (): JSX.Element => {
+  const users = useLoaderData()?.data;
   return (
     <div className="AppWrapper AppWrapperLarge">
-      <Search locatedInNav={false} placeholder="Поиск пользователей" />
+      <Search locatedInNav={false} placeholder="Поиск пользователей" userSearch={true} />
       <div className="Users">
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/234" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/274" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/244" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/54" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/21" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/23" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/25" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/20" />
-        <User name="Имя пользователя" avatar={UserAvatar} url="/profile/63" />
+        {users && Object.keys(users).length > 0 && GetUsers(users)}
       </div>
       <ScrollRestoration />
     </div>
   );
 };
+
+const GetUsers = (allUsers: object): JSX.Element[] => {
+  const users: JSX.Element[] = [];
+  allUsers.forEach((user, index) => {
+    users[index] = <User name={user.displayName} avatar={GetImage(user.pfpUrl)} url={`/profile/${user.id}`} />
+  })
+  return users;
+}
 
 export default Users;

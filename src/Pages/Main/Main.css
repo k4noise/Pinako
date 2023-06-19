@@ -14,3 +14,11 @@
   gap: 15px;
   margin-bottom: 20px;
 }
+
+.NoArtworks {
+  font-size: 20px;
+}
+
+.NoArtworks a {
+  text-decoration: underline;
+}

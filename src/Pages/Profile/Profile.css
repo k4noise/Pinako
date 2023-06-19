@@ -20,6 +20,7 @@
 
 .UserHeader .UserName {
   font-size: 20px;
+  padding-left: 0;
 }
 
 .AboutUserText {

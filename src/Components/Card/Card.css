@@ -59,6 +59,10 @@
   box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.25);
 }
 
+.CardTag:visited {
+  color: white;
+}
+
 .CardName {
   margin: 20px 0;
   font-size: 24px;
