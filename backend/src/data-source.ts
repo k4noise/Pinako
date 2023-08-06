@@ -1,9 +1,7 @@
-import 'reflect-metadata';
-import { DataSource } from 'typeorm';
-import { User } from './entity/User';
-import 'dotenv/config'; 
+import { DataSource, DataSourceOptions } from 'typeorm';
+import 'dotenv/config';
 
-export const AppDataSource = new DataSource({
+export const typeormSettings = {
   type: 'postgres',
   host: process.env.HOST,
   port: 5432,
@@ -12,7 +10,11 @@ export const AppDataSource = new DataSource({
   database: process.env.DATABASE,
   synchronize: true,
   logging: false,
-  entities: [User],
-  migrations: [],
+  entities: [__dirname + '/**/entities/*.entity.{js,ts}'],
+  migrations: [__dirname + '/migrations/*.{js,ts}'],
   subscribers: [],
-});
+};
+
+export const AppDataSource = new DataSource(
+  typeormSettings as DataSourceOptions,
+);
