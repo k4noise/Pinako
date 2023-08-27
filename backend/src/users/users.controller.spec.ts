@@ -1,43 +1,30 @@
-import { Test } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { sqliteDataSource } from '../sqlite-source';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { PartialType } from '@nestjs/mapped-types';
 
 class PartialUser extends PartialType(User) {}
 
 describe('test UsersController', () => {
+  const USER_ID = 1;
+  const TEST_USER: CreateUserDto = { login: 'test', password: 'test' };
+
   let controller: UsersController;
   let service: UsersService;
-  let repository: Repository<User>;
-  let dataSource: DataSource;
   const testConnectionName = 'testUsersController';
+  const dataSource: DataSource = new DataSource({
+    ...sqliteDataSource,
+    type: 'sqlite',
+    entities: [User],
+    name: testConnectionName,
+  });
 
   beforeAll(async () => {
-    await Test.createTestingModule({
-      providers: [
-        UsersService,
-        {
-          provide: getRepositoryToken(User),
-          useClass: Repository,
-        },
-      ],
-    }).compile();
-
-    dataSource = new DataSource({
-      ...sqliteDataSource,
-      type: 'sqlite',
-      entities: [User],
-      name: testConnectionName,
-    });
-
     await dataSource.initialize();
-    repository = dataSource.getRepository(User);
+    const repository: Repository<User> = dataSource.getRepository(User);
     service = new UsersService(repository);
     controller = new UsersController(service);
   });
@@ -46,27 +33,9 @@ describe('test UsersController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should create a user', async () => {
-    const userData: CreateUserDto = {
-      login: 'test',
-      password: 'test',
-    };
-    const expectedResponse: { id: number; avatarUrl: string } = {
-      id: 1,
-      avatarUrl: '/default.jpg',
-    };
-
-    jest.spyOn(service, 'create');
-    const createdUserData = await controller.create(userData);
-
-    expect(createdUserData).toEqual(expectedResponse);
-    expect(service.create).toHaveBeenCalledWith(userData);
-    await expect(controller.create(userData)).rejects.toThrow('Login exists');
-  });
-
   it('should find all users', async () => {
     const usersData: CreateUserDto[] = [
-      { login: 'test', password: 'test' },
+      TEST_USER,
       { login: 'test2', password: 'test' },
       { login: 'test3', password: 'test' },
     ];
@@ -75,14 +44,14 @@ describe('test UsersController', () => {
         id: index + 1,
         login: userData.login,
         displayName: userData.login,
-        about: '',
+        about: null,
         avatarUrl: '/default.jpg',
       }),
     );
 
     for (const userData of usersData) {
       try {
-        await controller.create(userData);
+        await service.create(userData);
       } catch (err) {}
     }
 
@@ -95,45 +64,41 @@ describe('test UsersController', () => {
 
   it('should find one user', async () => {
     const expectedUserData: PartialUser = {
-      id: 1,
-      login: 'test',
-      displayName: 'test',
-      about: '',
+      id: USER_ID,
+      login: TEST_USER.login,
+      displayName: TEST_USER.login,
+      about: null,
       avatarUrl: '/default.jpg',
     };
 
-    jest.spyOn(service, 'findOne');
-    const foundUserData = await controller.findOne(1);
+    jest.spyOn(service, 'findById');
+    const foundUserData = await controller.findById(USER_ID);
 
-    expect(service.findOne).toHaveBeenCalledWith(1);
+    expect(service.findById).toHaveBeenCalledWith(USER_ID);
     expect(foundUserData).toEqual(expectedUserData);
   });
 
   it('should update user', async () => {
-    const id = 1;
-    const dataToUpdate: UpdateUserDto = {
-      password: 'test',
-      about: 'test',
-    };
-    const userData = await controller.findOne(id);
-    const expectedUserData: PartialUser = { ...userData, ...dataToUpdate };
+    const userData = await controller.findById(USER_ID);
+    const expectedUserData: PartialUser = { ...userData, ...TEST_USER };
     delete expectedUserData.password;
 
     jest.spyOn(service, 'update');
-    await controller.update(id, dataToUpdate);
-    const updatedUserData = await controller.findOne(id);
+    await controller.update(USER_ID, TEST_USER);
+    const updatedUserData = await controller.findById(USER_ID);
 
-    expect(service.update).toHaveBeenCalledWith(id, dataToUpdate);
+    expect(service.update).toHaveBeenCalledWith(USER_ID, TEST_USER);
     expect(updatedUserData).toEqual(expectedUserData);
   });
 
   it('should remove user', async () => {
-    const id = 1;
     jest.spyOn(service, 'remove');
-    await controller.remove(id);
+    await controller.remove(USER_ID);
 
-    expect(service.remove).toHaveBeenCalledWith(id);
-    await expect(controller.findOne(id)).rejects.toThrow("User don't exists");
+    expect(service.remove).toHaveBeenCalledWith(USER_ID);
+    await expect(controller.findById(USER_ID)).rejects.toThrow(
+      "User don't exists",
+    );
   });
 
   afterAll(async () => {

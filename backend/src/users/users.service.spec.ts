@@ -1,41 +1,37 @@
-import { Test } from '@nestjs/testing';
 import { UsersService } from './users.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { DataSource, Repository } from 'typeorm';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { sqliteDataSource } from '../sqlite-source';
 import { PartialType } from '@nestjs/mapped-types';
+import * as bcrypt from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 class PartialUser extends PartialType(User) {}
 
 describe('test UsersService', () => {
+  const WRONG_USER_ID = 10;
+  const NO_EXIST_USER_ERROR = "User don't exists";
+  const TEST_USER: CreateUserDto = {
+    login: 'test',
+    password: 'test',
+  };
+  const TEST_USER_ID = 1;
+
   let service: UsersService;
-  let repository: Repository<User>;
-  let dataSource: DataSource;
   const testConnectionName = 'testUsersService';
+  const dataSource: DataSource = new DataSource({
+    ...sqliteDataSource,
+    type: 'sqlite',
+    entities: [User],
+    name: testConnectionName,
+  });
 
   beforeAll(async () => {
-    await Test.createTestingModule({
-      providers: [
-        UsersService,
-        {
-          provide: getRepositoryToken(User),
-          useClass: Repository,
-        },
-      ],
-    }).compile();
-
-    dataSource = new DataSource({
-      ...sqliteDataSource,
-      type: 'sqlite',
-      entities: [User],
-      name: testConnectionName,
-    });
-
     await dataSource.initialize();
-    repository = dataSource.getRepository(User);
+    const repository: Repository<User> = dataSource.getRepository(User);
     service = new UsersService(repository);
 
     return dataSource;
@@ -46,33 +42,24 @@ describe('test UsersService', () => {
   });
 
   describe('create user', () => {
-    const userData: CreateUserDto = {
-      login: 'test',
-      password: 'test',
-    };
-
     it('use unique data', async () => {
-      const expectedResponse: { id: number; avatarUrl: string } = {
-        id: 1,
-        avatarUrl: '/default.jpg',
-      };
+      const expectedId = TEST_USER_ID;
 
       jest.spyOn(service, 'create');
-      const createdUserData: { id: number; avatarUrl: string } =
-        await service.create(userData);
+      const userData: number = await service.create(TEST_USER);
 
-      expect(createdUserData).toEqual(expectedResponse);
-      expect(service.create).toHaveBeenCalledWith(userData);
+      expect(userData).toEqual(expectedId);
+      expect(service.create).toHaveBeenCalledWith(TEST_USER);
     });
 
     it('use existing login', async () => {
-      await expect(service.create(userData)).rejects.toThrow('Login exists');
+      await expect(service.create(TEST_USER)).rejects.toThrow('Login exists');
     });
   });
 
   describe('search user(s)', () => {
     const usersData: CreateUserDto[] = [
-      { login: 'test', password: 'test' },
+      TEST_USER,
       { login: 'test2', password: 'test' },
       { login: 'test3', password: 'test' },
     ];
@@ -86,121 +73,199 @@ describe('test UsersService', () => {
     });
 
     it('return all users', async () => {
-      const expectedResponse: PartialUser[] = usersData.map(
-        (userData, index) => ({
-          id: index + 1,
-          login: userData.login,
-          displayName: userData.login,
-          about: '',
-          avatarUrl: '/default.jpg',
-        }),
-      );
+      const expectedUsers: PartialUser[] = usersData.map((userData, index) => ({
+        id: index + 1,
+        login: userData.login,
+        displayName: userData.login,
+        about: '',
+        avatarUrl: '/default.jpg',
+      }));
 
       jest.spyOn(service, 'findAll');
-      const users: User[] = await service.findAll();
+      const foundUsers: User[] = await service.findAll();
 
       expect(service.findAll).toHaveBeenCalled();
-      expect(users.length).toBe(usersData.length);
-      expect(expectedResponse).toEqual(expectedResponse);
+      expect(foundUsers.length).toBe(usersData.length);
+      expect(expectedUsers).toEqual(expectedUsers);
     });
 
-    it('return user', async () => {
+    it('existing user by id', async () => {
       const users: User[] = await service.findAll();
-      const randomUserId: number = Math.floor((Math.random() * 10) % 3) + 1;
-      const expectedUserData = users[randomUserId - 1];
+      const expectedUserData = users[TEST_USER_ID - 1];
 
-      jest.spyOn(service, 'findOne');
-      const user: User = await service.findOne(randomUserId);
+      jest.spyOn(service, 'findById');
+      const user: User = await service.findById(TEST_USER_ID);
 
-      expect(service.findOne).toBeCalledWith(randomUserId);
+      expect(service.findById).toBeCalledWith(TEST_USER_ID);
       expect(user instanceof User).toBeTruthy();
       expect(expectedUserData).toEqual(user);
     });
 
+    it('non-existing user by id', async () => {
+      await expect(service.findById(WRONG_USER_ID)).rejects.toThrow(
+        NO_EXIST_USER_ERROR,
+      );
+    });
+
+    it('existing user by login', async () => {
+      const users: User[] = await service.findAll();
+      const expectedUserData = users[TEST_USER_ID - 1];
+
+      jest.spyOn(service, 'findByLogin');
+      const user: User = await service.findByLogin(expectedUserData.login);
+
+      expect(service.findByLogin).toBeCalledWith(expectedUserData.login);
+      expect(user instanceof User).toBeTruthy();
+      expect(expectedUserData).toEqual(user);
+    });
+
+    it('non-existing user by login', async () => {
+      const userLogin = 'user';
+      const expectedUserData = null;
+
+      jest.spyOn(service, 'findByLogin');
+      const user = await service.findByLogin(userLogin);
+      expect(service.findByLogin).toBeCalledWith(userLogin);
+      expect(user).toEqual(expectedUserData);
+    });
+  });
+
+  describe('get password (hashed)', () => {
+    it('existing user', async () => {
+      jest.spyOn(service, 'getUserPassword');
+      const hashedPassword: string = await service.getUserPassword(
+        TEST_USER_ID,
+      );
+      expect(service.getUserPassword).toHaveBeenCalledWith(TEST_USER_ID);
+      expect(
+        bcrypt.compareSync(TEST_USER.password, hashedPassword),
+      ).toBeTruthy();
+    });
+
     it('non-existing user', async () => {
-      await expect(service.findOne(usersData.length + 1)).rejects.toThrow(
-        "User don't exists",
+      await expect(service.getUserPassword(WRONG_USER_ID)).rejects.toThrow(
+        NO_EXIST_USER_ERROR,
       );
     });
   });
 
   describe('update user', () => {
-    const randomUserId: number = Math.floor((Math.random() * 10) % 3) + 1;
     it('existing user', async () => {
-      const userData = await service.findOne(randomUserId);
+      const userData = await service.findById(TEST_USER_ID);
       const updateUserData: UpdateUserDto = {
-        password: 'test',
+        password: TEST_USER.password,
         about: 'test',
       };
       const expectedUserData: PartialUser = { ...userData, ...updateUserData };
       delete expectedUserData.password;
 
       jest.spyOn(service, 'update');
-      await service.update(randomUserId, updateUserData);
-      const userWithNewData = await service.findOne(randomUserId);
+      await service.update(TEST_USER_ID, updateUserData);
+      const userWithNewData = await service.findById(TEST_USER_ID);
 
-      expect(service.update).toHaveBeenCalledWith(randomUserId, updateUserData);
+      expect(service.update).toHaveBeenCalledWith(TEST_USER_ID, updateUserData);
       expect(userWithNewData).toEqual(expectedUserData);
     });
 
     it('exising user with new password', async () => {
       const updateUserData: UpdateUserDto = {
-        password: 'test',
+        password: TEST_USER.password,
         newPassword: 'p@ssw0rd',
-        about: `test${randomUserId}`,
+        about: `test${TEST_USER_ID}`,
       };
-      const userData = await service.findOne(randomUserId);
+      const userData = await service.findById(TEST_USER_ID);
       const expectedUserData: PartialUser = { ...userData, ...updateUserData };
       delete expectedUserData.password;
       delete expectedUserData['newPassword'];
 
       jest.spyOn(service, 'update');
-      await service.update(randomUserId, updateUserData);
-      const userWithNewData = await service.findOne(randomUserId);
-      expect(service.update).toHaveBeenCalledWith(randomUserId, updateUserData);
+      await service.update(TEST_USER_ID, updateUserData);
+      const userWithNewData = await service.findById(TEST_USER_ID);
+      expect(service.update).toHaveBeenCalledWith(TEST_USER_ID, updateUserData);
       expect(userWithNewData).toEqual(expectedUserData);
     });
 
     it('existing user with wrong password', async () => {
+      const wrongPassword = '****';
       jest.spyOn(service, 'update');
-
       await expect(
-        service.update(randomUserId, { password: 'idontknow' }),
+        service.update(TEST_USER_ID, { password: wrongPassword }),
       ).rejects.toThrow('Wrong password');
-      expect(service.update).toHaveBeenCalledWith(randomUserId, {
-        password: 'idontknow',
+      expect(service.update).toHaveBeenCalledWith(TEST_USER_ID, {
+        password: wrongPassword,
       });
     });
 
     it('non-existing user', async () => {
+      const password = '****';
       jest.spyOn(service, 'update');
-      const users = await service.findAll();
 
-      await expect(
-        service.update(users.length + 1, { password: 'idontknow' }),
-      ).rejects.toThrow("User don't exists");
-      expect(service.update).toHaveBeenCalledWith(users.length + 1, {
-        password: 'idontknow',
+      await expect(service.update(WRONG_USER_ID, { password })).rejects.toThrow(
+        NO_EXIST_USER_ERROR,
+      );
+      expect(service.update).toHaveBeenCalledWith(WRONG_USER_ID, {
+        password,
       });
     });
   });
 
-  describe('remove user', () => {
-    const randomUserId: number = Math.floor((Math.random() * 10) % 3) + 1;
+  describe('actions with refresh token', () => {
+    const payload = { sub: TEST_USER_ID, type: 'refresh' };
+    const secret = process.env.JWT_SECRET;
+    const options = { expiresIn: '1h' };
+    const token = jwt.sign(payload, secret, options);
 
-    it('existing user', async () => {
-      jest.spyOn(service, 'remove');
-      await service.findOne(randomUserId);
-      await service.remove(randomUserId);
-      expect(service.remove).toHaveBeenCalledWith(randomUserId);
+    it('set token at existing user', async () => {
+      jest.spyOn(service, 'setRefreshToken');
+      await service.setRefreshToken(payload.sub, token);
+      expect(service.setRefreshToken).toHaveBeenCalledWith(payload.sub, token);
     });
 
-    it('non-existing user', async () => {
-      jest.spyOn(service, 'remove');
-      await expect(service.remove(randomUserId)).rejects.toThrow(
-        "User don't exists",
+    it('set token at non-existing user', async () => {
+      await expect(
+        service.setRefreshToken(WRONG_USER_ID, 'token'),
+      ).rejects.toThrow(NO_EXIST_USER_ERROR);
+    });
+
+    it('get token at existing user', async () => {
+      jest.spyOn(service, 'getRefreshToken');
+      const refreshToken = await service.getRefreshToken(payload.sub);
+      expect(service.setRefreshToken).toHaveBeenCalledWith(payload.sub, token);
+      expect(bcrypt.compareSync(token, refreshToken)).toBeTruthy();
+    });
+
+    it('get nullable token at existing user', async () => {
+      const userIdWithNullableToken = payload.sub + 1;
+      const expectedUserData = null;
+      jest.spyOn(service, 'getRefreshToken');
+      const refreshToken = await service.getRefreshToken(
+        userIdWithNullableToken,
       );
-      expect(service.remove).toHaveBeenCalledWith(randomUserId);
+      expect(service.getRefreshToken).toHaveBeenCalledWith(payload.sub);
+      expect(refreshToken).toBe(expectedUserData);
+    });
+
+    it('get token at non-existing user', async () => {
+      await expect(service.getRefreshToken(WRONG_USER_ID)).rejects.toThrow(
+        NO_EXIST_USER_ERROR,
+      );
+    });
+
+    describe('remove user', () => {
+      it('existing user', async () => {
+        jest.spyOn(service, 'remove');
+        await service.findById(TEST_USER_ID);
+        await service.remove(TEST_USER_ID);
+        expect(service.remove).toHaveBeenCalledWith(TEST_USER_ID);
+      });
+
+      it('non-existing user', async () => {
+        jest.spyOn(service, 'remove');
+        await expect(service.remove(TEST_USER_ID)).rejects.toThrow(
+          NO_EXIST_USER_ERROR,
+        );
+        expect(service.remove).toHaveBeenCalledWith(TEST_USER_ID);
+      });
     });
   });
 

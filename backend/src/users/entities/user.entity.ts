@@ -14,9 +14,12 @@ export class User {
   @Column()
   displayName: string;
 
-  @Column()
+  @Column({ nullable: true })
   about: string;
 
-  @Column()
+  @Column({ default: '/default.jpg' })
   avatarUrl: string;
+
+  @Column({ select: false, nullable: true })
+  refreshToken: string;
 }
