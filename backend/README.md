@@ -73,7 +73,7 @@ $ npm run test:cov
 > | http code | response                                                                       |
 > | --------- | ------------------------------------------------------------------------------ |
 > | `201`     | `No response`                                                                  |
-> | `400`     | `{"code":"400","message":"Bad Request"}`                                       |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                 |
 > | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a string']}` |
 
 </details>
@@ -96,8 +96,8 @@ Success response create 2 cookies: accessToken and refreshToken.
 
 > | http code | response                                                                       |
 > | --------- | ------------------------------------------------------------------------------ |
-> | `201`     | `{id: id, avatarUrl: '/default.png'}`                                          |
-> | `400`     | `{"code":"400","message":"Bad Request"}`                                       |
+> | `201`     | `No response`                                                                  |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                 |
 > | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a string']}` |
 
 </details>
@@ -114,8 +114,8 @@ None, cookie with access token is required
 > | http code | response                                                                       |
 > | --------- | ------------------------------------------------------------------------------ |
 > | `201`     | `No response`                                                                  |
-> | `400`     | `{"code":"400","message":"Bad Request"}`                                       |
-> | `401`     | `{"code":"401","message":"Unauthorized"}`                                      |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                 |
+> | `401`     | `{"statusCode":"401","message":"Unauthorized"}`                                |
 > | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a string']}` |
 
 </details>
@@ -129,11 +129,11 @@ None, cookie with refresh token is required
 
 ##### Responses
 
-> | http code | response                                  |
-> | --------- | ----------------------------------------- |
-> | `200`     | `No response`                             |
-> | `401`     | `{"code":"401","message":"Unauthorized"}` |
-> | `403`     | `{"error": "Wrong refresh token"}`        |
+> | http code | response                                        |
+> | --------- | ----------------------------------------------- |
+> | `200`     | `No response`                                   |
+> | `401`     | `{"statusCode":"401","message":"Unauthorized"}` |
+> | `403`     | `{"error": "Wrong refresh token"}`              |
 
 </details>
 
@@ -190,7 +190,7 @@ Cookie with access token is required
 > | http code | response                                                |
 > | --------- | ------------------------------------------------------- |
 > | `200`     | `None`                                                  |
-> | `400`     | `{"code":"400","message":"Bad Request"}`                |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`          |
 > | `401`     | `{ "statusCode": 401, "message": "Wrong password" }`    |
 > | `401`     | `{ "statusCode": 401, "message": "Unauthorized" }`      |
 > | `409`     | `{ "statusCode": 409, "message": "User don't exists" }` |
@@ -208,10 +208,52 @@ None, cookie with access token is required
 ##### Responses
 
 > | http code | response                                                |
-> | --------- | ------------------------------------------------------- | --- |
+> | --------- | ------------------------------------------------------- |
 > | `200`     | `None`                                                  |
-> | `401`     | `{ "statusCode": 401, "message": "Unauthorized" }`      |     |
+> | `401`     | `{ "statusCode": 401, "message": "Unauthorized" }`      |
 > | `409`     | `{ "statusCode": 409, "message": "User don't exists" }` |
+
+</details>
+
+---
+
+<details>
+ <summary>Upload picture: <code>POST</code> <code><b>/</b></code> <code>files/upload</code></summary>
+
+##### Parameters
+
+Cookie with access token is required
+
+> | name    | type     | description         |
+> | ------- | -------- | ------------------- |
+> | picture | required | User file (picture) |
+
+##### Responses
+
+> | http code | response                                                                     |
+> | --------- | ---------------------------------------------------------------------------- |
+> | `201`     | `{"url": "{serverHost}/upload/{pictureId}"}`                                 |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                               |
+> | `401`     | `{ "statusCode": 401, "message": "Unauthorized" }`                           |
+> | `415`     | `{ "statusCode": 415, "message": "Not a image" }`                            |
+> | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a file']}` |
+> | `500`     | `{ "statusCode": 500, "message": "Failed to save file" }`                    |
+
+</details>
+
+<details>
+ <summary>Get picture: <code>GET</code> <code><b>/</b></code> <code>files/upload/{id}</code></summary>
+
+##### Parameters
+
+None
+
+##### Responses
+
+> | http code | response                                                |
+> | --------- | ------------------------------------------------------- |
+> | `200`     | `Picture`                                               |
+> | `404`     | `{ "statusCode": 404, "message": "File not found" }`    |
 
 </details>
 
