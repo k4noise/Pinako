@@ -59,7 +59,7 @@ $ npm run test:cov
  </details>
 
 <details>
- <summary>Register user: <code>POST</code> <code><b>/</b></code> <code>auth/users</code></summary>
+ <summary>Register user: <code>POST</code> <code><b>/</b></code> <code>auth/register</code></summary>
 
 ##### Parameters
 
@@ -90,13 +90,11 @@ $ npm run test:cov
 
 ##### Responses
 
-**Attention:** User avatar url, given to success response, has relative path. Full path: {serverAddress}/static/{avatarUrl}
-
 Success response create 2 cookies: accessToken and refreshToken.
 
 > | http code | response                                                                       |
 > | --------- | ------------------------------------------------------------------------------ |
-> | `201`     | `No response`                                                                  |
+> | `201`     | `{id: 1, avatarUrl: <serverAddress>/upload/<avatarId>}`                        |
 > | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                 |
 > | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a string']}` |
 
@@ -217,8 +215,8 @@ None, cookie with access token is required
 
 ---
 
-<details>
- <summary>Upload picture: <code>POST</code> <code><b>/</b></code> <code>files/upload</code></summary>
+<details name="upload">
+ <summary>Upload picture: <code>POST</code> <code><b>/</b></code> <code>upload</code></summary>
 
 ##### Parameters
 
@@ -242,7 +240,93 @@ Cookie with access token is required
 </details>
 
 <details>
- <summary>Get picture: <code>GET</code> <code><b>/</b></code> <code>files/upload/{id}</code></summary>
+ <summary>Get picture: <code>GET</code> <code><b>/</b></code> <code>upload/{id}</code></summary>
+
+##### Parameters
+
+None
+
+##### Responses
+
+> | http code | response                                             |
+> | --------- | ---------------------------------------------------- |
+> | `200`     | `Picture`                                            |
+> | `404`     | `{ "statusCode": 404, "message": "File not found" }` |
+
+</details>
+
+---
+
+<details>
+ <summary>Create artwork: <code>POST</code> <code><b>/</b></code> <code>artworks/create</code></summary>
+
+##### Parameters
+
+Cookie with access token is required
+**Note**: before create artwork first [upload](#upload]) picture
+
+> | name        | type     | description           |
+> | ----------- | -------- | --------------------- |
+> | picture     | required | Url to uploaded image |
+> | title       | required | Artwork title         |
+> | description | required | Artwork description   |
+
+##### Responses
+
+> | http code | response                                                                       |
+> | --------- | ------------------------------------------------------------------------------ |
+> | `201`     | `{id: 1}`                                                                      |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                 |
+> | `401`     | `{"statusCode": 401, "message": "Unauthorized" }`                              |
+> | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a string']}` |
+
+</details>
+
+<details>
+ <summary>Get artwork: <code>GET</code> <code><b>/</b></code> <code>artworks/{artworkId}</code></summary>
+
+##### Parameters
+
+None
+
+##### Responses
+
+> | http code | response                                                                                                                                                                                                                     |
+> | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+> | `200`     | `{id: 1, picture: 'path/to/picture', title: 'title', description: 'description', views: 0, likes: 0, author: {id: 1, login: 'login', displayName: 'displayName', about: null, avatarUrl: '/path/to/avatar', artworks: [1]}}` |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                                                                                                                                                               |
+> | `404`     | `{"statusCode":"404","message":"Artwork don't exists"}`                                                                                                                                                                      |
+
+</details>
+
+<details>
+ <summary>Update artwork: <code>PATCH</code> <code><b>/</b></code> <code>artworks/update</code></summary>
+
+##### Parameters
+
+Cookie with access token is required
+**Note**: before create artwork first upload picture
+
+> | name        | type     | description           |
+> | ----------- | -------- | --------------------- |
+> | id          | required | Artwork id            |
+> | picture     | optional | Url to uploaded image |
+> | title       | optional | Artwork title         |
+> | description | optional | Artwork description   |
+
+##### Responses
+
+> | http code | response                                                                       |
+> | --------- | ------------------------------------------------------------------------------ |
+> | `200`     | `No response`                                                                  |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`                                 |
+> | `401`     | `{"statusCode": 401, "message": "Unauthorized" }`                              |
+> | `422`     | `{errors: 'field': ['field should be not a empty', 'field must be a string']}` |
+
+</details>
+
+<details>
+ <summary>Delete artwork: <code>DELETE</code> <code><b>/</b></code> <code>artworks/delete/{artworkId}</code></summary>
 
 ##### Parameters
 
@@ -252,9 +336,8 @@ None
 
 > | http code | response                                                |
 > | --------- | ------------------------------------------------------- |
-> | `200`     | `Picture`                                               |
-> | `404`     | `{ "statusCode": 404, "message": "File not found" }`    |
+> | `200`     | `No response`                                           |
+> | `400`     | `{"statusCode":"400","message":"Bad Request"}`          |
+> | `404`     | `{"statusCode":"404","message":"Artwork don't exists"}` |
 
 </details>
-
----

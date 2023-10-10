@@ -6,4 +6,4 @@ coverage/
 tmp/
 temp/
 .env
-uploads/
+upload/

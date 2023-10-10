@@ -21,6 +21,7 @@ export class UsersService implements IUsersService {
     user.login = createUserDto.login;
     user.displayName = createUserDto.login;
     user.password = await bcrypt.hash(createUserDto.password, 10);
+    user.artworks = [];
 
     const createdUser = await this.UserRepository.save(user);
     return createdUser.id;
@@ -92,6 +93,14 @@ export class UsersService implements IUsersService {
       .where('users.id = :id', { id })
       .getOne();
     return userData?.refreshToken ?? null;
+  }
+
+  async saveArtworkId(userId: number, artworkId: number) {
+    const user = await this.validateUser(userId);
+    const userArtworks = user.artworks;
+    userArtworks.unshift(artworkId);
+    user.artworks = userArtworks;
+    await this.UserRepository.save(user);
   }
 
   private async validateUser(id: number) {

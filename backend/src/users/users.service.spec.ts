@@ -250,22 +250,50 @@ describe('test UsersService', () => {
         NO_EXIST_USER_ERROR,
       );
     });
+  });
 
-    describe('remove user', () => {
-      it('existing user', async () => {
-        jest.spyOn(service, 'remove');
-        await service.findById(TEST_USER_ID);
-        await service.remove(TEST_USER_ID);
-        expect(service.remove).toHaveBeenCalledWith(TEST_USER_ID);
-      });
+  describe('save artwork id', () => {
+    const artworkId = 1;
+    it('existing user', async () => {
+      const userData = await service.findById(TEST_USER_ID);
+      const expectedUserData = userData;
+      expectedUserData.artworks = [artworkId];
 
-      it('non-existing user', async () => {
-        jest.spyOn(service, 'remove');
-        await expect(service.remove(TEST_USER_ID)).rejects.toThrow(
-          NO_EXIST_USER_ERROR,
-        );
-        expect(service.remove).toHaveBeenCalledWith(TEST_USER_ID);
-      });
+      jest.spyOn(service, 'saveArtworkId');
+      await service.saveArtworkId(TEST_USER_ID, artworkId);
+      const userDataWithNewArtwork = await service.findById(TEST_USER_ID);
+      // преобразование в число нужно в связи с тем, что sqlite не умеет в массивы и хранит всё в виде строки
+      userDataWithNewArtwork.artworks = userDataWithNewArtwork.artworks.map(
+        (item) => +item,
+      );
+
+      expect(service.saveArtworkId).toHaveBeenCalledWith(
+        TEST_USER_ID,
+        artworkId,
+      );
+
+      expect(userDataWithNewArtwork).toEqual(expectedUserData);
+    });
+
+    it('non-existing user', async () => {
+      await expect(
+        service.saveArtworkId(WRONG_USER_ID, artworkId),
+      ).rejects.toThrow(NO_EXIST_USER_ERROR);
+    });
+  });
+
+  describe('remove user', () => {
+    it('existing user', async () => {
+      jest.spyOn(service, 'remove');
+      await service.findById(TEST_USER_ID);
+      await service.remove(TEST_USER_ID);
+      expect(service.remove).toHaveBeenCalledWith(TEST_USER_ID);
+    });
+
+    it('non-existing user', async () => {
+      await expect(service.remove(TEST_USER_ID)).rejects.toThrow(
+        NO_EXIST_USER_ERROR,
+      );
     });
   });
 

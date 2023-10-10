@@ -22,4 +22,7 @@ export class User {
 
   @Column({ select: false, nullable: true })
   refreshToken: string;
+
+  @Column('simple-array', { nullable: true })
+  artworks: number[];
 }

@@ -9,12 +9,11 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { AccessTokenGuard } from './shared/guards/AccessToken.guard';
 import { APP_GUARD } from '@nestjs/core';
-import { ArtworkService } from './artwork/artwork.service';
-import { ArtworkController } from './artwork/artwork.controller';
-import { ArtworkModule } from './artwork/artwork.module';
 import { FilesService } from './files/files.service';
 import { FilesController } from './files/files.controller';
 import { FilesModule } from './files/files.module';
+import { UsersService } from './users/users.service';
+import { ArtworksModule } from './artworks/artworks.module';
 
 @Module({
   imports: [
@@ -22,23 +21,15 @@ import { FilesModule } from './files/files.module';
     ConfigModule.forRoot(),
     UsersModule,
     AuthModule,
-    ArtworkModule,
     FilesModule,
+    ArtworksModule,
   ],
-  controllers: [
-    AppController,
-    UsersController,
-    ArtworkController,
-    FilesController,
-  ],
+
   providers: [
     {
       provide: APP_GUARD,
       useClass: AccessTokenGuard,
     },
-    AppService,
-    ArtworkService,
-    FilesService,
   ],
 })
 export class AppModule {}

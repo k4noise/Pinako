@@ -46,6 +46,7 @@ describe('test UsersController', () => {
         displayName: userData.login,
         about: null,
         avatarUrl: '/default.jpg',
+        artworks: [],
       }),
     );
 
@@ -69,6 +70,7 @@ describe('test UsersController', () => {
       displayName: TEST_USER.login,
       about: null,
       avatarUrl: '/default.jpg',
+      artworks: [],
     };
 
     jest.spyOn(service, 'findById');
